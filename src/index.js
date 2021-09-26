@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/global.css';
-import Main from './pages/Main';
-import SignIn from './pages/SignIn';
+import Routes from './routes';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SignIn />
+    <Routes />
   </React.StrictMode>,
   document.getElementById('root')
 );
