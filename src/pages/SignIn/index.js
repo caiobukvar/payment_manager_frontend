@@ -13,11 +13,11 @@ function SignIn() {
                 <div className="logo">
                     <img src={Logo} alt="logo" />
                 </div>
-                <div className="flex-column">
-                    <label className="mb-md" htmlFor="email">E-mail</label>
+                <div className="flex-column border-bt">
+                    <label className="mb-md font-md-bold" htmlFor="email">E-mail</label>
                     <input id="email" type="text" placeholder="Digite seu e-mail" />
                 </div>
-                <div className="flex-column input-password">
+                <div className="flex-column input-password border-bt">
                     <InputPassword
                         label="Senha"
                         placeholder="Digite sua senha"
@@ -25,7 +25,7 @@ function SignIn() {
                         setValue={setPassword}
                     />
                 </div>
-                <button className="btn-pink mb-lg mt-lg font-md">
+                <button className="btn-pink mb-lg mt-lg font-md-bold">
                     Entrar
                 </button>
             </form>

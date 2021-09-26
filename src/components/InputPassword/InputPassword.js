@@ -7,7 +7,7 @@ function InputPassword({ label, placeholder, value, setValue }) {
 
     return (
         <div className="flex-column input-password">
-            <label className="mb-md" htmlFor="password">{label}</label>
+            <label className="mb-md font-md-bold" htmlFor="password">{label}</label>
             <input
                 id="password"
                 type={showPassword ? 'text' : 'password'}

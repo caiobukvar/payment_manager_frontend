@@ -1,6 +1,6 @@
 .form-sign-in {
     justify-content: space-between;
-    width: 300px;
+    width: 250px;
     height: auto;
 }
 
@@ -28,10 +28,14 @@ input {
     all: unset;
     width: 250px;
     height: 30px;
-    margin-bottom: 40px;
-    border-bottom: 1px solid #4C4C4C;
 }
 
 label {
     color: #374952;
+}
+
+.border-bt {
+    border-bottom: 1px solid #4C4C4C;
+    margin-bottom: 40px;
+    padding: 0px 8px;
 }
