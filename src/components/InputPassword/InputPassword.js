@@ -19,7 +19,7 @@ function InputPassword({ label, placeholder, value, setValue }) {
             <FontAwesomeIcon
                 className="eye-password"
                 icon={showPassword ? faEye : faEyeSlash}
-                size="lg"
+                size="md"
                 onClick={() => setShowPassword(!showPassword)}
             />
         </div>

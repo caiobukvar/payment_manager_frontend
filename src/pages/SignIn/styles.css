@@ -1,0 +1,16 @@
+.input-password {
+    position: relative;
+}
+
+.eye-password {
+    position: absolute;
+    top: 45px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.form-sign-in {
+    justify-content: space-between;
+    width: 300px;
+    height: auto;
+}

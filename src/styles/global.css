@@ -1,7 +1,5 @@
 @import './alignments.css';
-@import './buttons.css';
 @import './margins.css';
-@import './texts.css';
 @import './form.css';
 body {
     margin: 0;
