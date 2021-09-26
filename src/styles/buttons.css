@@ -1,0 +1,9 @@
+.btn-pink {
+    font-family: inherit;
+    background-color: rgba(218, 1, 117, 0.35);
+    color: white;
+    width: 180px;
+    border-radius: 35px;
+    border: 0;
+    height: 40px;
+}

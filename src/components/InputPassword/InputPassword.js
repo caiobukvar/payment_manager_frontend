@@ -7,7 +7,7 @@ function InputPassword({ label, placeholder, value, setValue }) {
 
     return (
         <div className="flex-column input-password">
-            <label htmlFor="password">{label}</label>
+            <label className="mb-md" htmlFor="password">{label}</label>
             <input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
@@ -20,6 +20,7 @@ function InputPassword({ label, placeholder, value, setValue }) {
                 className="eye-password"
                 icon={showPassword ? faEye : faEyeSlash}
                 size="md"
+                color="#BEBEBE"
                 onClick={() => setShowPassword(!showPassword)}
             />
         </div>

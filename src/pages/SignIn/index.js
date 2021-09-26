@@ -8,21 +8,31 @@ function SignIn() {
     const [password, setPassword] = useState('');
 
     return (
-        <div className="form-container flex-column items-center content-center">
-            <img src={Logo} alt="logo" />
+        <div className="container-form flex-column">
             <form className="form form-sign-in">
+                <div className="logo">
+                    <img src={Logo} alt="logo" />
+                </div>
                 <div className="flex-column">
-                    <label htmlFor="email">E-mail</label>
+                    <label className="mb-md" htmlFor="email">E-mail</label>
                     <input id="email" type="text" placeholder="Digite seu e-mail" />
                 </div>
-                <InputPassword
-                    label="Senha"
-                    placeholder="Digite sua senha"
-                    value={password}
-                    setValue={setPassword}
-                />
-                <Link to="/sign-up">Cadastre-se</Link>
+                <div className="flex-column input-password">
+                    <InputPassword
+                        label="Senha"
+                        placeholder="Digite sua senha"
+                        value={password}
+                        setValue={setPassword}
+                    />
+                </div>
+                <button className="btn-pink mb-lg mt-lg font-md">
+                    Entrar
+                </button>
             </form>
+            <span className="mt-lg">
+                Não possui uma conta?
+                <Link to="/sign-up"> Cadastre-se!</Link>
+            </span>
         </div>
     );
 }

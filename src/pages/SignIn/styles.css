@@ -1,16 +1,37 @@
+.form-sign-in {
+    justify-content: space-between;
+    width: 300px;
+    height: auto;
+}
+
 .input-password {
     position: relative;
 }
 
 .eye-password {
     position: absolute;
-    top: 45px;
-    right: 15px;
+    top: 37px;
+    right: 7px;
     cursor: pointer;
 }
 
-.form-sign-in {
-    justify-content: space-between;
-    width: 300px;
+.logo {
+    margin-bottom: 40px;
+}
+
+.logo img {
+    width: 150px;
     height: auto;
+}
+
+input {
+    all: unset;
+    width: 250px;
+    height: 30px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #4C4C4C;
+}
+
+label {
+    color: #374952;
 }

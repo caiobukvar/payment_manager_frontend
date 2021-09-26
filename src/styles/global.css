@@ -1,6 +1,8 @@
 @import './alignments.css';
 @import './margins.css';
 @import './form.css';
+@import './buttons.css';
+@import './texts.css';
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;

@@ -1,0 +1,16 @@
+.font-lg {
+    font-size: 18px;
+}
+
+.font-md {
+    font-size: 16px;
+}
+
+.font-sm {
+    font-size: 12px;
+}
+
+.font-bold {
+    font-weight: 700;
+    color: #374952;
+}
