@@ -30,7 +30,7 @@ function SignUp() {
                     />
                 </div>
                 <button type="submit" className="btn-pink mb-lg mt-lg font-md-bold">
-                    Criar Conta
+                    Criar conta
                 </button>
             </form>
             <span className="mt-lg">
