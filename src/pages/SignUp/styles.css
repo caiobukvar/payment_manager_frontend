@@ -1,0 +1,41 @@
+.form-sign-up {
+    justify-content: space-between;
+    width: 300px;
+    height: auto;
+}
+
+.input-password {
+    position: relative;
+}
+
+.eye-password {
+    position: absolute;
+    top: 37px;
+    right: 7px;
+    cursor: pointer;
+}
+
+.logo {
+    margin-bottom: 40px;
+}
+
+.logo img {
+    width: 150px;
+    height: auto;
+}
+
+input {
+    all: unset;
+    width: 250px;
+    height: 30px;
+}
+
+label {
+    color: #374952;
+}
+
+.border-bt {
+    border-bottom: 1px solid #4C4C4C;
+    margin-bottom: 50px;
+    padding: 0px 8px;
+}
