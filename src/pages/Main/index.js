@@ -10,10 +10,10 @@ function Main() {
       <Sidebar />
       <div className="flex-column content-center items-center">
         <ProfileBar />
-        <form className="card-container flex-row">
+        <div className="flex-row content-center gap-sm">
           <ClientsCard />
           <ChargesCard />
-        </form>
+        </div>
       </div>
     </div>
   );

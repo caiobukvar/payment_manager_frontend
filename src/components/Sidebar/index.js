@@ -7,21 +7,20 @@ import Clients from '../../assets/clients.svg';
 function Sidebar() {
     return (
         <div className="background-dark sidebar flex-column items-center space-between">
-            <div className="mt-lg flex-column">
-                <img src={LogoWhite} alt="logo white" />
-
-                <div className="flex-row mt-xl white">
-                    <img src={House} alt="home" />
+            <div className="mt-lg flex-column items-center content-center">
+                <img src={LogoWhite} alt="logo white" className="logo mt-xl" />
+                <a href="/" className="flex-row mt-xl white align-start">
+                    <img src={House} alt="home" className="ml-lg" />
                     <h2 className="ml-md font-md">Home</h2>
-                </div>
-                <div className="flex-row white">
-                    <img src={Money} alt="charges" />
+                </a>
+                <a href="/" className="flex-row mt-xl white align-start">
+                    <img src={Money} alt="charges" className="ml-lg" />
                     <h2 className="ml-md font-md">Cobranças</h2>
-                </div>
-                <div className="flex-row white">
-                    <img src={Clients} alt="clients" />
+                </a>
+                <a href="/" className="flex-row mt-xl white align-start">
+                    <img src={Clients} alt="clients" className="ml-lg" />
                     <h2 className="ml-md font-md">Clientes</h2>
-                </div>
+                </a>
             </div>
             <button type="submit" className="btn-pink-bright mb-xxl font-md-bold">
                 Criar cobrança

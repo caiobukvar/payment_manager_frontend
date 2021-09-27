@@ -6,6 +6,7 @@
     border-radius: 35px;
     border: 0;
     height: 40px;
+    cursor: pointer;
 }
 
 .btn-pink-bright {
@@ -16,4 +17,5 @@
     border-radius: 35px;
     border: 0;
     height: 40px;
+    cursor: pointer;
 }

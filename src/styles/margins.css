@@ -30,6 +30,10 @@
     margin-top: 50px;
 }
 
+.mt-xxl {
+    margin-top: 250px;
+}
+
 .mx-sm {
     margin: 0px 5px;
 }
@@ -60,4 +64,8 @@
 
 .ml-md {
     margin-left: 20px;
+}
+
+.ml-lg {
+    margin-left: 50px;
 }

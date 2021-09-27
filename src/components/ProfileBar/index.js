@@ -1,17 +1,14 @@
 import './styles.css';
 import { useState } from 'react';
 import ProfileIcon from '../../assets/profile-icon.svg';
+import ProfileEditMenu from '../ProfileEditMenu';
 
 function ProfileBar() {
     const [menuOpen, setMenuOpen] = useState(false);
 
     function handleOpenMenu() {
-        if (menuOpen === false) {
-            setMenuOpen(true);
-        }
-        setMenuOpen(false);
+        setMenuOpen(!menuOpen);
     }
-
 
     return (
         <div>
@@ -20,7 +17,12 @@ function ProfileBar() {
                 className="icon"
                 onClick={() => { handleOpenMenu() }}
             />
-            {menuOpen ? <ProfileEditMenu /> : null}
+            {menuOpen ?
+                <ProfileEditMenu
+                    menuOpen={menuOpen}
+                    setMenuOpen={setMenuOpen}
+                />
+                : null}
         </div>
     );
 }

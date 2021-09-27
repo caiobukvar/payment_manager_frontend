@@ -1,0 +1,25 @@
+.card {
+    width: 350px;
+    height: auto;
+}
+
+.card-client {
+    width: 350px;
+    height: 350px;
+}
+
+.card-padding {
+    padding: 10px;
+}
+
+.card-padding-lg {
+    padding: 30px 50px;
+}
+
+.pad-sm {
+    padding: 6px;
+}
+
+.pad-md {
+    padding: 0px 12px;
+}
