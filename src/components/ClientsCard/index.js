@@ -1,6 +1,8 @@
+import './styles.css';
+
 function ClientsCard() {
     return (
-        <div>
+        <div classname="">
             clients card
         </div>
     )

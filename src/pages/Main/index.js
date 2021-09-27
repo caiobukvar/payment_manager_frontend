@@ -10,7 +10,7 @@ function Main() {
       <Sidebar />
       <div className="flex-column content-center items-center">
         <ProfileBar />
-        <form className="card-container">
+        <form className="card-container flex-row">
           <ClientsCard />
           <ChargesCard />
         </form>
