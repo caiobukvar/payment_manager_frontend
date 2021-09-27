@@ -10,6 +10,10 @@
     margin-bottom: 15px;
 }
 
+.mb-xxl {
+    margin-bottom: 250px;
+}
+
 .mt-sm {
     margin-top: 5px;
 }
@@ -20,6 +24,10 @@
 
 .mt-lg {
     margin-top: 15px;
+}
+
+.mt-xl {
+    margin-top: 50px;
 }
 
 .mx-sm {
@@ -44,4 +52,12 @@
 
 .my-lg {
     margin: 15px 0px;
+}
+
+.ml-sm {
+    margin-left: 10px;
+}
+
+.ml-md {
+    margin-left: 20px;
 }
