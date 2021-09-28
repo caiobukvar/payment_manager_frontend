@@ -31,7 +31,7 @@ function SignIn() {
             </form>
             <span className="mt-lg">
                 Não possui uma conta?
-                <Link to="/sign-up"> Cadastre-se!</Link>
+                <Link to="/sign-up" className="pink"> Cadastre-se!</Link>
             </span>
         </div>
     );

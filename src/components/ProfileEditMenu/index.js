@@ -1,25 +1,28 @@
 import './styles.css';
-import { useState, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useContext } from 'react';
 import Edit from '../../assets/edit.svg';
 import Exit from '../../assets/exit.svg';
+import { contextoModal } from '../../contextoModal';
 
 function ProfileEditMenu({ menuOpen, setMenuOpen }) {
-    const [openProfileEdit, setOpenProfileEdit] = useState(false);
+    const { value, setValue } = useContext(contextoModal);
+
+    function handleOpenProfilePage() {
+        setValue(true);
+    }
 
     return (
         <>
             {menuOpen &&
                 <div className="flex-column menu items-center content-center items-start">
-                    <div className="flex-row items-center" >
+                    <div className="flex-row items-center content-center" onClick={() => handleOpenProfilePage()}>
                         <img
                             src={Edit}
                             alt="edit profile"
-                            onClick={() => handleOpenProfilePage()}
                         />
                         <p className="ml-sm">Editar</p>
                     </div>
-                    <div className="flex-row items-center">
+                    <div className="flex-row items-center content-center">
                         <img
                             src={Exit}
                             alt="exit profile"
@@ -33,5 +36,7 @@ function ProfileEditMenu({ menuOpen, setMenuOpen }) {
     );
 }
 
-export default ProfileEditMenu;
+export default {
+    ProfileEditMenu
+};
 

@@ -12,6 +12,7 @@
 a {
     all: unset;
     width: 250px;
+    height: auto;
 }
 
 a:hover {

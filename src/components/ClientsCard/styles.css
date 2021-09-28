@@ -1,4 +1,8 @@
-.background-dark {
+.background-dark-smooth {
     background-color: #374952;
     color: white;
+}
+
+p {
+    font-weight: bold;
 }

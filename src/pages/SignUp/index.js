@@ -35,7 +35,7 @@ function SignUp() {
             </form>
             <span className="mt-lg">
                 Já possui uma conta?
-                <Link to="/sign-in"> Acesse agora!</Link>
+                <Link to="/sign-in" className="pink"> Acesse agora!</Link>
             </span>
         </div>
     )

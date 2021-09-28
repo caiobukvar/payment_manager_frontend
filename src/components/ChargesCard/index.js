@@ -4,7 +4,7 @@ import Money from '../../assets/money.svg';
 function ChargesCard() {
     return (
         <div className="card flex-column box-shadow mt-xxl ml-lg">
-            <div className="flex-row topbar background-dark card-padding content-center border-round-top">
+            <div className="flex-row topbar background-dark-smooth card-padding content-center border-round-top">
                 <img src={Money} alt="charges" />
                 <p className="ml-sm">Cobranças</p>
             </div>

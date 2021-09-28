@@ -1,11 +1,12 @@
 import './styles.css';
 import CloseIcon from '../../assets/close-icon.svg';
+import InputPassword from '../InputPassword/InputPassword';
 
 function ModalEditProfile({ openProfileEdit, setOpenProfileEdit }) {
     return (
         <>
             {openProfileEdit &&
-                <div className="modal">
+                <div className="modal dark-bg box-shadow">
                     <div className="modal-content flex-column content-center items-center">
                         <img src={CloseIcon}
                             alt="modal-close-icon"
