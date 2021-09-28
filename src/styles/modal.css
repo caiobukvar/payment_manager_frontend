@@ -13,10 +13,11 @@
 .modal-content {
     background-color: white;
     border-radius: 15px;
+    position: relative;
 }
 
 .modal-close-icon {
-    width: 30px;
+    width: 10px;
     position: absolute;
     right: 20px;
     top: 20px;

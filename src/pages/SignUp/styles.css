@@ -39,3 +39,11 @@ label {
     margin-bottom: 50px;
     padding: 0px 8px;
 }
+
+.enabled {
+    cursor: pointer;
+}
+
+.disabled {
+    cursor: not-allowed;
+}

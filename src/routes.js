@@ -11,20 +11,20 @@ import AddClient from './pages/AddClient';
 import { contextoModal } from './contextoModal';
 import Layout from './components/Layout';
 
-
 function Routes() {
     const [value, setValue] = useState(false);
+    // const [userData, setUserData] = useState();
 
     return (
         <Router>
             <Switch>
+                <Route path="/sign-in" component={SignIn} />
+                <Route path="/sign-up" component={SignUp} />
                 <contextoModal.Provider
                     value={{ value, setValue }}
                 >
                     <Layout>
                         <Route path="/" exact component={Main} />
-                        <Route path="/sign-in" component={SignIn} />
-                        <Route path="/sign-up" component={SignUp} />
                         <Route path="/add-client" component={AddClient} />
                     </Layout>
                 </contextoModal.Provider>

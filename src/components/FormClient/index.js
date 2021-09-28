@@ -8,7 +8,6 @@ function FormClient() {
 
     const onSubmit = (data) => {
         console.log(data);
-        //placeholder={nameWatch} ??
     }
 
     useEffect(() => {
