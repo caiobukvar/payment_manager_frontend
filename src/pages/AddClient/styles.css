@@ -1,0 +1,9 @@
+.mt-large {
+    margin-top: 100px;
+}
+
+.position-left {
+    position: absolute;
+    left: 20%;
+    top: 10%;
+}

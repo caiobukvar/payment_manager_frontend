@@ -13,7 +13,7 @@ function Sidebar() {
                     <img src={House} alt="home" className="ml-lg" />
                     <h2 className="ml-md font-md">Home</h2>
                 </a>
-                <a href="/" className="flex-row white align-start">
+                <a href="/add-client" className="flex-row white align-start">
                     <img src={Money} alt="charges" className="ml-lg" />
                     <h2 className="ml-md font-md">Cobranças</h2>
                 </a>
@@ -25,7 +25,7 @@ function Sidebar() {
             <button type="submit" className="btn-pink-bright mt-xxl font-md-bold">
                 Criar cobrança
             </button>
-        </div>
+        </div >
     );
 }
 

@@ -2,9 +2,21 @@
     font-family: inherit;
     background-color: rgba(218, 1, 117, 0.35);
     color: white;
-    width: 180px;
+    width: 200px;
     border-radius: 35px;
     border: 0;
+    height: 40px;
+    cursor: pointer;
+}
+
+.btn-white {
+    font-family: inherit;
+    color: #DA0175;
+    background-color: #fff;
+    border: 1px solid #DA0175;
+    width: 150px;
+    border-radius: 35px;
+    font-weight: 600;
     height: 40px;
     cursor: pointer;
 }
@@ -13,7 +25,7 @@
     font-family: inherit;
     background-color: rgba(218, 1, 117, 1);
     color: white;
-    width: 180px;
+    width: 200px;
     border-radius: 35px;
     border: 0;
     height: 40px;

@@ -17,6 +17,7 @@ a {
 
 a:hover {
     background-color: #374952;
+    cursor: pointer;
 }
 
 .logo {

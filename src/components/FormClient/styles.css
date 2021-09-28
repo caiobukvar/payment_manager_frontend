@@ -1,0 +1,11 @@
+.large {
+    width: 530px;
+    margin-bottom: 15px;
+}
+
+.mg-top {
+    margin-top: 50px;
+    position: relative;
+    left: 20%;
+    top: 5%;
+}

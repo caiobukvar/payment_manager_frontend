@@ -16,3 +16,14 @@
     border-radius: 15px;
     padding: 45px 61px;
 }
+
+.form-borderless {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background-color: white;
+    border-radius: 15px;
+    padding: 45px 61px;
+}
