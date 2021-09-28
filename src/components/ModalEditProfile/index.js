@@ -2,14 +2,14 @@ import './styles.css';
 import CloseIcon from '../../assets/close-icon.svg';
 import InputPassword from '../InputPassword/InputPassword';
 
-function ModalEditProfile({ setOpenProfileEdit }) {
+function ModalEditProfile({ setValue }) {
     return (
         <>
             <div className="modal dark-bg box-shadow">
                 <div className="modal-content flex-column content-center items-center">
                     <img src={CloseIcon}
                         className="modal-close-icon"
-                        onClick={() => { setOpenProfileEdit(false) }}
+                        onClick={() => { setValue(false) }}
                     />
                     <div className="flex-column items-center content-center">
                         <p>// EDITAR USUÁRIO</p>
