@@ -42,9 +42,7 @@ function SignIn() {
                         : <button className="btn-pink mb-lg mt-lg font-md-bold disabled" disabled>
                             Entrar
                         </button>)}
-
             </form>
-
             <span className="mt-lg">
                 Não possui uma conta?
                 <Link to="/sign-up" className="pink"> Cadastre-se!</Link>
