@@ -44,13 +44,14 @@ function SignUp() {
                         setValue={setPassword}
                     />
                 </div>
-                {(signUpValues.nome && signUpValues.email && password) ? <button type="submit" className="btn-pink-bright mb-lg mt-lg font-md-bold enabled">
-                    Criar conta
-                </button>
-                    :
-                    <button type="submit" className="btn-pink mb-lg mt-lg font-md-bold disabled " disabled >
-                        Criar conta
-                    </button>
+                {
+                    (signUpValues.nome && signUpValues.email && password)
+                        ? <button type="submit" className="btn-pink-bright mb-lg mt-lg font-md-bold enabled">
+                            Criar conta
+                        </button>
+                        : <button type="submit" className="btn-pink mb-lg mt-lg font-md-bold disabled " disabled >
+                            Criar conta
+                        </button>
                 }
 
             </form>

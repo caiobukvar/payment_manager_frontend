@@ -31,3 +31,11 @@
     height: 40px;
     cursor: pointer;
 }
+
+.enabled {
+    cursor: pointer;
+}
+
+.disabled {
+    cursor: not-allowed;
+}
