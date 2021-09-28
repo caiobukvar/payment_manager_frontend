@@ -5,6 +5,7 @@
 @import './texts.css';
 @import './borders.css';
 @import './card.css';
+@import './modal.css';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 body {
     margin: 0;

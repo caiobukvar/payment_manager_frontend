@@ -1,15 +1,23 @@
 import './styles.css';
 import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 
 function FormClient() {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = (data) => {
+    const { register, handleSubmit, watch } = useForm();
+    let nameWatch = watch('name');
 
+    const onSubmit = (data) => {
         console.log(data);
+        //placeholder={nameWatch} ??
     }
 
+    useEffect(() => {
+        console.log(nameWatch);
+    }, [nameWatch]);
+
+
     return (
-        <form action="submit" className="form-borderless mg-top">
+        <form onSubmit={handleSubmit(onSubmit)} className="form-borderless mg-top">
             <div className="flex-column ">
                 <label htmlFor="name">Nome</label>
                 <input
@@ -18,6 +26,7 @@ function FormClient() {
                     title="name"
                     id="name"
                     placeholder="Digite seu nome"
+                    {...register("nome")}
                 />
                 <label htmlFor="email">E-mail</label>
                 <input
@@ -26,6 +35,7 @@ function FormClient() {
                     title="email"
                     id="email"
                     placeholder="Digite seu e-mail"
+                    {...register("email")}
                 />
             </div>
             <div className="flex-row">
@@ -37,6 +47,7 @@ function FormClient() {
                         title="CPF"
                         id="CPF"
                         placeholder="Digite seu CPF"
+                        {...register("CPF")}
                     />
                 </div>
                 <div className="flex-column ml-md">
@@ -47,6 +58,7 @@ function FormClient() {
                         title="phone"
                         id="phone"
                         placeholder="Digite seu telefone"
+                        {...register("phone")}
                     />
                 </div>
             </div>
@@ -59,6 +71,7 @@ function FormClient() {
                         title="CEP"
                         id="CEP"
                         placeholder="Digite seu CEP"
+                        {...register("CEP")}
                     />
                 </div>
                 <div className="flex-column ml-md">
@@ -69,6 +82,7 @@ function FormClient() {
                         title="adress"
                         id="adress"
                         placeholder="Digite seu endereço"
+                        {...register("adress")}
                     />
                 </div>
             </div>
@@ -81,6 +95,7 @@ function FormClient() {
                         title="neighbourhood"
                         id="neighbourhood"
                         placeholder="Digite seu bairro"
+                        {...register("neighbourhood")}
                     />
                 </div>
                 <div className="flex-column ml-md">
@@ -91,6 +106,7 @@ function FormClient() {
                         title="city"
                         id="city"
                         placeholder="Digite sua cidade"
+                        {...register("city")}
                     />
                 </div>
             </div>
@@ -103,6 +119,7 @@ function FormClient() {
                         title="complement"
                         id="complement"
                         placeholder="Digite seu complemento"
+                        {...register("complement")}
                     />
                 </div>
                 <div className="flex-column ml-md">
@@ -113,6 +130,7 @@ function FormClient() {
                         title="reference"
                         id="reference"
                         placeholder="Digite um ponto de referência"
+                        {...register("reference")}
                     />
                 </div>
             </div>
@@ -120,7 +138,7 @@ function FormClient() {
                 <button className="btn-white">
                     Cancelar
                 </button>
-                <button className="btn-pink ml-md">
+                <button type="submit" className="btn-pink ml-md">
                     Adicionar cliente
                 </button>
             </div>

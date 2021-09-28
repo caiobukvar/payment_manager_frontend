@@ -17,12 +17,11 @@ function ProfileBar() {
                 className="icon"
                 onClick={() => { handleOpenMenu() }}
             />
-            {menuOpen ?
+            {menuOpen &&
                 <ProfileEditMenu
-                    menuOpen={menuOpen}
                     setMenuOpen={setMenuOpen}
                 />
-                : null}
+            }
         </div>
     );
 }

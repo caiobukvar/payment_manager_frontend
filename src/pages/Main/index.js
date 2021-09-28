@@ -12,24 +12,22 @@ function Main() {
   const { value, setValue } = useContext(contextoModal);
 
   return (
-    <>
-      <div className="flex-row content-center align-start">
-        <Sidebar />
-        <div className="flex-column content-center items-center">
-          <ProfileBar />
-          <div className="flex-row content-center gap-sm">
-            <ClientsCard />
-            <ChargesCard />
-          </div>
+    <div className="flex-row content-center align-start relative">
+      <Sidebar />
+      <div className="flex-column content-center items-center">
+        <ProfileBar />
+        <div className="flex-row content-center gap-sm">
+          <ClientsCard />
+          <ChargesCard />
         </div>
       </div>
-      {value ?
+      {value &&
         <ModalEditProfile
           value={value}
           setValue={setValue}
         />
-        : null}
-    </>
+      }
+    </div>
   );
 }
 
