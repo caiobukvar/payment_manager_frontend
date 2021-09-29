@@ -1,3 +1,4 @@
+import './styles.css';
 import { useContext } from 'react';
 import Sidebar from '../../components/Sidebar';
 import ProfileBar from '../../components/ProfileBar';
@@ -8,9 +9,9 @@ function Layout({ children }) {
     const { value, setValue } = useContext(contextoModal);
 
     return (
-        <div className="flex-row content-center align-start ">
+        <div className="flex-row align-start">
             <Sidebar />
-            <div className="flex-column content-center items-start">
+            <div className="flex-column items-center w100 ">
                 <ProfileBar />
                 {children}
             </div>
