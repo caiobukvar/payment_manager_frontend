@@ -21,3 +21,7 @@ a:hover {
 .logo {
     width: 150px;
 }
+
+.active {
+    background-color: #374952;
+}
