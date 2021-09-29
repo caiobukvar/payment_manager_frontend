@@ -1,18 +1,25 @@
 import './styles.css';
 import Logo from "../../assets/logo.svg";
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import InputPassword from "../../components/InputPassword/InputPassword"
 
 function SignUp() {
     const [password, setPassword] = useState('');
+    const { handleSubmit, register } = useForm();
+
+    function signUpData(data) {
+        console.log()
+    }
+
     const [signUpValues, setSignUpValues] = useState({
         nome: '',
         email: ''
     });
 
     return (
-        <div className="container-form flex-column">
+        <div className="container-form flex-column" onSubmit={handleSubmit(signUpData)}>
             <form className="form form-sign-up">
                 <div className="logo">
                     <img src={Logo} alt="logo" />
@@ -23,6 +30,7 @@ function SignUp() {
                         type="text"
                         id="name"
                         placeholder="Digite seu nome"
+                        {...register('name', { required: true })}
                         value={signUpValues.nome}
                         onChange={(e) => { setSignUpValues({ ...signUpValues, nome: e.target.value }) }}
                     />
@@ -33,6 +41,7 @@ function SignUp() {
                         type="text"
                         id="email"
                         placeholder="Digite seu e-mail"
+                        {...register('email', { required: true })}
                         value={signUpValues.email}
                         onChange={(e) => { setSignUpValues({ ...signUpValues, email: e.target.value }) }} />
                 </div>
@@ -40,6 +49,7 @@ function SignUp() {
                     <InputPassword
                         label="Senha"
                         placeholder="Digite sua senha"
+                        register={() => register('password')}
                         value={password}
                         setValue={setPassword}
                     />
@@ -49,7 +59,7 @@ function SignUp() {
                         ? <button type="submit" className="btn-pink-bright mb-lg mt-lg font-md-bold enabled">
                             Criar conta
                         </button>
-                        : <button type="submit" className="btn-pink mb-lg mt-lg font-md-bold disabled " disabled >
+                        : <button className="btn-pink mb-lg mt-lg font-md-bold disabled " disabled >
                             Criar conta
                         </button>
                 }

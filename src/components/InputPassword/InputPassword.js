@@ -1,9 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
 
 function InputPassword({ label, placeholder, value, setValue }) {
     const [showPassword, setShowPassword] = useState(false);
+    const { register } = useForm();
 
     return (
         <div className="flex-column input-password">
@@ -12,6 +15,7 @@ function InputPassword({ label, placeholder, value, setValue }) {
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 placeholder={placeholder}
+                {...register('password')}
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
             />
@@ -19,7 +23,6 @@ function InputPassword({ label, placeholder, value, setValue }) {
             <FontAwesomeIcon
                 className="eye-password"
                 icon={showPassword ? faEye : faEyeSlash}
-                size="md"
                 color="#BEBEBE"
                 onClick={() => setShowPassword(!showPassword)}
             />
