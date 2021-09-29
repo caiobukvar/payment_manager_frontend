@@ -11,7 +11,7 @@ function Layout({ children }) {
     return (
         <div className="flex-row align-start">
             <Sidebar />
-            <div className="flex-column items-center w100 ">
+            <div className="flex-column items-center full-width ">
                 <ProfileBar />
                 {children}
             </div>
