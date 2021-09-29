@@ -9,8 +9,16 @@ function SignUp() {
     const [password, setPassword] = useState('');
     const { handleSubmit, register } = useForm();
 
-    function signUpData(data) {
-        console.log()
+    async function signUpData(data) {
+        const response = await fetch('https://paymentmanager-api.herokuapp.com/',
+            {
+                method: 'POST',
+                body: JSON.stringify(data),
+
+            });
+
+        const responseData = await response.json();
+        console.log(responseData);
     }
 
     const [signUpValues, setSignUpValues] = useState({
@@ -49,7 +57,7 @@ function SignUp() {
                     <InputPassword
                         label="Senha"
                         placeholder="Digite sua senha"
-                        register={() => register('password')}
+                        register={() => register()}
                         value={password}
                         setValue={setPassword}
                     />
