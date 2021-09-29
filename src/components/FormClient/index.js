@@ -1,6 +1,6 @@
 import './styles.css';
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function FormClient() {
     const [novosDadosCliente, setNovosDadosCliente] = useState({
@@ -16,16 +16,12 @@ function FormClient() {
         referencia: ''
     });
 
-    const { register, handleSubmit, watch } = useForm();
-    let nameWatch = watch('name');
+    const { register, handleSubmit } = useForm();
 
     const onSubmit = (data) => {
         console.log(data);
     }
 
-    useEffect(() => {
-        console.log(nameWatch);
-    }, [nameWatch]);
 
 
     return (
