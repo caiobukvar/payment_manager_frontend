@@ -21,7 +21,7 @@ function ProtectedRoutes(props) {
 }
 
 function Routes() {
-    const [modalOpen, setModalOpen] = useState(false);
+    const [value, setValue] = useState(false);
     const [token, setToken] = useState();
 
     return (
@@ -32,16 +32,16 @@ function Routes() {
                 <Switch>
                     <Route path="/sign-up" component={SignUp} />
                     <Route path="/sign-in" component={SignIn} />
-                    <ProtectedRoutes>
-                        <ContextoModal.Provider
-                            value={{ modalOpen, setModalOpen }}
-                        >
-                            <Layout>
-                                <Route path="/" exact component={Main} />
-                                <Route path="/add-client" component={AddClient} />
-                            </Layout>
-                        </ContextoModal.Provider>
-                    </ProtectedRoutes>
+                    {/* <ProtectedRoutes> */}
+                    <ContextoModal.Provider
+                        value={{ value, setValue }}
+                    >
+                        <Layout>
+                            <Route path="/" exact component={Main} />
+                            <Route path="/add-client" component={AddClient} />
+                        </Layout>
+                    </ContextoModal.Provider>
+                    {/* </ProtectedRoutes> */}
                 </Switch>
             </Router>
         </AuthContext.Provider>
