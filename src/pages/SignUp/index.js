@@ -21,8 +21,12 @@ function SignUp() {
                 }
             });
 
+        const result = await response.json();
+
+        console.log(result);
+
         if (response.ok) {
-            toast.success('Cadastro realizado com sucesso, redirecionando...', {
+            toast.success('Cadastro realizado com sucesso!', {
                 position: "top-right",
                 autoClose: 4000,
                 hideProgressBar: false,
