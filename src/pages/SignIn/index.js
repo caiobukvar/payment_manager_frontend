@@ -1,6 +1,6 @@
 import './styles.css';
 import Logo from "../../assets/logo.svg";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import InputPassword from "../../components/InputPassword/InputPassword"
@@ -10,6 +10,7 @@ function SignIn() {
     const [password, setPassword] = useState('');
     const { setToken } = useContext(AuthContext);
     const { handleSubmit, register } = useForm();
+    const history = useHistory();
 
 
     async function signInData(data) {
@@ -22,16 +23,13 @@ function SignIn() {
                 }
             });
 
-        console.log(data);
         const userData = await response.json();
-        console.log(userData.token);
 
         if (response.ok) {
             setToken(userData.token);
             history.push('/');
             return;
         }
-
         console.log('tratar: login realizado com sucesso / login falho');
     }
 

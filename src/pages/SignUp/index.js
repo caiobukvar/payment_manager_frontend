@@ -33,6 +33,7 @@ function SignUp() {
                 closeOnClick: true,
                 progress: undefined,
             });
+
             history.push('/sign-in');
             return;
         }
