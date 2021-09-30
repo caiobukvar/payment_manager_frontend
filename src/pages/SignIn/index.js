@@ -22,8 +22,9 @@ function SignIn() {
                 }
             });
 
+        console.log(data);
         const userData = await response.json();
-        console.log(userData);
+        console.log(userData.token);
 
         if (response.ok) {
             setToken(userData.token);
@@ -50,7 +51,7 @@ function SignIn() {
                         id="email"
                         type="text"
                         placeholder="Digite seu e-mail"
-                        {...register('nome', { required: true })}
+                        {...register('email', { required: true })}
                         value={signInValues.email}
                         onChange={(e) => { setSignInValues({ ...signInValues, email: e.target.value }) }}
                     />

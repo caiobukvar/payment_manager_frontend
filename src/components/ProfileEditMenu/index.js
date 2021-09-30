@@ -22,8 +22,8 @@ function ProfileEditMenu() {
 
     return (
         <>
-            <div className="flex-column menu items-center content-center items-start">
-                <div className="flex-row items-center content-center" onClick={() => handleOpenProfilePage()}>
+            <div className="flex-column menu items-center content-center items-start pad-left">
+                <div className="flex-row items-center content-center text-center" onClick={() => handleOpenProfilePage()}>
                     <img
                         src={Edit}
                         alt="edit profile"
