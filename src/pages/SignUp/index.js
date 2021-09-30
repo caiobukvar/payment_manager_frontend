@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import InputPassword from "../../components/InputPassword/InputPassword"
+import { toast } from 'react-toastify';
 
 function SignUp() {
     const [password, setPassword] = useState('');
@@ -21,6 +22,13 @@ function SignUp() {
             });
 
         if (response.ok) {
+            toast.success('Cadastro realizado com sucesso, redirecionando...', {
+                position: "top-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                progress: undefined,
+            });
             history.push('/sign-in');
             return;
         }
