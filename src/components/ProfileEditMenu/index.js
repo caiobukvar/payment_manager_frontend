@@ -2,14 +2,22 @@ import './styles.css';
 import { useContext } from 'react';
 import Edit from '../../assets/edit.svg';
 import Exit from '../../assets/exit.svg';
-import { contextoModal } from '../../contextoModal';
-import { Link } from 'react-router-dom';
+import { ContextoModal } from '../../ContextoModal';
+import { AuthContext } from '../../AuthContext';
+import { useHistory } from 'react-router-dom';
 
-function ProfileEditMenu({ setMenuOpen }) {
-    const { setValue } = useContext(contextoModal);
+function ProfileEditMenu() {
+    const { setValue } = useContext(ContextoModal);
+    const { setToken } = useContext(AuthContext);
+    const history = useHistory();
 
     function handleOpenProfilePage() {
         setValue(true);
+    }
+
+    function handleLogout() {
+        setToken('');
+        history.push('/sign-in');
     }
 
     return (
@@ -22,19 +30,12 @@ function ProfileEditMenu({ setMenuOpen }) {
                     />
                     <p className="ml-sm">Editar</p>
                 </div>
-                <div className="flex-row items-center content-center">
-                    <Link
-                        style={{ textDecoration: 'none' }}
-                        to="/sign-in"
-                        className="flex-row"
-                    >
-                        <img
-                            src={Exit}
-                            alt="exit profile"
-                            onClick={() => { setMenuOpen(false) }}
-                        />
-                        <p className="ml-sm">Deslogar</p>
-                    </Link>
+                <div className="flex-row items-center content-center" onClick={handleLogout}>
+                    <img
+                        src={Exit}
+                        alt="exit profile"
+                    />
+                    <p className="ml-sm">Logout</p>
                 </div>
             </div>
         </>

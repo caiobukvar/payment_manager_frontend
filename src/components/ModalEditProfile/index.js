@@ -4,7 +4,7 @@ import CloseIcon from '../../assets/close-icon.svg';
 import InputPassword from '../InputPassword/InputPassword';
 import { useForm } from 'react-hook-form';
 
-function ModalEditProfile({ setValue }) {
+function ModalEditProfile({ setModalOpen }) {
     const { register } = useForm();
     const [newPassword, setNewPassword] = useState('');
 
@@ -22,7 +22,7 @@ function ModalEditProfile({ setValue }) {
                     <div className="modal-content flex-column content-center items-center modal-padding">
                         <img src={CloseIcon}
                             className="modal-close-icon"
-                            onClick={() => { setValue(false) }}
+                            onClick={() => { setModalOpen(false) }}
                         />
                         <div className="flex-column items-center content-center">
                             <p className="flex-column align-start font-xl">// EDITAR USUÁRIO</p>

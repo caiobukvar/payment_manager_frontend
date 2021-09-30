@@ -1,14 +1,37 @@
 import './styles.css';
 import Logo from "../../assets/logo.svg";
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { useForm } from 'react-hook-form';
 import InputPassword from "../../components/InputPassword/InputPassword"
+import { AuthContext } from '../../AuthContext';
 
-function SignIn({ register }) {
+function SignIn() {
     const [password, setPassword] = useState('');
+    const { setToken } = useContext(AuthContext);
+    const { handleSubmit, register } = useForm();
+
 
     async function signInData(data) {
+        const response = await fetch('https://paymentmanager-api.herokuapp.com/login',
+            {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
 
+        const userData = await response.json();
+        console.log(userData);
+
+        if (response.ok) {
+            setToken(userData.token);
+            history.push('/');
+            return;
+        }
+
+        console.log('tratar: login realizado com sucesso / login falho');
     }
 
     const [signInValues, setSignInValues] = useState({
