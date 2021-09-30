@@ -1,0 +1,11 @@
+.eye-password {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 7px;
+    cursor: pointer;
+}
+
+.full-input {
+    position: relative;
+}

@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 
 function ModalEditProfile({ setValue }) {
     const { register } = useForm();
+    const [newPassword, setNewPassword] = useState('');
 
     const [editValues, setEditValues] = useState({
         name: '',
@@ -25,43 +26,60 @@ function ModalEditProfile({ setValue }) {
                         />
                         <div className="flex-column items-center content-center">
                             <p>// EDITAR USUÁRIO</p>
-                            <input
-                                type="text"
-                                id="name"
-                                placeholder="seu nome"
-                                {...register("nome", { required: true })}
-                                value={editValues.name}
-                                onChange={(e) => { setEditValues({ ...editValues, name: e.target.value }) }}
-                            />
-                            <input
-                                type="text"
-                                id="email"
-                                placeholder="seu email"
-                                {...register("email", { required: true })}
-                                value={editValues.email}
-                                onChange={(e) => { setEditValues({ ...editValues, email: e.target.value }) }}
-                            />
-                            <InputPassword
-                                id="new-password"
-                                placeholder=""
-                                register={() => register({ required: true })}
-                            />
-                            <input
-                                type="text"
-                                id="phone"
-                                placeholder="seu telefone"
-                                {...register("telefone")}
-                                value={editValues.telefone}
-                                onChange={(e) => { setEditValues({ ...editValues, telefone: e.target.value }) }}
-                            />
-                            <input
-                                type="text"
-                                id="cpf"
-                                placeholder="seu cpf"
-                                {...register("cpf")}
-                                value={editValues.cpf}
-                                onChange={(e) => { setEditValues({ ...editValues, cpf: e.target.value }) }}
-                            />
+                            <div className="flex-column border-bt">
+                                <label className="mb-md font-md-bold" htmlFor="name">Nome</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    placeholder="Digite o novo nome"
+                                    {...register("nome", { required: true })}
+                                    value={editValues.name}
+                                    onChange={(e) => { setEditValues({ ...editValues, name: e.target.value }) }}
+                                />
+                            </div>
+                            <div className="flex-column border-bt">
+                                <label className="mb-md font-md-bold" htmlFor="email">E-mail</label>
+                                <input
+                                    type="text"
+                                    id="email"
+                                    placeholder="Digite o novo email"
+                                    {...register("email", { required: true })}
+                                    value={editValues.email}
+                                    onChange={(e) => { setEditValues({ ...editValues, email: e.target.value }) }}
+                                />
+                            </div>
+                            <div className="flex-column border-bt">
+                                <label className="mb-md font-md-bold" htmlFor="new-password">Nova senha</label>
+                                <InputPassword
+                                    id="password"
+                                    placeholder="Digite a nova senha"
+                                    value={newPassword}
+                                    setValue={setNewPassword}
+                                    register={() => register({ required: true })}
+                                />
+                            </div>
+                            <div className="flex-column border-bt">
+                                <label className="mb-md font-md-bold" htmlFor="email">Telefone</label>
+                                <input
+                                    type="text"
+                                    id="phone"
+                                    placeholder="(xx) x xxxx-xxxx"
+                                    {...register("telefone")}
+                                    value={editValues.telefone}
+                                    onChange={(e) => { setEditValues({ ...editValues, telefone: e.target.value }) }}
+                                />
+                            </div>
+                            <div className="flex-column border-bt">
+                                <label className="mb-md font-md-bold" htmlFor="email">CPF</label>
+                                <input
+                                    type="text"
+                                    id="cpf"
+                                    placeholder="222.222.222-22"
+                                    {...register("cpf")}
+                                    value={editValues.cpf}
+                                    onChange={(e) => { setEditValues({ ...editValues, cpf: e.target.value }) }}
+                                />
+                            </div>
                             {
                                 (editValues.name && editValues.email && editValues.telefone && editValues.cpf)
                                     ? <button className="btn-pink-bright enabled">Editar conta</button>

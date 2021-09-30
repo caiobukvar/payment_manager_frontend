@@ -2,23 +2,29 @@ import './styles.css';
 import Logo from "../../assets/logo.svg";
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import InputPassword from "../../components/InputPassword/InputPassword"
 
 function SignUp() {
     const [password, setPassword] = useState('');
     const { handleSubmit, register } = useForm();
+    const history = useHistory();
 
     async function signUpData(data) {
         const response = await fetch('https://paymentmanager-api.herokuapp.com/',
             {
                 method: 'POST',
                 body: JSON.stringify(data),
-
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
 
-        const responseData = await response.json();
-        console.log(responseData);
+        if (response.ok) {
+            history.push('/');
+            return;
+        }
+        console.log('tratar: cadastro realizado com sucesso')
     }
 
     const [signUpValues, setSignUpValues] = useState({
@@ -27,8 +33,8 @@ function SignUp() {
     });
 
     return (
-        <div className="container-form flex-column" onSubmit={handleSubmit(signUpData)}>
-            <form className="form form-sign-up">
+        <div className="container-form flex-column">
+            <form className="form form-sign-up" onSubmit={handleSubmit(signUpData)}>
                 <div className="logo">
                     <img src={Logo} alt="logo" />
                 </div>
@@ -36,9 +42,9 @@ function SignUp() {
                     <label className="mb-md font-md-bold" htmlFor="name">Nome</label>
                     <input
                         type="text"
-                        id="name"
+                        id="nome"
                         placeholder="Digite seu nome"
-                        {...register('name', { required: true })}
+                        {...register('nome', { required: true })}
                         value={signUpValues.nome}
                         onChange={(e) => { setSignUpValues({ ...signUpValues, nome: e.target.value }) }}
                     />
@@ -57,7 +63,7 @@ function SignUp() {
                     <InputPassword
                         label="Senha"
                         placeholder="Digite sua senha"
-                        register={() => register()}
+                        register={register}
                         value={password}
                         setValue={setPassword}
                     />

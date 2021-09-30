@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import InputPassword from "../../components/InputPassword/InputPassword"
 
+// const userData = await response.json({ nome, email, token, id });
+
 function SignIn() {
     const [password, setPassword] = useState('');
     const [signInValues, setSignInValues] = useState({

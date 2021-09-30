@@ -8,13 +8,6 @@
     position: relative;
 }
 
-.eye-password {
-    position: absolute;
-    top: 37px;
-    right: 7px;
-    cursor: pointer;
-}
-
 .logo {
     margin-bottom: 40px;
 }
