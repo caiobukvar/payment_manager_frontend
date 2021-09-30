@@ -17,16 +17,16 @@ function ModalEditProfile({ setValue }) {
 
     return (
         <>
-            <div className="modal dark-bg box-shadow">
+            <div className="modal dark-bg box-shadow ">
                 <form className="form">
-                    <div className="modal-content flex-column content-center items-center">
+                    <div className="modal-content flex-column content-center items-center modal-padding">
                         <img src={CloseIcon}
                             className="modal-close-icon"
                             onClick={() => { setValue(false) }}
                         />
                         <div className="flex-column items-center content-center">
-                            <p>// EDITAR USUÁRIO</p>
-                            <div className="flex-column border-bt">
+                            <p className="flex-column align-start font-xl">// EDITAR USUÁRIO</p>
+                            <div className="flex-column border-bt mt-lg">
                                 <label className="mb-md font-md-bold" htmlFor="name">Nome</label>
                                 <input
                                     type="text"
@@ -55,7 +55,7 @@ function ModalEditProfile({ setValue }) {
                                     placeholder="Digite a nova senha"
                                     value={newPassword}
                                     setValue={setNewPassword}
-                                    register={() => register({ required: true })}
+                                    register={register}
                                 />
                             </div>
                             <div className="flex-column border-bt">

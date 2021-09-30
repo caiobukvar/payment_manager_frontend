@@ -14,7 +14,6 @@
     box-shadow: 0 0 1em rgb(0, 0, 0, 0.2);
     background-color: white;
     border-radius: 15px;
-    padding: 45px 61px;
 }
 
 .form-borderless {
@@ -23,6 +22,8 @@
     align-items: center;
     justify-content: center;
     border: 0;
+    left: 50%;
+    transform: translateX(-10%);
     background-color: white;
     border-radius: 15px;
     padding: 45px 61px;

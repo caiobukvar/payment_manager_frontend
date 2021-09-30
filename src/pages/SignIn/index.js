@@ -4,17 +4,20 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import InputPassword from "../../components/InputPassword/InputPassword"
 
-// const userData = await response.json({ nome, email, token, id });
-
-function SignIn() {
+function SignIn({ register }) {
     const [password, setPassword] = useState('');
+
+    async function signInData(data) {
+
+    }
+
     const [signInValues, setSignInValues] = useState({
         email: ''
     });
 
     return (
         <div className="container-form flex-column">
-            <form className="form form-sign-in">
+            <form className="form form-sign-in" onSubmit={handleSubmit(signInData)}>
                 <div className="logo">
                     <img src={Logo} alt="logo" />
                 </div>
@@ -24,6 +27,7 @@ function SignIn() {
                         id="email"
                         type="text"
                         placeholder="Digite seu e-mail"
+                        {...register('nome', { required: true })}
                         value={signInValues.email}
                         onChange={(e) => { setSignInValues({ ...signInValues, email: e.target.value }) }}
                     />
@@ -32,6 +36,7 @@ function SignIn() {
                     <InputPassword
                         label="Senha"
                         placeholder="Digite sua senha"
+                        register={register}
                         value={password}
                         setValue={setPassword}
                     />

@@ -17,9 +17,13 @@
 }
 
 .modal-close-icon {
-    width: 10px;
+    width: 12px;
     position: absolute;
-    right: 20px;
-    top: 20px;
+    right: 35px;
+    top: 35px;
     cursor: pointer;
+}
+
+.modal-padding {
+    padding: 45px 61px;
 }

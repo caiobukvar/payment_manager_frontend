@@ -13,7 +13,6 @@ import Layout from './components/Layout';
 
 function Routes() {
     const [value, setValue] = useState(false);
-    // const [userData, setUserData] = useState();
 
     return (
         <Router>

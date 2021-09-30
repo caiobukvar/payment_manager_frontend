@@ -1,8 +1,8 @@
 import './styles.css';
 import Logo from "../../assets/logo.svg";
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import InputPassword from "../../components/InputPassword/InputPassword"
 
 function SignUp() {
@@ -21,10 +21,10 @@ function SignUp() {
             });
 
         if (response.ok) {
-            history.push('/');
+            history.push('/sign-in');
             return;
         }
-        console.log('tratar: cadastro realizado com sucesso')
+        console.log('tratar: cadastro realizado com sucesso');
     }
 
     const [signUpValues, setSignUpValues] = useState({
