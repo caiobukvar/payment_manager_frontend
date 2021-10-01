@@ -12,6 +12,7 @@ import AddClient from './pages/AddClient';
 import Layout from './components/Layout';
 import { ContextoModal } from './ContextoModal';
 import { AuthContext } from './AuthContext';
+import { UserContext } from './UserContext';
 
 function ProtectedRoutes(props) {
     const { token } = useContext(AuthContext);
@@ -23,28 +24,40 @@ function ProtectedRoutes(props) {
 
 function Routes() {
     const [value, setValue] = useState(false);
-    const [token, setToken] = useState();
+    const [userInfo, setUserInfo] = useState(() => {
+        const localUserInfo = localStorage.getItem('info-usuario');
+        return localUserInfo ? JSON.parse(localUserInfo) : '';
+    });
+    const [token, setToken] = useState(() => {
+        const localToken = localStorage.getItem('token-usuario');
+        return localToken ? localToken : '';
+    });
+
 
     return (
         <AuthContext.Provider
             value={{ token, setToken }}
         >
-            <Router>
-                <Switch>
-                    <Route path="/signup" component={SignUp} />
-                    <Route path="/signin" component={SignIn} />
-                    <ProtectedRoutes>
-                        <ContextoModal.Provider
-                            value={{ value, setValue }}
-                        >
-                            <Layout>
-                                <Route path="/" exact component={Main} />
-                                <Route path="/add-client" component={AddClient} />
-                            </Layout>
-                        </ContextoModal.Provider>
-                    </ProtectedRoutes>
-                </Switch>
-            </Router>
+            <UserContext.Provider
+                value={{ userInfo, setUserInfo }}
+            >
+                <Router>
+                    <Switch>
+                        <Route path="/signup" component={SignUp} />
+                        <Route path="/signin" component={SignIn} />
+                        <ProtectedRoutes>
+                            <ContextoModal.Provider
+                                value={{ value, setValue }}
+                            >
+                                <Layout>
+                                    <Route path="/" exact component={Main} />
+                                    <Route path="/add-client" component={AddClient} />
+                                </Layout>
+                            </ContextoModal.Provider>
+                        </ProtectedRoutes>
+                    </Switch>
+                </Router>
+            </UserContext.Provider>
         </AuthContext.Provider>
     )
 }

@@ -5,7 +5,7 @@ function ClientsCard() {
     return (
         <div className="card-client flex-column box-shadow mt-xxl">
             <div className="flex-row topbar background-dark-smooth card-padding content-center border-round-top">
-                <img src={Clients} alt="clients" />
+                <img src={Clients} alt="clients" className="img-resize" />
                 <p className="ml-sm">Clientes</p>
             </div>
             <div className="flex-column card-content align-center content-center card-padding-lg">

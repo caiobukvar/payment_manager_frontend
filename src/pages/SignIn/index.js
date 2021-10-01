@@ -5,10 +5,12 @@ import { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import InputPassword from "../../components/InputPassword/InputPassword"
 import { AuthContext } from '../../AuthContext';
+import { UserContext } from '../../UserContext';
 
 function SignIn() {
     const [password, setPassword] = useState('');
     const { setToken } = useContext(AuthContext);
+    const { setUserInfo } = useContext(UserContext);
     const { handleSubmit, register } = useForm();
     const history = useHistory();
 
@@ -24,10 +26,14 @@ function SignIn() {
             });
 
         const userData = await response.json();
+
         console.log(userData);
 
         if (response.ok) {
             setToken(userData.token);
+            setUserInfo(userData.usuario);
+            localStorage.setItem('token-usuario', JSON.stringify(userData.token));
+            localStorage.setItem('info-usuario', JSON.stringify(userData.usuario));
             console.log('tratar: login realizado com sucesso / login falho');
             history.push('/');
             return;

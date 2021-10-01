@@ -17,3 +17,8 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.img-resize {
+    width: 35px;
+    height: auto;
+}

@@ -17,6 +17,8 @@ function ProfileEditMenu() {
 
     function handleLogout() {
         setToken('');
+        localStorage.removeItem('token-usuario');
+        localStorage.removeItem('info-usuario');
         history.push('/signin');
     }
 

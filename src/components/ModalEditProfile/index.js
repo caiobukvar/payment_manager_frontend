@@ -3,18 +3,18 @@ import { useState, useContext } from 'react';
 import CloseIcon from '../../assets/close-icon.svg';
 import InputPassword from '../InputPassword/InputPassword';
 import { useForm } from 'react-hook-form';
-import { AuthContext } from '../../AuthContext';
+import { UserContext } from '../../UserContext';
 
 function ModalEditProfile({ setValue, userData }) {
-    const { token } = useContext(AuthContext);
+    const { userInfo } = useContext(UserContext);
     const { register } = useForm();
     const [newPassword, setNewPassword] = useState('');
 
     const [editValues, setEditValues] = useState({
-        name: '',
-        email: '',
-        telefone: '',
-        cpf: ''
+        name: userInfo.nome,
+        email: userInfo.email,
+        telefone: userInfo.telefone,
+        cpf: userInfo.cpf
     });
 
     console.log(userData)
