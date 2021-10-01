@@ -23,6 +23,10 @@
     font-weight: 600;
 }
 
+input {
+    color: #4C4C4C;
+}
+
 ::placeholder {
     color: #A5A5A5;
 }

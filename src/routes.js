@@ -17,7 +17,7 @@ function ProtectedRoutes(props) {
     const { token } = useContext(AuthContext);
 
     return (
-        <Route render={() => (token ? props.children : <Redirect to="/sign-in" />)} />
+        <Route render={() => (token ? props.children : <Redirect to="/signin" />)} />
     )
 }
 
@@ -31,8 +31,8 @@ function Routes() {
         >
             <Router>
                 <Switch>
-                    <Route path="/sign-up" component={SignUp} />
-                    <Route path="/sign-in" component={SignIn} />
+                    <Route path="/signup" component={SignUp} />
+                    <Route path="/signin" component={SignIn} />
                     <ProtectedRoutes>
                         <ContextoModal.Provider
                             value={{ value, setValue }}

@@ -3,8 +3,7 @@ import Logo from "../../assets/logo.svg";
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import InputPassword from "../../components/InputPassword/InputPassword"
-import { toast } from 'react-toastify';
+import InputPassword from "../../components/InputPassword/InputPassword";
 
 function SignUp() {
     const [password, setPassword] = useState('');
@@ -12,7 +11,7 @@ function SignUp() {
     const history = useHistory();
 
     async function signUpData(data) {
-        const response = await fetch('https://paymentmanager-api.herokuapp.com/',
+        const response = await fetch('https://paymentmanager-api.herokuapp.com/signup',
             {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -26,23 +25,15 @@ function SignUp() {
         console.log(result);
 
         if (response.ok) {
-            toast.success('Cadastro realizado com sucesso!', {
-                position: "top-right",
-                autoClose: 4000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                progress: undefined,
-            });
-
-            history.push('/sign-in');
+            history.push('/signin');
             return;
         }
         console.log('tratar: cadastro realizado com sucesso');
     }
 
     const [signUpValues, setSignUpValues] = useState({
-        nome: '',
-        email: ''
+        nome,
+        email
     });
 
     return (
@@ -94,7 +85,7 @@ function SignUp() {
             </form>
             <span className="mt-lg">
                 Já possui uma conta?
-                <Link to="/sign-in" className="pink"> Acesse agora!</Link>
+                <Link to="/signin" className="pink"> Acesse agora!</Link>
             </span>
         </div>
     )

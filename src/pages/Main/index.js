@@ -10,7 +10,7 @@ function Main() {
 
   useEffect(() => {
     async function getUserData() {
-      const response = await fetch('https://paymentmanager-api.herokuapp.com/',
+      const response = await fetch('https://paymentmanager-api.herokuapp.com/user',
         {
           method: 'GET',
           headers: {
@@ -19,13 +19,11 @@ function Main() {
         });
 
       const userData = await response.json();
-
       console.log(userData);
     }
 
     getUserData();
   }, []);
-
 
 
   return (

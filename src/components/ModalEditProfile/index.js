@@ -1,10 +1,12 @@
 import './styles.css';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import CloseIcon from '../../assets/close-icon.svg';
 import InputPassword from '../InputPassword/InputPassword';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../AuthContext';
 
-function ModalEditProfile({ setValue }) {
+function ModalEditProfile({ setValue, userData }) {
+    const { token } = useContext(AuthContext);
     const { register } = useForm();
     const [newPassword, setNewPassword] = useState('');
 
@@ -15,6 +17,7 @@ function ModalEditProfile({ setValue }) {
         cpf: ''
     });
 
+    console.log(userData)
     return (
         <>
             <div className="modal dark-bg box-shadow ">

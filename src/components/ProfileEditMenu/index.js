@@ -17,7 +17,7 @@ function ProfileEditMenu() {
 
     function handleLogout() {
         setToken('');
-        history.push('/sign-in');
+        history.push('/signin');
     }
 
     return (

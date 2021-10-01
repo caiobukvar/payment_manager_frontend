@@ -18,7 +18,7 @@ function Sidebar() {
                         "active"
                     }
                 >
-                    <img src={House} alt="home" className="ml-lg" />
+                    <img src={House} alt="home" className="ml-lg img-resize" />
                     <h2 className="ml-md font-md">Home</h2>
                 </NavLink>
                 <NavLink
@@ -28,7 +28,7 @@ function Sidebar() {
                         "active"
                     }
                 >
-                    <img src={Money} alt="charges" className="ml-lg" />
+                    <img src={Money} alt="charges" className="ml-lg img-resize" />
                     <h2 className="ml-md font-md">Cobranças</h2>
                 </NavLink>
                 <NavLink
@@ -38,7 +38,7 @@ function Sidebar() {
                         "active"
                     }
                 >
-                    <img src={Clients} alt="clients" className="ml-lg" />
+                    <img src={Clients} alt="clients" className="ml-lg img-resize" />
                     <h2 className="ml-md font-md">Clientes</h2>
                 </NavLink>
             </div>

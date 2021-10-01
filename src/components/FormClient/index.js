@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
 function FormClient() {
+    const [cep, setCep] = useState('');
+    const [city, setCity] = useState('');
     const [novosDadosCliente, setNovosDadosCliente] = useState({
         nome: '',
         email: '',
@@ -21,7 +23,6 @@ function FormClient() {
     const onSubmit = (data) => {
         console.log(data);
     }
-
 
 
     return (
@@ -89,7 +90,7 @@ function FormClient() {
                         id="CEP"
                         placeholder="Digite seu CEP"
                         {...register("cep")}
-                        value={novosDadosCliente.cep}
+                        value={novosDadosCliente.cep, cep}
                         onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, cep: e.target.value }) }}
                     />
                 </div>

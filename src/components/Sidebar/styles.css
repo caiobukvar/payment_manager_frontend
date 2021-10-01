@@ -25,3 +25,8 @@ a:hover {
 .active {
     background-color: #374952;
 }
+
+.img-resize {
+    width: 35px;
+    height: auto;
+}
