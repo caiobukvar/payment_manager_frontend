@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import ClientsCard from '../../components/ClientsCard';
 import ChargesCard from '../../components/ChargesCard';
 import { AuthContext } from '../../AuthContext';
@@ -10,7 +10,7 @@ function Main() {
 
   useEffect(() => {
     async function getUserData() {
-      const response = await fetch('https://paymentmanager-api.herokuapp.com/login',
+      const response = await fetch('https://paymentmanager-api.herokuapp.com/',
         {
           method: 'GET',
           headers: {
@@ -19,12 +19,14 @@ function Main() {
         });
 
       const userData = await response.json();
-      console.log(userData);
 
+      console.log(userData);
     }
 
     getUserData();
   }, []);
+
+
 
   return (
     <div className="flex-row content-center gap-sm">

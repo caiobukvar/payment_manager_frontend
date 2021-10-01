@@ -24,13 +24,15 @@ function SignIn() {
             });
 
         const userData = await response.json();
+        console.log(userData);
 
         if (response.ok) {
             setToken(userData.token);
+            console.log('tratar: login realizado com sucesso / login falho');
             history.push('/');
             return;
         }
-        console.log('tratar: login realizado com sucesso / login falho');
+
     }
 
     const [signInValues, setSignInValues] = useState({
