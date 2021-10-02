@@ -5,6 +5,7 @@ import Exit from '../../assets/exit.svg';
 import { ContextoModal } from '../../ContextoModal';
 import { AuthContext } from '../../AuthContext';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function ProfileEditMenu() {
     const { setValue } = useContext(ContextoModal);
@@ -19,6 +20,14 @@ function ProfileEditMenu() {
         setToken('');
         localStorage.removeItem('token-usuario');
         localStorage.removeItem('info-usuario');
+        toast.success('Deslogado com sucesso!', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            progress: undefined,
+        });
         history.push('/signin');
     }
 

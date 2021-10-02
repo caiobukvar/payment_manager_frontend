@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import InputPassword from "../../components/InputPassword/InputPassword";
+import { toast } from 'react-toastify';
 
 function SignUp() {
     const [password, setPassword] = useState('');
@@ -25,15 +26,30 @@ function SignUp() {
         console.log(result);
 
         if (response.ok) {
+            toast.success('Cadastro realizado com sucesso!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                progress: undefined,
+            });
             history.push('/signin');
             return;
         }
-        console.log('tratar: cadastro realizado com sucesso');
+        toast.error('Erro ao cadastrar o usuário', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            progress: undefined,
+        });
     }
 
     const [signUpValues, setSignUpValues] = useState({
-        nome,
-        email
+        nome: '',
+        email: ''
     });
 
     return (
@@ -85,7 +101,7 @@ function SignUp() {
             </form>
             <span className="mt-lg">
                 Já possui uma conta?
-                <Link to="/signin" className="pink"> Acesse agora!</Link>
+                <Link to="/signin" className="pink ml-sm">Acesse agora!</Link>
             </span>
         </div>
     )

@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import InputPassword from "../../components/InputPassword/InputPassword"
 import { AuthContext } from '../../AuthContext';
 import { UserContext } from '../../UserContext';
+import { toast } from 'react-toastify';
 
 function SignIn() {
     const [password, setPassword] = useState('');
@@ -34,10 +35,25 @@ function SignIn() {
             setUserInfo(userData.usuario);
             localStorage.setItem('token-usuario', JSON.stringify(userData.token));
             localStorage.setItem('info-usuario', JSON.stringify(userData.usuario));
-            console.log('tratar: login realizado com sucesso / login falho');
+            toast.success('Login realizado com sucesso!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                progress: undefined,
+            });
             history.push('/');
             return;
         }
+        toast.error('Dados inválidos', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            progress: undefined,
+        });
 
     }
 
@@ -82,7 +98,7 @@ function SignIn() {
             </form>
             <span className="mt-lg">
                 Não possui uma conta?
-                <Link to="/signup" className="pink"> Cadastre-se!</Link>
+                <Link to="/signup" className="pink ml-sm">Cadastre-se!</Link>
             </span>
         </div>
     );
