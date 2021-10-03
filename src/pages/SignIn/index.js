@@ -10,6 +10,8 @@ import { toast } from 'react-toastify';
 
 function SignIn() {
     const [password, setPassword] = useState('');
+    const [errorPassword, setErrorPassword] = useState('');
+    const [errorEmail, setErrorEmail] = useState('');
     const { setToken } = useContext(AuthContext);
     const { setUserInfo } = useContext(UserContext);
     const { handleSubmit, register } = useForm();
@@ -46,15 +48,38 @@ function SignIn() {
             history.push('/');
             return;
         }
-        toast.error('Dados inválidos', {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            progress: undefined,
-        });
+        const err = true;
 
+        if (userData === "Email não existe no sistema.") {
+            toast.error('Email não cadastrado!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                progress: undefined,
+            });
+            setErrorEmail(err);
+        } else if (userData === "Senha incorreta.") {
+            toast.error('Senha inválida!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                progress: undefined,
+            });
+            setErrorPassword(err);
+        } else {
+            toast.error('Ocorreu um erro inesperado!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                progress: undefined,
+            });
+        }
     }
 
     const [signInValues, setSignInValues] = useState({
@@ -67,7 +92,7 @@ function SignIn() {
                 <div className="logo">
                     <img src={Logo} alt="logo" />
                 </div>
-                <div className="flex-column border-bt">
+                <div className={`flex-column border-bt ${errorEmail ? 'inputError' : ''}`}>
                     <label className="mb-md font-md-bold" htmlFor="email">E-mail</label>
                     <input
                         id="email"
@@ -75,10 +100,10 @@ function SignIn() {
                         placeholder="Digite seu e-mail"
                         {...register('email', { required: true })}
                         value={signInValues.email}
-                        onChange={(e) => { setSignInValues({ ...signInValues, email: e.target.value }) }}
+                        onChange={(e) => { setSignInValues({ ...signInValues, email: e.target.value }), setErrorEmail(false) }}
                     />
                 </div>
-                <div className="flex-column input-password border-bt">
+                <div className={`flex-column input-password border-bt ${errorPassword ? 'inputError' : ''}`}>
                     <InputPassword
                         label="Senha"
                         placeholder="Digite sua senha"
