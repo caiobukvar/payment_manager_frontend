@@ -1,5 +1,5 @@
 import './styles.css';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import CloseIcon from '../../assets/close-icon.svg';
 import InputPassword from '../InputPassword/InputPassword';
 import { useForm } from 'react-hook-form';
@@ -9,31 +9,30 @@ import { UserContext } from '../../UserContext';
 function ModalEditProfile({ setValue }) {
     const { token } = useContext(AuthContext);
     const { userInfo } = useContext(UserContext);
-    const { register } = useForm();
+    const { register, handleSubmit } = useForm();
     const [newPassword, setNewPassword] = useState('');
     const [editValues, setEditValues] = useState({
-        nome: '',
-        email: '',
-        telefone: '',
-        cpf: ''
+        nome: userInfo.nome ? userInfo.nome : '',
+        email: userInfo.email ? userInfo.email : '',
+        senha: (newPassword ? newPassword : null),
+        telefone: userInfo.telefone ? userInfo.telefone : '',
+        cpf: userInfo.cpf ? userInfo.cpf : ''
     });
 
-    useEffect(() => {
-        async function editUser() {
-            const response = await fetch('https://paymentmanager-api.herokuapp.com/edit',
-                {
-                    method: 'PUT',
-                    body: JSON.stringify(),
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                });
+    async function editUser(editValues) {
+        editValues.telefone.replace(/[^0-9]/g, '');
 
-            const result = await response.json();
-            console.log(result);
-        }
-
-    })
+        const response = await fetch('https://paymentmanager-api.herokuapp.com/edit',
+            {
+                method: 'PUT',
+                body: JSON.stringify(editValues),
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+        const result = await response.json();
+        console.log(result);
+    }
 
 
     return (
@@ -52,7 +51,7 @@ function ModalEditProfile({ setValue }) {
                                 <input
                                     type="text"
                                     id="name"
-                                    placeholder={userInfo.nome}
+                                    placeholder="Digite seu nome"
                                     {...register("nome", { required: true })}
                                     value={editValues.nome}
                                     onChange={(e) => { setEditValues({ ...editValues, nome: e.target.value }) }}
@@ -63,7 +62,7 @@ function ModalEditProfile({ setValue }) {
                                 <input
                                     type="text"
                                     id="email"
-                                    placeholder={userInfo.email}
+                                    placeholder="Digite seu email"
                                     {...register("email", { required: true })}
                                     value={editValues.email}
                                     onChange={(e) => { setEditValues({ ...editValues, email: e.target.value }) }}
@@ -84,10 +83,11 @@ function ModalEditProfile({ setValue }) {
                                 <input
                                     type="text"
                                     id="phone"
-                                    placeholder={userInfo.telefone ? userInfo.telefone : "(XX) X XXXX-XXXX"}
+                                    placeholder="(XX) X XXXX-XXXX"
                                     {...register("telefone")}
                                     value={editValues.telefone}
-                                    onChange={(e) => { setEditValues({ ...editValues, telefone: e.target.value }) }}
+                                    onChange={(e) => { setEditValues({ ...editValues, telefone: e.target.value.replace(/\D/g, "").replace(/^(\d{2})(\d)/g, "($1) $2").replace(/(\d)(\d{4})$/, "$1-$2").substr(0, 15) }) }}
+                                    maxLength="15"
                                 />
                             </div>
                             <div className="flex-column border-bt">
@@ -95,15 +95,25 @@ function ModalEditProfile({ setValue }) {
                                 <input
                                     type="text"
                                     id="cpf"
-                                    placeholder={userInfo.cpf ? userInfo.cpf : "222.222.222-22"}
+                                    placeholder="222.222.222-22"
                                     {...register("cpf")}
                                     value={editValues.cpf}
-                                    onChange={(e) => { setEditValues({ ...editValues, cpf: e.target.value }) }}
+                                    onChange={(e) => {
+                                        setEditValues({
+                                            ...editValues,
+                                            cpf: e.target.value.replace(/\D/g, "")
+                                                .replace(/^(\d{3})(\d)/g, "$1.$2")
+                                                .replace(/(\d{3})(\d)/, '$1.$2')
+                                                .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+                                                .replace(/(-\d{2})\d+?$/, '$1')
+                                        })
+                                    }}
+                                    maxLength="14"
                                 />
                             </div>
                             {
                                 (editValues.nome && editValues.email && editValues.telefone && editValues.cpf)
-                                    ? <button className="btn-pink-bright enabled" type="submit">Editar conta</button>
+                                    ? <button className="btn-pink-bright enabled" type="submit" onClick={() => editUser(editValues)}>Editar conta</button>
                                     : <button className="btn-pink disabled" disabled>Editar conta</button>
                             }
                         </div>
@@ -115,11 +125,3 @@ function ModalEditProfile({ setValue }) {
 }
 
 export default ModalEditProfile;
-
-
-
-async function signUpData(data) {
-
-
-    console.log(result);
-}
