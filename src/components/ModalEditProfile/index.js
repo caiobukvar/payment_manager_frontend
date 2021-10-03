@@ -1,23 +1,41 @@
 import './styles.css';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import CloseIcon from '../../assets/close-icon.svg';
 import InputPassword from '../InputPassword/InputPassword';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../AuthContext';
 import { UserContext } from '../../UserContext';
 
-function ModalEditProfile({ setValue, userData }) {
+function ModalEditProfile({ setValue }) {
+    const { token } = useContext(AuthContext);
     const { userInfo } = useContext(UserContext);
     const { register } = useForm();
     const [newPassword, setNewPassword] = useState('');
-
     const [editValues, setEditValues] = useState({
-        name: userInfo.nome,
-        email: userInfo.email,
-        telefone: userInfo.telefone,
-        cpf: userInfo.cpf
+        nome: '',
+        email: '',
+        telefone: '',
+        cpf: ''
     });
 
-    console.log(userData)
+    useEffect(() => {
+        async function editUser() {
+            const response = await fetch('https://paymentmanager-api.herokuapp.com/edit',
+                {
+                    method: 'PUT',
+                    body: JSON.stringify(),
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+
+            const result = await response.json();
+            console.log(result);
+        }
+
+    })
+
+
     return (
         <>
             <div className="modal dark-bg box-shadow ">
@@ -30,14 +48,14 @@ function ModalEditProfile({ setValue, userData }) {
                         <div className="flex-column items-center content-center">
                             <p className="flex-column align-start font-xl">// EDITAR USUÁRIO</p>
                             <div className="flex-column border-bt mt-lg">
-                                <label className="mb-md font-md-bold" htmlFor="name">Nome</label>
+                                <label className="mb-md font-md-bold" htmlFor="nome">Nome</label>
                                 <input
                                     type="text"
                                     id="name"
-                                    placeholder="Digite o novo nome"
+                                    placeholder={userInfo.nome}
                                     {...register("nome", { required: true })}
-                                    value={editValues.name}
-                                    onChange={(e) => { setEditValues({ ...editValues, name: e.target.value }) }}
+                                    value={editValues.nome}
+                                    onChange={(e) => { setEditValues({ ...editValues, nome: e.target.value }) }}
                                 />
                             </div>
                             <div className="flex-column border-bt">
@@ -45,7 +63,7 @@ function ModalEditProfile({ setValue, userData }) {
                                 <input
                                     type="text"
                                     id="email"
-                                    placeholder="Digite o novo email"
+                                    placeholder={userInfo.email}
                                     {...register("email", { required: true })}
                                     value={editValues.email}
                                     onChange={(e) => { setEditValues({ ...editValues, email: e.target.value }) }}
@@ -66,7 +84,7 @@ function ModalEditProfile({ setValue, userData }) {
                                 <input
                                     type="text"
                                     id="phone"
-                                    placeholder="(xx) x xxxx-xxxx"
+                                    placeholder={userInfo.telefone ? userInfo.telefone : "(XX) X XXXX-XXXX"}
                                     {...register("telefone")}
                                     value={editValues.telefone}
                                     onChange={(e) => { setEditValues({ ...editValues, telefone: e.target.value }) }}
@@ -77,15 +95,15 @@ function ModalEditProfile({ setValue, userData }) {
                                 <input
                                     type="text"
                                     id="cpf"
-                                    placeholder="222.222.222-22"
+                                    placeholder={userInfo.cpf ? userInfo.cpf : "222.222.222-22"}
                                     {...register("cpf")}
                                     value={editValues.cpf}
                                     onChange={(e) => { setEditValues({ ...editValues, cpf: e.target.value }) }}
                                 />
                             </div>
                             {
-                                (editValues.name && editValues.email && editValues.telefone && editValues.cpf)
-                                    ? <button className="btn-pink-bright enabled">Editar conta</button>
+                                (editValues.nome && editValues.email && editValues.telefone && editValues.cpf)
+                                    ? <button className="btn-pink-bright enabled" type="submit">Editar conta</button>
                                     : <button className="btn-pink disabled" disabled>Editar conta</button>
                             }
                         </div>
@@ -97,3 +115,11 @@ function ModalEditProfile({ setValue, userData }) {
 }
 
 export default ModalEditProfile;
+
+
+
+async function signUpData(data) {
+
+
+    console.log(result);
+}

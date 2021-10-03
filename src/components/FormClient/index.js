@@ -22,7 +22,6 @@ function FormClient() {
         console.log(data);
     }
 
-
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="form-borderless mg-top">
             <div className="flex-column ">
@@ -88,7 +87,7 @@ function FormClient() {
                         id="CEP"
                         placeholder="Digite seu CEP"
                         {...register("cep")}
-                        value={novosDadosCliente.cep, cep}
+                        value={novosDadosCliente.cep}
                         onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, cep: e.target.value }) }}
                     />
                 </div>
