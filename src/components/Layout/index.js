@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import Sidebar from '../../components/Sidebar';
 import ProfileBar from '../../components/ProfileBar';
 import ModalEditProfile from '../../components/ModalEditProfile';
-import { ContextoModal } from '../../ContextoModal';
+import ContextoModal from '../../ContextoModal';
 
 function Layout({ children }) {
     const { value, setValue } = useContext(ContextoModal);

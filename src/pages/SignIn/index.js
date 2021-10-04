@@ -4,8 +4,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import InputPassword from "../../components/InputPassword/InputPassword"
-import { AuthContext } from '../../AuthContext';
-import { UserContext } from '../../UserContext';
+import AuthContext from '../../AuthContext';
+import UserContext from '../../UserContext';
 import { toast } from 'react-toastify';
 
 function SignIn() {

@@ -10,9 +10,9 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import AddClient from './pages/AddClient';
 import Layout from './components/Layout';
-import { ContextoModal } from './ContextoModal.js';
-import { AuthContext } from './AuthContext.js';
-import { UserContext } from './UserContext.js';
+import ContextoModal from './ContextoModal';
+import AuthContext from './AuthContext';
+import UserContext from './UserContext';
 
 function ProtectedRoutes(props) {
     const { token } = useContext(AuthContext);
