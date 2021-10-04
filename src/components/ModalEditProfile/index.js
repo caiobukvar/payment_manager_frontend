@@ -45,15 +45,6 @@ function ModalEditProfile({ setValue }) {
                 pauseOnHover: true,
                 progress: undefined,
             });
-        } else {
-            toast.error('Falha ao editar os dados.', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                progress: undefined,
-            });
         }
     }
 
