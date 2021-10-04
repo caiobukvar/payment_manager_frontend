@@ -23,6 +23,7 @@ function ModalEditProfile({ setValue }) {
 
     async function editUser(editValues) {
         editValues.telefone.replace(/[^0-9]/g, '');
+        editValues.cpf.replace(/[^0-9]/g, '');
 
         const response = await fetch('https://paymentmanager-api.herokuapp.com/edit',
             {
@@ -32,6 +33,8 @@ function ModalEditProfile({ setValue }) {
                     "Authorization": `Bearer ${token}`
                 }
             });
+        const newValues = response.json();
+        localStorage.setItem('info-usuario', newValues);
 
         if (response.ok) {
             toast.success('Dados editados com sucesso!', {
@@ -106,7 +109,15 @@ function ModalEditProfile({ setValue }) {
                                     placeholder="(XX) X XXXX-XXXX"
                                     {...register("telefone")}
                                     value={editValues.telefone}
-                                    onChange={(e) => { setEditValues({ ...editValues, telefone: e.target.value.replace(/\D/g, "").replace(/^(\d{2})(\d)/g, "($1) $2").replace(/(\d)(\d{4})$/, "$1-$2").substr(0, 15) }) }}
+                                    onChange={(e) => {
+                                        setEditValues({
+                                            ...editValues,
+                                            telefone: e.target.value.replace(/\D/g, "")
+                                                .replace(/^(\d{2})(\d)/g, "($1) $2")
+                                                .replace(/(\d)(\d{4})$/, "$1-$2")
+                                                .substr(0, 15)
+                                        })
+                                    }}
                                     maxLength="15"
                                 />
                             </div>
