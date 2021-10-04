@@ -77,6 +77,7 @@ function SignUp() {
                         register={register}
                         value={password}
                         setValue={setPassword}
+                        required
                     />
                 </div>
                 {

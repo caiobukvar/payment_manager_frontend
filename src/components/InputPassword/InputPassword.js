@@ -4,7 +4,7 @@ import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 
-function InputPassword({ label, placeholder, value, setValue, register }) {
+function InputPassword({ label, placeholder, value, setValue, register, required }) {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
@@ -15,7 +15,7 @@ function InputPassword({ label, placeholder, value, setValue, register }) {
                     id="password"
                     type={showPassword ? 'text' : 'password'}
                     placeholder={placeholder}
-                    {...register('senha', { required: true })}
+                    {...register('senha', required && { required: true })}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                 />

@@ -35,11 +35,12 @@ function ModalEditProfile({ setValue }) {
                 }
             });
 
-        const newValues = response.json();
-        localStorage.setItem('info-usuario', JSON.stringify(newValues));
+        const newValues = await response.json();
+        console.log(newValues);
 
         if (response.ok) {
             toast.success("Dados editados com sucesso!");
+            localStorage.setItem('info-usuario', JSON.stringify(newValues));
         } else {
             toast.error("Falha ao editar os dados.");
         }

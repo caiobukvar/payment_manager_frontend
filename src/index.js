@@ -9,7 +9,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Routes />
     <ToastContainer
-      position="top-center"
+      position="top-right"
       autoClose={3000}
       hideProgressBar="true"
       closeOnClick={true}
