@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { useState } from 'react';
+import React from 'react';
 import ClientsCard from '../../components/ClientsCard';
 import ChargesCard from '../../components/ChargesCard';
 

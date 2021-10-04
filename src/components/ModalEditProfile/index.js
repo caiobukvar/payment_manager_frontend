@@ -64,6 +64,7 @@ function ModalEditProfile({ setValue }) {
                 <form className="form">
                     <div className="modal-content flex-column content-center items-center modal-padding">
                         <img src={CloseIcon}
+                            alt="close-icon"
                             className="modal-close-icon"
                             onClick={() => { setValue(false) }}
                         />
