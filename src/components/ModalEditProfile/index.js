@@ -5,12 +5,14 @@ import InputPassword from '../InputPassword/InputPassword';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../AuthContext';
 import { UserContext } from '../../UserContext';
+import { toast } from 'react-toastify';
 
 function ModalEditProfile({ setValue }) {
     const { token } = useContext(AuthContext);
     const { userInfo } = useContext(UserContext);
-    const { register, handleSubmit } = useForm();
+    const { register } = useForm();
     const [newPassword, setNewPassword] = useState('');
+
     const [editValues, setEditValues] = useState({
         nome: userInfo.nome ? userInfo.nome : '',
         email: userInfo.email ? userInfo.email : '',
@@ -30,8 +32,26 @@ function ModalEditProfile({ setValue }) {
                     "Authorization": `Bearer ${token}`
                 }
             });
-        const result = await response.json();
-        console.log(result);
+
+        if (response.ok) {
+            toast.success('Dados editados com sucesso!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                progress: undefined,
+            });
+        } else {
+            toast.error('Falha ao editar os dados.', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                progress: undefined,
+            });
+        }
     }
 
 
@@ -112,7 +132,7 @@ function ModalEditProfile({ setValue }) {
                                 />
                             </div>
                             {
-                                (editValues.nome && editValues.email && editValues.telefone && editValues.cpf)
+                                (editValues.nome && editValues.email)
                                     ? <button className="btn-pink-bright enabled" type="submit" onClick={() => editUser(editValues)}>Editar conta</button>
                                     : <button className="btn-pink disabled" disabled>Editar conta</button>
                             }

@@ -21,10 +21,6 @@ function SignUp() {
                 }
             });
 
-        const result = await response.json();
-
-        console.log(result);
-
         if (response.ok) {
             toast.success('Cadastro realizado com sucesso!', {
                 position: "top-center",

@@ -29,9 +29,6 @@ function SignIn() {
             });
 
         const userData = await response.json();
-
-        console.log(userData);
-
         if (response.ok) {
             setToken(userData.token);
             setUserInfo(userData.usuario);
