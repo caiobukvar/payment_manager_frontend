@@ -15,7 +15,7 @@ function InputPassword({ label, placeholder, value, setValue, register }) {
                     id="password"
                     type={showPassword ? 'text' : 'password'}
                     placeholder={placeholder}
-                    {...register('senha')}
+                    {...register('senha', { required: true })}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                 />

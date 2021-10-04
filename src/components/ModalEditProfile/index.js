@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 function ModalEditProfile({ setValue }) {
     const { token } = useContext(AuthContext);
     const { userInfo } = useContext(UserContext);
-    const { register } = useForm();
+    const { register, handleSubmit } = useForm();
     const [newPassword, setNewPassword] = useState('');
 
     const [editValues, setEditValues] = useState({
@@ -22,6 +22,7 @@ function ModalEditProfile({ setValue }) {
     });
 
     async function editUser(editValues) {
+        console.log(editValues)
         editValues.telefone.replace(/[^0-9]/g, '');
         editValues.cpf.replace(/[^0-9]/g, '');
 
@@ -47,7 +48,7 @@ function ModalEditProfile({ setValue }) {
     return (
         <>
             <div className="modal dark-bg box-shadow ">
-                <form className="form">
+                <form className="form" onSubmit={handleSubmit(editUser)}>
                     <div className="modal-content flex-column content-center items-center modal-padding">
                         <img src={CloseIcon}
                             alt="close-icon"
@@ -131,7 +132,7 @@ function ModalEditProfile({ setValue }) {
                             </div>
                             {
                                 (editValues.nome && editValues.email)
-                                    ? <button className="btn-pink-bright enabled" type="submit" onClick={() => editUser(editValues)}>Editar conta</button>
+                                    ? <button className="btn-pink-bright enabled" type="submit">Editar conta</button>
                                     : <button className="btn-pink disabled" disabled>Editar conta</button>
                             }
                         </div>
