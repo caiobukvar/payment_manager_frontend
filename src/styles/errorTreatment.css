@@ -3,3 +3,8 @@
     padding: 0px 8px;
     border-bottom: 2px solid red !important;
 }
+
+.inputError input {
+    color: red;
+    font-weight: 600;
+}

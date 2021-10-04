@@ -10,6 +10,7 @@ function SignUp() {
     const [password, setPassword] = useState('');
     const { handleSubmit, register } = useForm();
     const history = useHistory();
+    const [errorSignUp, setErrorSignUp] = useState('');
 
     async function signUpData(data) {
         const response = await fetch('https://paymentmanager-api.herokuapp.com/signup',
@@ -32,15 +33,23 @@ function SignUp() {
             });
             history.push('/signin');
             return;
+        } else {
+            const err = true;
+
+            toast.error('Erro ao cadastrar o usuário', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                progress: undefined,
+            });
+            setErrorSignUp(err);
         }
-        toast.error('Erro ao cadastrar o usuário', {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            progress: undefined,
-        });
+    }
+
+    function handleClearError() {
+        setErrorSignUp(false);
     }
 
     const [signUpValues, setSignUpValues] = useState({
@@ -65,15 +74,15 @@ function SignUp() {
                         onChange={(e) => { setSignUpValues({ ...signUpValues, nome: e.target.value }) }}
                     />
                 </div>
-                <div className="flex-column border-bt">
-                    <label className="mb-md font-md-bold" htmlFor="email">E-mail</label>
+                <div className={`flex-column border-bt  ${errorSignUp ? 'inputError' : ''}`}>
+                    <label className="mb-md font-md-bold" htmlFor="email" >E-mail</label>
                     <input
                         type="text"
                         id="email"
                         placeholder="Digite seu e-mail"
                         {...register('email', { required: true })}
                         value={signUpValues.email}
-                        onChange={(e) => { setSignUpValues({ ...signUpValues, email: e.target.value }) }} />
+                        onChange={(e) => { setSignUpValues({ ...signUpValues, email: e.target.value }, handleClearError()) }} />
                 </div>
                 <div className="flex-column input-password border-bt">
                     <InputPassword
