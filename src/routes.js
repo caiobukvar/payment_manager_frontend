@@ -10,7 +10,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import AddClient from './pages/AddClient';
 import Layout from './components/Layout';
-import ContextoModal from './ContextoModal';
+import ModalContext from './ModalContext';
 import AuthContext from './AuthContext';
 import UserContext from './UserContext';
 
@@ -46,14 +46,14 @@ function Routes() {
                         <Route path="/signup" component={SignUp} />
                         <Route path="/signin" component={SignIn} />
                         <ProtectedRoutes>
-                            <ContextoModal.Provider
+                            <ModalContext.Provider
                                 value={{ value, setValue }}
                             >
                                 <Layout>
                                     <Route path="/" exact component={Main} />
                                     <Route path="/add-client" component={AddClient} />
                                 </Layout>
-                            </ContextoModal.Provider>
+                            </ModalContext.Provider>
                         </ProtectedRoutes>
                     </Switch>
                 </Router>

@@ -2,13 +2,13 @@ import './styles.css';
 import { useContext } from 'react';
 import Edit from '../../assets/edit.svg';
 import Exit from '../../assets/exit.svg';
-import ContextoModal from '../../ContextoModal';
+import ModalContext from '../../ModalContext';
 import AuthContext from '../../AuthContext';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 function ProfileEditMenu() {
-    const { setValue } = useContext(ContextoModal);
+    const { setValue } = useContext(ModalContext);
     const { setToken } = useContext(AuthContext);
     const history = useHistory();
 
