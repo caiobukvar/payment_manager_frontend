@@ -19,7 +19,7 @@ function FormClient() {
     const { register, handleSubmit } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data);
+        return;
     }
 
     return (
@@ -31,7 +31,7 @@ function FormClient() {
                     type="text"
                     title="name"
                     id="name"
-                    placeholder="Digite seu nome"
+                    placeholder="Digite o nome do cliente"
                     {...register("nome", { required: true })}
                     value={novosDadosCliente.nome}
                     onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, nome: e.target.value }) }}
@@ -43,7 +43,7 @@ function FormClient() {
                     type="text"
                     title="email"
                     id="email"
-                    placeholder="Digite seu e-mail"
+                    placeholder="Digite o email do cliente"
                     {...register("email", { required: true })}
                     value={novosDadosCliente.email}
                     onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, email: e.target.value }) }}
@@ -57,7 +57,7 @@ function FormClient() {
                         type="text"
                         title="CPF"
                         id="CPF"
-                        placeholder="Digite seu CPF"
+                        placeholder="Digite o CPF do cliente"
                         {...register("CPF", { required: true })}
                         value={novosDadosCliente.cpf}
                         onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, cpf: e.target.value }) }}
@@ -70,7 +70,7 @@ function FormClient() {
                         type="text"
                         title="phone"
                         id="phone"
-                        placeholder="Digite seu telefone"
+                        placeholder="Digite o telefone do cliente"
                         {...register("telefone", { required: true })}
                         value={novosDadosCliente.telefone}
                         onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, telefone: e.target.value }) }}
@@ -85,7 +85,7 @@ function FormClient() {
                         type="text"
                         title="CEP"
                         id="CEP"
-                        placeholder="Digite seu CEP"
+                        placeholder="Digite o CEP do cliente"
                         {...register("cep")}
                         value={novosDadosCliente.cep}
                         onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, cep: e.target.value }) }}
@@ -98,7 +98,7 @@ function FormClient() {
                         type="text"
                         title="adress"
                         id="adress"
-                        placeholder="Digite seu endereço"
+                        placeholder="Digite o endereço do cliente"
                         {...register("endereco")}
                         value={novosDadosCliente.endereco}
                         onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, endereco: e.target.value }) }}
@@ -113,7 +113,7 @@ function FormClient() {
                         type="text"
                         title="neighbourhood"
                         id="neighbourhood"
-                        placeholder="Digite seu bairro"
+                        placeholder="Digite o bairro do cliente"
                         {...register("bairro")}
                         value={novosDadosCliente.bairro}
                         onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, bairro: e.target.value }) }}
@@ -126,7 +126,7 @@ function FormClient() {
                         type="text"
                         title="city"
                         id="city"
-                        placeholder="Digite sua cidade"
+                        placeholder="Digite a cidade do cliente"
                         {...register("cidade")}
                         value={novosDadosCliente.cidade}
                         onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, cidade: e.target.value }) }}
@@ -141,7 +141,7 @@ function FormClient() {
                         type="text"
                         title="complement"
                         id="complement"
-                        placeholder="Digite seu complemento"
+                        placeholder="Digite o complemento do cliente"
                         {...register("complemento")}
                         value={novosDadosCliente.complemento}
                         onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, complemento: e.target.value }) }}
