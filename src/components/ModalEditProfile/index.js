@@ -31,12 +31,12 @@ function ModalEditProfile({ setValue }) {
                 method: 'PUT',
                 body: JSON.stringify(editValues),
                 headers: {
+                    "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
                 }
             });
 
         const newValues = await response.json();
-        console.log(newValues);
 
         if (response.ok) {
             toast.success("Dados editados com sucesso!");
