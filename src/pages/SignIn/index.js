@@ -97,7 +97,7 @@ function SignIn() {
                         placeholder="Digite seu e-mail"
                         {...register('email', { required: true })}
                         value={signInValues.email}
-                        onChange={(e) => { setSignInValues({ ...signInValues, email: e.target.value }), setErrorEmail(false) }}
+                        onChange={(e) => { setSignInValues({ ...signInValues, email: e.target.value }) }}
                     />
                 </div>
                 <div className={`flex-column input-password border-bt ${errorPassword ? 'inputError' : ''}`}>
