@@ -8,7 +8,12 @@ import 'react-toastify/dist/ReactToastify.css';
 ReactDOM.render(
   <React.StrictMode>
     <Routes />
-    <ToastContainer />
+    <ToastContainer
+      position="top-center"
+      autoClose={3000}
+      hideProgressBar="true"
+      closeOnClick={true}
+    />
   </React.StrictMode>,
   document.getElementById('root')
 );

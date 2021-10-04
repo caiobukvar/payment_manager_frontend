@@ -34,51 +34,26 @@ function SignIn() {
             setUserInfo(userData.usuario);
             localStorage.setItem('token-usuario', JSON.stringify(userData.token));
             localStorage.setItem('info-usuario', JSON.stringify(userData.usuario));
-            toast.success('Login realizado com sucesso!', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                progress: undefined,
-            });
+            toast.success('Login realizado com sucesso!');
             history.push('/');
             return;
         }
         const err = true;
 
         if (userData === "Email não existe no sistema.") {
-            toast.error('Email não cadastrado!', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                progress: undefined,
-            });
+            toast.error('Email não cadastrado!');
             setErrorEmail(err);
         } else if (userData === "Senha incorreta.") {
-            toast.error('Senha inválida!', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                progress: undefined,
-            });
+            toast.error('Senha inválida!');
             setErrorPassword(err);
         } else {
-            toast.error('Ocorreu um erro inesperado!', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                progress: undefined,
-            });
+            toast.error('Ocorreu um erro inesperado!');
         }
     }
 
+    function handleError() {
+        setErrorEmail(false);
+    }
     const [signInValues, setSignInValues] = useState({
         email: ''
     });
@@ -97,7 +72,7 @@ function SignIn() {
                         placeholder="Digite seu e-mail"
                         {...register('email', { required: true })}
                         value={signInValues.email}
-                        onChange={(e) => { setSignInValues({ ...signInValues, email: e.target.value }) }}
+                        onChange={(e) => { setSignInValues({ ...signInValues, email: e.target.value }, handleError()) }}
                     />
                 </div>
                 <div className={`flex-column input-password border-bt ${errorPassword ? 'inputError' : ''}`}>

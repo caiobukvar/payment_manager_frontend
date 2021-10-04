@@ -33,18 +33,14 @@ function ModalEditProfile({ setValue }) {
                     "Authorization": `Bearer ${token}`
                 }
             });
+
         const newValues = response.json();
-        localStorage.setItem('info-usuario', newValues);
+        localStorage.setItem('info-usuario', JSON.stringify(newValues));
 
         if (response.ok) {
-            toast.success('Dados editados com sucesso!', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                progress: undefined,
-            });
+            toast.success('Dados editados com sucesso!');
+        } else {
+            toast.error('Falha ao editar os dados.');
         }
     }
 

@@ -23,27 +23,13 @@ function SignUp() {
             });
 
         if (response.ok) {
-            toast.success('Cadastro realizado com sucesso!', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                progress: undefined,
-            });
+            toast.success('Cadastro realizado com sucesso!');
             history.push('/signin');
             return;
         } else {
             const err = true;
 
-            toast.error('Erro ao cadastrar o usuário', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                progress: undefined,
-            });
+            toast.error('Erro ao cadastrar o usuário');
             setErrorSignUp(err);
         }
     }
