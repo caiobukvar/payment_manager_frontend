@@ -23,13 +23,13 @@ function SignUp() {
             });
 
         if (response.ok) {
-            toast.success('Cadastro realizado com sucesso!');
+            toast.success("Cadastro realizado com sucesso!");
             history.push('/signin');
             return;
         } else {
             const err = true;
 
-            toast.error('Erro ao cadastrar o usuário');
+            toast.error("Erro ao cadastrar o usuário");
             setErrorSignUp(err);
         }
     }

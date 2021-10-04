@@ -20,14 +20,7 @@ function ProfileEditMenu() {
         setToken('');
         localStorage.removeItem('token-usuario');
         localStorage.removeItem('info-usuario');
-        toast.success('Deslogado com sucesso!', {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            progress: undefined,
-        });
+        toast.success("Deslogado com sucesso!");
         history.push('/signin');
     }
 
