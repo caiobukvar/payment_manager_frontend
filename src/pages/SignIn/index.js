@@ -29,6 +29,7 @@ function SignIn() {
             });
 
         const userData = await response.json();
+
         if (response.ok) {
             setToken(userData.token);
             setUserInfo(userData.usuario);

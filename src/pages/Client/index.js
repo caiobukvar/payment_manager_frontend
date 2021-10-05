@@ -1,14 +1,15 @@
 import './styles.css'
-// import FormClient from '../../components/FormClient';
+import FormClient from '../../components/FormClient';
 import ClientList from '../../components/ClientList';
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import AuthContext from '../../AuthContext';
 
 function Client() {
     const { token } = useContext(AuthContext);
+    const [userClientList, setUserClientList] = useState([]);
 
     useEffect(() => {
-        async function clientInfo() {
+        async function UserClientInfo() {
 
             const response = await fetch('https://paymentmanager-api.herokuapp.com/client',
                 {
@@ -21,19 +22,16 @@ function Client() {
                 });
 
             const clientList = await response.json();
-            console.log(clientList);
-
+            setUserClientList(clientList);
             console.log("renderizar adicionar cliente caso não tenha nada no BD")
         }
-        clientInfo();
+        UserClientInfo();
     }, []);
 
 
     return (
         <div className="flex-column content-center mt-large">
-            {/* <h2 className="position-left">{'//'} ADICIONAR CLIENTE</h2>
-            <FormClient /> */}
-            <ClientList />
+            {userClientList.length > 0 ? <ClientList /> : <FormClient />}
         </div>
     );
 }
