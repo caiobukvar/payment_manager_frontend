@@ -2,7 +2,6 @@ import './styles.css';
 import { useState, useContext } from 'react';
 import CloseIcon from '../../assets/close-icon.svg';
 import InputPassword from '../InputPassword/InputPassword';
-import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import AuthContext from '../../AuthContext';
 import UserContext from '../../UserContext';
@@ -13,7 +12,6 @@ function ModalEditProfile({ setValue }) {
     const { userInfo } = useContext(UserContext);
     const { register, handleSubmit } = useForm();
     const [newPassword, setNewPassword] = useState('');
-    const history = useHistory();
 
     const [editValues, setEditValues] = useState({
         nome: userInfo.nome ? userInfo.nome : '',
