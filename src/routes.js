@@ -26,10 +26,12 @@ function ProtectedRoutes(props) {
 function Routes() {
     const [value, setValue] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+
     const [userInfo, setUserInfo] = useState(() => {
         const localUserInfo = localStorage.getItem('info-usuario');
         return localUserInfo ? JSON.parse(localUserInfo) : '';
     });
+
     const [token, setToken] = useState(() => {
         const localToken = localStorage.getItem('token-usuario');
         return localToken ? localToken : '';

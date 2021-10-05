@@ -29,11 +29,12 @@ function SignIn() {
             });
 
         const userData = await response.json();
+        console.log(userData)
 
         if (response.ok) {
             setToken(userData.token);
             setUserInfo(userData.usuario);
-            localStorage.setItem('token-usuario', JSON.stringify(userData.token));
+            localStorage.setItem('token-usuario', userData.token);
             localStorage.setItem('info-usuario', JSON.stringify(userData.usuario));
             toast.success('Login realizado com sucesso!');
             history.push('/');
