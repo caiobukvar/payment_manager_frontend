@@ -1,7 +1,7 @@
 import './styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 
 function InputPassword({ label, placeholder, value, setValue, register, required }) {

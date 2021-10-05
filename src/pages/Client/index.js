@@ -1,5 +1,5 @@
 import './styles.css'
-import FormClient from '../../components/FormClient';
+// import FormClient from '../../components/FormClient';
 import ClientList from '../../components/ClientList';
 import React, { useEffect, useContext } from 'react';
 import AuthContext from '../../AuthContext';

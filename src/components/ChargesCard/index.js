@@ -1,4 +1,5 @@
 import './styles.css';
+import React from 'react';
 import Money from '../../assets/money.svg';
 
 function ChargesCard() {

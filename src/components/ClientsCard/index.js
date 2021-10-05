@@ -1,4 +1,5 @@
 import './styles.css';
+import React from 'react';
 import Clients from '../../assets/clients.svg'
 
 function ClientsCard() {
