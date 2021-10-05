@@ -1,21 +1,17 @@
 import './styles.css';
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import CloseIcon from '../../assets/close-icon.svg';
 import InputPassword from '../InputPassword/InputPassword';
 import { useForm } from 'react-hook-form';
 import AuthContext from '../../AuthContext';
 import UserContext from '../../UserContext';
-import MenuContext from '../../MenuContext';
 import { toast } from 'react-toastify';
-import { useLocation } from 'react-router-dom';
 
 function ModalEditProfile({ setValue }) {
     const { token } = useContext(AuthContext);
     const { userInfo } = useContext(UserContext);
-    const { setMenuOpen } = useContext(MenuContext);
     const { register, handleSubmit } = useForm();
     const [newPassword, setNewPassword] = useState('');
-    const location = useLocation();
 
     const [editValues, setEditValues] = useState({
         nome: userInfo.nome ? userInfo.nome : '',
@@ -24,12 +20,6 @@ function ModalEditProfile({ setValue }) {
         telefone: userInfo.telefone ? userInfo.telefone : '',
         cpf: userInfo.cpf ? userInfo.cpf : ''
     });
-
-    useEffect(() => {
-        if (location.pathname !== "/home") {
-            setMenuOpen(false);
-        }
-    }, [location])
 
     async function editUser(editValues) {
         editValues.telefone.replace(/[^0-9]/g, '');

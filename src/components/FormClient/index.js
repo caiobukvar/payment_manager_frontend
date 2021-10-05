@@ -24,14 +24,13 @@ function FormClient() {
     const history = useHistory();
 
     async function addClient() {
-        //para remover tudo que não é número e enviar "limpo"
         novosDadosCliente.telefone.replace(/[^0-9]/g, '');
         novosDadosCliente.cpf.replace(/[^0-9]/g, '');
         novosDadosCliente.cep.replace(/[^0-9]/g, '');
 
-        const response = await fetch('https://paymentmanager-api.herokuapp.com/',
+        const response = await fetch("https://paymentmanager-api.herokuapp.com/",
             {
-                method: 'PUT',
+                method: "PUT",
                 body: JSON.stringify(),
                 headers: {
                     "Content-Type": "application/json",
@@ -43,8 +42,10 @@ function FormClient() {
         console.log(clientList);
 
         if (response.ok) {
-            toast.sucess('Cliente adicionado com sucesso')
-            console.log("renderizar adicionar cliente caso não tenha nada no BD")
+            toast.sucess("Cliente adicionado com sucesso");
+            console.log("renderizar adicionar cliente caso não tenha nada no BD");
+        } else {
+            toast.error("Ocorreu um erro inesperado")
         }
 
     }
