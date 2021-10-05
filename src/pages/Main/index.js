@@ -7,7 +7,7 @@ import ChargesCard from '../../components/ChargesCard';
 function Main() {
 
   return (
-    <div className="flex-row content-center gap-sm">
+    <div className="flex-row content-center full-height">
       <ClientsCard />
       <ChargesCard />
     </div>

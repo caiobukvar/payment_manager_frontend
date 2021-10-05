@@ -13,7 +13,7 @@ function Sidebar() {
                 <img src={LogoWhite} alt="logo white" className="logo mt-xl" />
                 <NavLink
                     exact to="/"
-                    className="flex-row white align-start full-width"
+                    className="flex-row white items-center full-width"
                     activeClassName={
                         "active"
                     }
@@ -23,7 +23,7 @@ function Sidebar() {
                 </NavLink>
                 <NavLink
                     to="/charges"
-                    className="flex-row white align-start full-width"
+                    className="flex-row white items-center full-width"
                     activeClassName={
                         "active"
                     }
@@ -33,7 +33,7 @@ function Sidebar() {
                 </NavLink>
                 <NavLink
                     to="/add-client"
-                    className="flex-row white align-start full-width"
+                    className="flex-row white items-center full-width"
                     activeClassName={
                         "active"
                     }

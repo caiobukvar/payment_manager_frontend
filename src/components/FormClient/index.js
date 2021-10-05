@@ -18,12 +18,12 @@ function FormClient() {
 
     const { register, handleSubmit } = useForm();
 
-    const onSubmit = (data) => {
-        return;
+    function addClient() {
+        console.log('fetch post para add cliente no db, dentro do user');
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="form-borderless mg-top">
+        <form onSubmit={handleSubmit(addClient)} className="form-borderless mg-top">
             <div className="flex-column ">
                 <label htmlFor="name" className="font-md-bold">Nome</label>
                 <input

@@ -30,11 +30,15 @@
 
 .box-shadow {
     border: 0;
-    border-radius: 8px;
+    border-radius: 16px;
     box-shadow: 0 0 1em rgb(0, 0, 0, 0.2);
 }
 
 .border-round-top {
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.full-width {
+    width: 100%;
 }

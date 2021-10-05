@@ -1,11 +1,11 @@
 .card {
-    width: 450px;
-    height: auto;
+    width: 500px;
+    height: 535px;
 }
 
 .card-client {
-    width: 350px;
-    height: 350px;
+    width: 500px;
+    height: 410px;
 }
 
 .card-padding {
@@ -13,7 +13,7 @@
 }
 
 .card-padding-lg {
-    padding: 30px 50px;
+    padding: 60px 100px;
 }
 
 .pad-sm {
