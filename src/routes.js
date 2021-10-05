@@ -4,11 +4,11 @@ import {
     Switch,
     Redirect
 } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import Main from './pages/Main';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-import AddClient from './pages/AddClient';
+import Client from './pages/Client';
 import Layout from './components/Layout';
 import ModalContext from './ModalContext';
 import AuthContext from './AuthContext';
@@ -51,7 +51,7 @@ function Routes() {
                             >
                                 <Layout>
                                     <Route path="/" exact component={Main} />
-                                    <Route path="/add-client" component={AddClient} />
+                                    <Route path="/client" component={Client} />
                                 </Layout>
                             </ModalContext.Provider>
                         </ProtectedRoutes>

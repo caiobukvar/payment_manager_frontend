@@ -1,5 +1,5 @@
 import './styles.css';
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import CloseIcon from '../../assets/close-icon.svg';
 import InputPassword from '../InputPassword/InputPassword';
 import { useForm } from 'react-hook-form';
@@ -66,7 +66,12 @@ function ModalEditProfile({ setValue }) {
                                     placeholder="Digite seu nome"
                                     {...register("nome", { required: true })}
                                     value={editValues.nome}
-                                    onChange={(e) => { setEditValues({ ...editValues, nome: e.target.value }) }}
+                                    onChange={(e) => {
+                                        setEditValues({
+                                            ...editValues,
+                                            nome: e.target.value
+                                        })
+                                    }}
                                 />
                             </div>
                             <div className="flex-column border-bt">
@@ -77,7 +82,12 @@ function ModalEditProfile({ setValue }) {
                                     placeholder="Digite seu email"
                                     {...register("email", { required: true })}
                                     value={editValues.email}
-                                    onChange={(e) => { setEditValues({ ...editValues, email: e.target.value }) }}
+                                    onChange={(e) => {
+                                        setEditValues({
+                                            ...editValues,
+                                            email: e.target.value
+                                        })
+                                    }}
                                 />
                             </div>
                             <div className="flex-column border-bt">
@@ -98,16 +108,17 @@ function ModalEditProfile({ setValue }) {
                                     placeholder="(XX) X XXXX-XXXX"
                                     {...register("telefone")}
                                     value={editValues.telefone}
+                                    maxLength="15"
                                     onChange={(e) => {
                                         setEditValues({
                                             ...editValues,
-                                            telefone: e.target.value.replace(/\D/g, "")
+                                            telefone: e.target.value
+                                                .replace(/\D/g, "")
                                                 .replace(/^(\d{2})(\d)/g, "($1) $2")
                                                 .replace(/(\d)(\d{4})$/, "$1-$2")
                                                 .substr(0, 15)
                                         })
                                     }}
-                                    maxLength="15"
                                 />
                             </div>
                             <div className="flex-column border-bt">

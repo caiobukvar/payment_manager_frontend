@@ -1,5 +1,5 @@
 import './styles.css';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import Sidebar from '../../components/Sidebar';
 import ProfileBar from '../../components/ProfileBar';
 import ModalEditProfile from '../../components/ModalEditProfile';

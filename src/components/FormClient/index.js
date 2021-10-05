@@ -1,8 +1,11 @@
 import './styles.css';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AuthContext from '../../AuthContext'
+import { toast } from 'react-toastify';
 
 function FormClient() {
+    const { token } = useContext(AuthContext);
     const [novosDadosCliente, setNovosDadosCliente] = useState({
         nome: '',
         email: '',
@@ -18,12 +21,31 @@ function FormClient() {
 
     const { register, handleSubmit } = useForm();
 
-    function addClient() {
-        console.log('fetch post para add cliente no db, dentro do user');
+    async function addClient() {
+        const response = await fetch('https://paymentmanager-api.herokuapp.com/',
+            {
+                method: 'PUT',
+                body: JSON.stringify(),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+        const clientList = await response.json();
+        console.log(clientList);
+
+        if (response.ok) {
+            toast.sucess('Cliente adicionado com sucesso')
+            console.log("renderizar adicionar cliente caso não tenha nada no BD")
+        }
+
     }
+    console.log('fetch post para add cliente no db, dentro do user');
+
 
     return (
-        <form onSubmit={handleSubmit(addClient)} className="form-borderless mg-top">
+        < form onSubmit={handleSubmit(addClient)} className="form-borderless mg-top" >
             <div className="flex-column ">
                 <label htmlFor="name" className="font-md-bold">Nome</label>
                 <input
@@ -34,7 +56,12 @@ function FormClient() {
                     placeholder="Digite o nome do cliente"
                     {...register("nome", { required: true })}
                     value={novosDadosCliente.nome}
-                    onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, nome: e.target.value }) }}
+                    onChange={(e) => {
+                        setNovosDadosCliente({
+                            ...novosDadosCliente,
+                            nome: e.target.value
+                        })
+                    }}
                 />
                 <label htmlFor="email" className="font-md-bold">E-mail</label>
                 <input
@@ -45,7 +72,12 @@ function FormClient() {
                     placeholder="Digite o email do cliente"
                     {...register("email", { required: true })}
                     value={novosDadosCliente.email}
-                    onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, email: e.target.value }) }}
+                    onChange={(e) => {
+                        setNovosDadosCliente({
+                            ...novosDadosCliente,
+                            email: e.target.value
+                        })
+                    }}
                 />
             </div>
             <div className="flex-row">
@@ -81,7 +113,17 @@ function FormClient() {
                         placeholder="Digite o telefone do cliente"
                         {...register("telefone", { required: true })}
                         value={novosDadosCliente.telefone}
-                        onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, telefone: e.target.value }) }}
+                        maxLength="15"
+                        onChange={(e) => {
+                            setNovosDadosCliente({
+                                ...novosDadosCliente,
+                                telefone: e.target.value
+                                    .replace(/\D/g, "")
+                                    .replace(/^(\d{2})(\d)/g, "($1) $2")
+                                    .replace(/(\d)(\d{4})$/, "$1-$2")
+                                    .substr(0, 15)
+                            })
+                        }}
                     />
                 </div>
             </div>
@@ -99,10 +141,7 @@ function FormClient() {
                         onChange={(e) => {
                             setNovosDadosCliente({
                                 ...novosDadosCliente,
-                                telefone: e.target.value.replace(/\D/g, "")
-                                    .replace(/^(\d{2})(\d)/g, "($1) $2")
-                                    .replace(/(\d)(\d{4})$/, "$1-$2")
-                                    .substr(0, 15)
+                                cep: e.target.value
                             })
                         }}
                     />
@@ -117,7 +156,12 @@ function FormClient() {
                         placeholder="Digite o endereço do cliente"
                         {...register("endereco")}
                         value={novosDadosCliente.endereco}
-                        onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, endereco: e.target.value }) }}
+                        onChange={(e) => {
+                            setNovosDadosCliente({
+                                ...novosDadosCliente,
+                                endereco: e.target.value
+                            })
+                        }}
                     />
                 </div>
             </div>
@@ -132,7 +176,12 @@ function FormClient() {
                         placeholder="Digite o bairro do cliente"
                         {...register("bairro")}
                         value={novosDadosCliente.bairro}
-                        onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, bairro: e.target.value }) }}
+                        onChange={(e) => {
+                            setNovosDadosCliente({
+                                ...novosDadosCliente,
+                                bairro: e.target.value
+                            })
+                        }}
                     />
                 </div>
                 <div className="flex-column ml-md">
@@ -145,7 +194,12 @@ function FormClient() {
                         placeholder="Digite a cidade do cliente"
                         {...register("cidade")}
                         value={novosDadosCliente.cidade}
-                        onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, cidade: e.target.value }) }}
+                        onChange={(e) => {
+                            setNovosDadosCliente({
+                                ...novosDadosCliente,
+                                cidade: e.target.value
+                            })
+                        }}
                     />
                 </div>
             </div>
@@ -160,7 +214,12 @@ function FormClient() {
                         placeholder="Digite o complemento do cliente"
                         {...register("complemento")}
                         value={novosDadosCliente.complemento}
-                        onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, complemento: e.target.value }) }}
+                        onChange={(e) => {
+                            setNovosDadosCliente({
+                                ...novosDadosCliente,
+                                complemento: e.target.value
+                            })
+                        }}
                     />
                 </div>
                 <div className="flex-column ml-md">
@@ -173,7 +232,12 @@ function FormClient() {
                         placeholder="Digite um ponto de referência"
                         {...register("referencia")}
                         value={novosDadosCliente.referencia}
-                        onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, referencia: e.target.value }) }}
+                        onChange={(e) => {
+                            setNovosDadosCliente({
+                                ...novosDadosCliente,
+                                referencia: e.target.value
+                            })
+                        }}
                     />
                 </div>
             </div>
@@ -200,5 +264,6 @@ function FormClient() {
         </form >
     );
 }
+
 
 export default FormClient;
