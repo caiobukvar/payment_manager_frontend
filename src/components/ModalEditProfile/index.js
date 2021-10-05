@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 
 function ModalEditProfile({ setValue }) {
     const { token } = useContext(AuthContext);
-    const { userInfo } = useContext(UserContext);
+    const { userInfo, setUserInfo } = useContext(UserContext);
     const { register, handleSubmit } = useForm();
     const [newPassword, setNewPassword] = useState('');
 
@@ -36,10 +36,12 @@ function ModalEditProfile({ setValue }) {
             });
 
         const newValues = await response.json();
+        console.log(newValues);
 
         if (response.ok) {
             toast.success("Dados editados com sucesso!");
             localStorage.setItem('info-usuario', JSON.stringify(newValues));
+            setUserInfo(editValues);
             setValue(false);
         } else {
             toast.error("Falha ao editar os dados.");

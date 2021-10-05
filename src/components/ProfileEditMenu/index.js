@@ -4,20 +4,24 @@ import Edit from '../../assets/edit.svg';
 import Exit from '../../assets/exit.svg';
 import ModalContext from '../../ModalContext';
 import AuthContext from '../../AuthContext';
+import MenuContext from '../../MenuContext';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 function ProfileEditMenu() {
     const { setValue } = useContext(ModalContext);
+    const { setMenuOpen } = useContext(MenuContext);
     const { setToken } = useContext(AuthContext);
     const history = useHistory();
 
     function handleOpenProfilePage() {
         setValue(true);
+        setMenuOpen(false);
     }
 
     function handleLogout() {
         setToken('');
+        setMenuOpen(false);
         localStorage.removeItem('token-usuario');
         localStorage.removeItem('info-usuario');
         toast.success("Deslogado com sucesso!");
