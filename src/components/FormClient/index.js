@@ -22,6 +22,11 @@ function FormClient() {
     const { register, handleSubmit } = useForm();
 
     async function addClient() {
+        //para remover tudo que não é número e enviar "limpo"
+        novosDadosCliente.telefone.replace(/[^0-9]/g, '');
+        novosDadosCliente.cpf.replace(/[^0-9]/g, '');
+        novosDadosCliente.cep.replace(/[^0-9]/g, '');
+
         const response = await fetch('https://paymentmanager-api.herokuapp.com/',
             {
                 method: 'PUT',
@@ -138,10 +143,14 @@ function FormClient() {
                         placeholder="Digite o CEP do cliente"
                         {...register("cep")}
                         value={novosDadosCliente.cep}
+                        maxLength="10"
                         onChange={(e) => {
                             setNovosDadosCliente({
                                 ...novosDadosCliente,
                                 cep: e.target.value
+                                    .replace(/\D/g, "")
+                                    .replace(/^(\d{2})(\d)/g, "$1.$2")
+                                    .replace(/(\d{3})(\d)/, '$1-$2')
                             })
                         }}
                     />
