@@ -35,7 +35,6 @@ function FormClient() {
                     {...register("nome", { required: true })}
                     value={novosDadosCliente.nome}
                     onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, nome: e.target.value }) }}
-
                 />
                 <label htmlFor="email" className="font-md-bold">E-mail</label>
                 <input
@@ -60,7 +59,16 @@ function FormClient() {
                         placeholder="Digite o CPF do cliente"
                         {...register("CPF", { required: true })}
                         value={novosDadosCliente.cpf}
-                        onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, cpf: e.target.value }) }}
+                        onChange={(e) => {
+                            setNovosDadosCliente({
+                                ...novosDadosCliente,
+                                cpf: e.target.value.replace(/\D/g, "")
+                                    .replace(/^(\d{3})(\d)/g, "$1.$2")
+                                    .replace(/(\d{3})(\d)/, '$1.$2')
+                                    .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+                                    .replace(/(-\d{2})\d+?$/, '$1')
+                            })
+                        }}
                     />
                 </div>
                 <div className="flex-column ml-md">
@@ -88,7 +96,15 @@ function FormClient() {
                         placeholder="Digite o CEP do cliente"
                         {...register("cep")}
                         value={novosDadosCliente.cep}
-                        onChange={(e) => { setNovosDadosCliente({ ...novosDadosCliente, cep: e.target.value }) }}
+                        onChange={(e) => {
+                            setNovosDadosCliente({
+                                ...novosDadosCliente,
+                                telefone: e.target.value.replace(/\D/g, "")
+                                    .replace(/^(\d{2})(\d)/g, "($1) $2")
+                                    .replace(/(\d)(\d{4})$/, "$1-$2")
+                                    .substr(0, 15)
+                            })
+                        }}
                     />
                 </div>
                 <div className="flex-column ml-md">

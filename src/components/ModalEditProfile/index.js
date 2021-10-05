@@ -57,7 +57,7 @@ function ModalEditProfile({ setValue }) {
                             onClick={() => { setValue(false) }}
                         />
                         <div className="flex-column items-center content-center">
-                            <p className="flex-column align-start font-xl">EDITAR USUÁRIO</p>
+                            <p className="flex-column align-start font-xl">{'//'}EDITAR USUÁRIO</p>
                             <div className="flex-column border-bt mt-lg">
                                 <label className="mb-md font-md-bold" htmlFor="nome">Nome</label>
                                 <input
