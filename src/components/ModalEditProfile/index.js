@@ -42,7 +42,7 @@ function ModalEditProfile({ setValue }) {
         if (response.ok) {
             toast.success("Dados editados com sucesso!");
             localStorage.setItem('info-usuario', JSON.stringify(newValues));
-            history.push("/");
+            setValue(false);
         } else {
             toast.error("Falha ao editar os dados.");
         }
