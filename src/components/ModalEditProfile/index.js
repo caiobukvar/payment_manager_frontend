@@ -129,6 +129,7 @@ function ModalEditProfile({ setValue }) {
                                     placeholder="222.222.222-22"
                                     {...register("cpf")}
                                     value={editValues.cpf}
+                                    maxLength="14"
                                     onChange={(e) => {
                                         setEditValues({
                                             ...editValues,
@@ -139,7 +140,6 @@ function ModalEditProfile({ setValue }) {
                                                 .replace(/(-\d{2})\d+?$/, '$1')
                                         })
                                     }}
-                                    maxLength="14"
                                 />
                             </div>
                             {

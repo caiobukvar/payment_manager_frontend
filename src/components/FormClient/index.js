@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import React, { useState, useContext } from 'react';
 import AuthContext from '../../AuthContext'
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
 function FormClient() {
     const { token } = useContext(AuthContext);
@@ -20,6 +21,7 @@ function FormClient() {
     });
 
     const { register, handleSubmit } = useForm();
+    const history = useHistory();
 
     async function addClient() {
         //para remover tudo que não é número e enviar "limpo"
@@ -47,6 +49,11 @@ function FormClient() {
 
     }
     console.log('fetch post para add cliente no db, dentro do user');
+
+
+    function returnHome() {
+        history.push("/");
+    }
 
 
     return (
@@ -96,6 +103,7 @@ function FormClient() {
                         placeholder="Digite o CPF do cliente"
                         {...register("CPF", { required: true })}
                         value={novosDadosCliente.cpf}
+                        maxLength="14"
                         onChange={(e) => {
                             setNovosDadosCliente({
                                 ...novosDadosCliente,
@@ -251,7 +259,7 @@ function FormClient() {
                 </div>
             </div>
             <div className="flex-row mt-lg">
-                <button className="btn-white">
+                <button className="btn-white" onClick={returnHome}>
                     Cancelar
                 </button>
                 {
