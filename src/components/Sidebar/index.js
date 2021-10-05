@@ -15,39 +15,39 @@ function Sidebar() {
     }
     return (
         <div className="background-dark sidebar flex-column items-center">
-            <div className="mt-lg flex-column items-center align-start content-center full-width">
+            <div className="mt-lg flex-column items-center content-center full-width">
                 <img src={LogoWhite} alt="logo white" className="logo mt-xl" />
                 <NavLink
                     exact to="/"
-                    className="flex-row white sidebar-width"
+                    className="flex-row white sidebar-width items-center"
                     activeClassName={
                         "active"
                     }
                     onClick={handleCloseProfileDropdown}
                 >
-                    <img src={House} alt="home" className="ml-lg img-resize" />
+                    <img src={House} alt="home" className="img-resize ml-xl" />
                     <h2 className="ml-md font-md">HOME</h2>
                 </NavLink>
                 <NavLink
                     to="/charges"
-                    className="flex-row white sidebar-width"
+                    className="flex-row white sidebar-width items-center"
                     activeClassName={
                         "active"
                     }
                     onClick={handleCloseProfileDropdown}
                 >
-                    <img src={Money} alt="charges" className="ml-lg img-resize" />
+                    <img src={Money} alt="charges" className="img-resize ml-xl" />
                     <h2 className="ml-md font-md">COBRANÇAS</h2>
                 </NavLink>
                 <NavLink
                     to="/client"
-                    className="flex-row white sidebar-width"
+                    className="flex-row white sidebar-width items-center"
                     activeClassName={
                         "active"
                     }
                     onClick={handleCloseProfileDropdown}
                 >
-                    <img src={Clients} alt="clients" className="ml-lg img-resize" />
+                    <img src={Clients} alt="clients" className="img-resize ml-xl" />
                     <h2 className="ml-md font-md">CLIENTES</h2>
                 </NavLink>
             </div>
