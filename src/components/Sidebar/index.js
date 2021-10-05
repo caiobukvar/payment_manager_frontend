@@ -10,11 +10,11 @@ function Sidebar() {
 
     return (
         <div className="background-dark sidebar flex-column items-center">
-            <div className="mt-lg flex-column items-center full-width">
+            <div className="mt-lg flex-column items-center align-start content-center full-width">
                 <img src={LogoWhite} alt="logo white" className="logo mt-xl" />
                 <NavLink
                     exact to="/"
-                    className="flex-row white items-center sidebar-width"
+                    className="flex-row white sidebar-width"
                     activeClassName={
                         "active"
                     }
@@ -24,7 +24,7 @@ function Sidebar() {
                 </NavLink>
                 <NavLink
                     to="/charges"
-                    className="flex-row white items-center sidebar-width"
+                    className="flex-row white sidebar-width"
                     activeClassName={
                         "active"
                     }
@@ -34,7 +34,7 @@ function Sidebar() {
                 </NavLink>
                 <NavLink
                     to="/client"
-                    className="flex-row white items-center sidebar-width"
+                    className="flex-row white sidebar-width"
                     activeClassName={
                         "active"
                     }

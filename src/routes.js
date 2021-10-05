@@ -13,6 +13,7 @@ import Layout from './components/Layout';
 import ModalContext from './ModalContext';
 import AuthContext from './AuthContext';
 import UserContext from './UserContext';
+import MenuContext from './MenuContext';
 
 function ProtectedRoutes(props) {
     const { token } = useContext(AuthContext);
@@ -24,6 +25,7 @@ function ProtectedRoutes(props) {
 
 function Routes() {
     const [value, setValue] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
     const [userInfo, setUserInfo] = useState(() => {
         const localUserInfo = localStorage.getItem('info-usuario');
         return localUserInfo ? JSON.parse(localUserInfo) : '';
@@ -49,10 +51,14 @@ function Routes() {
                             <ModalContext.Provider
                                 value={{ value, setValue }}
                             >
-                                <Layout>
-                                    <Route path="/" exact component={Main} />
-                                    <Route path="/client" component={Client} />
-                                </Layout>
+                                <MenuContext.Provider
+                                    value={{ menuOpen, setMenuOpen }}
+                                >
+                                    <Layout>
+                                        <Route path="/" exact component={Main} />
+                                        <Route path="/client" component={Client} />
+                                    </Layout>
+                                </MenuContext.Provider>
                             </ModalContext.Provider>
                         </ProtectedRoutes>
                     </Switch>

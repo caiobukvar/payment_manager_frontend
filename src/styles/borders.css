@@ -28,6 +28,11 @@
     color: #323232;
 }
 
+.border-grey {
+    background-color: #9DBBC3;
+    border-radius: 16px;
+}
+
 .box-shadow {
     border: 0;
     border-radius: 16px;

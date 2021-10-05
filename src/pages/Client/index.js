@@ -1,5 +1,6 @@
 import './styles.css'
 import FormClient from '../../components/FormClient';
+import ClientList from '../../components/ClientList';
 import React, { useEffect, useContext } from 'react';
 import AuthContext from '../../AuthContext';
 
@@ -22,19 +23,17 @@ function Client() {
             const clientList = await response.json();
             console.log(clientList);
 
-            if (clientList.length === 0) {
-                console.log("renderizar adicionar cliente caso não tenha nada no BD")
-            }
-
+            console.log("renderizar adicionar cliente caso não tenha nada no BD")
         }
         clientInfo();
-    });
+    }, []);
 
 
     return (
         <div className="flex-column content-center mt-large">
-            <h2 className="position-left">{'//'} ADICIONAR CLIENTE</h2>
-            <FormClient />
+            {/* <h2 className="position-left">{'//'} ADICIONAR CLIENTE</h2>
+            <FormClient /> */}
+            <ClientList />
         </div>
     );
 }

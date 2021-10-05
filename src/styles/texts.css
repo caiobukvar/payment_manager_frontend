@@ -23,6 +23,10 @@
     font-weight: 600;
 }
 
+.font-regular {
+    font-weight: 400;
+}
+
 input {
     color: #4C4C4C;
 }
@@ -43,4 +47,8 @@ input {
     color: #DA0175;
     cursor: pointer;
     text-decoration: underline;
+}
+
+.green {
+    color: #4EC06E;
 }

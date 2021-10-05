@@ -1,10 +1,11 @@
 import './styles.css';
-import { useState } from 'react';
+import React, { useContext } from 'react';
 import ProfileIcon from '../../assets/profile-icon.svg';
 import ProfileEditMenu from '../ProfileEditMenu';
+import MenuContext from '../../MenuContext';
 
 function ProfileBar() {
-    const [menuOpen, setMenuOpen] = useState(false);
+    const { menuOpen, setMenuOpen } = useContext(MenuContext);
 
     function handleOpenMenu() {
         setMenuOpen(!menuOpen);

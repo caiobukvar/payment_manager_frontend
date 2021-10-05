@@ -1,5 +1,5 @@
 import './styles.css';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import Edit from '../../assets/edit.svg';
 import Exit from '../../assets/exit.svg';
 import ModalContext from '../../ModalContext';
