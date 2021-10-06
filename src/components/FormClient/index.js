@@ -272,7 +272,7 @@ function FormClient() {
                     </div>
                 </div>
                 <div className="flex-row mt-lg">
-                    <button className="btn-white" onClick={returnHome}>
+                    <button className="btn-white-client" onClick={returnHome}>
                         Cancelar
                     </button>
                     {
@@ -282,10 +282,10 @@ function FormClient() {
                             novosDadosCliente.cpf &&
                             novosDadosCliente.telefone
                         )
-                            ? <button type="submit" className="btn-pink-bright ml-md enabled">
+                            ? <button type="submit" className="btn-pink-bright-client ml-md enabled">
                                 Adicionar cliente
                             </button>
-                            : <button type="submit" className="btn-pink ml-md disabled" disabled>
+                            : <button type="submit" className="btn-pink-client ml-md disabled" disabled>
                                 Adicionar cliente
                             </button>
                     }
