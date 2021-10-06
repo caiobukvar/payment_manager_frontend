@@ -29,7 +29,7 @@ function Client() {
 
     return (
         <div className="flex-column content-center mt-large">
-            {userClientList.length > 0 ? <FormClient /> : <ClientList />}
+            {userClientList.length > 0 ? <ClientList /> : <FormClient />}
 
         </div>
     );
