@@ -2,7 +2,7 @@ import './styles.css'
 import FormClient from '../../components/FormClient';
 import ClientList from '../../components/ClientList';
 import React, { useEffect, useContext, useState } from 'react';
-import AuthContext from '../../AuthContext';
+import AuthContext from '../../contexts/AuthContext';
 
 function Client() {
     const { token } = useContext(AuthContext);
@@ -11,7 +11,7 @@ function Client() {
     useEffect(() => {
         async function UserClientInfo() {
 
-            const response = await fetch('https://paymentmanager-api.herokuapp.com/client',
+            const response = await fetch('https://paymentmanager-api.herokuapp.com/listCustomers',
                 {
                     method: 'GET',
                     body: JSON.stringify(),
@@ -20,10 +20,8 @@ function Client() {
                         "Authorization": `Bearer ${token}`
                     }
                 });
-
             const clientList = await response.json();
             setUserClientList(clientList);
-            console.log("renderizar adicionar cliente caso não tenha nada no BD")
         }
         UserClientInfo();
     }, []);

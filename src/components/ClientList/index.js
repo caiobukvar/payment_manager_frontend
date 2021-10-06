@@ -1,7 +1,7 @@
 import "./styles.css";
 import React from "react";
 
-function ClientList() {
+function ClientList({ userClientList }) {
     return (
         <div className="flex-colum list-box">
             <button className="btn-white-large mb-xl">Adicionar cliente</button>
@@ -12,32 +12,33 @@ function ClientList() {
                 <p>Status</p>
                 <p></p>
             </div>
-
-            <div className="flex-row space-between list-padding">
-                <div className="flex-column client-box content-center space-between">
-                    <h3 className="font-md-bold">Nome e Sobrenome da Cliente</h3>
-                    <div className="flex-row items-center space-between">
-                        <img src="" alt="mail-icon" />
-                        <p className="font-md font-regular">email@email.com</p>
+            {userClientList.map(client => (
+                <div className="flex-row space-between list-padding">
+                    <div className="flex-column client-box content-center space-between">
+                        <h3 className="font-md-bold">{client.nome}</h3>
+                        <div className="flex-row items-center space-between">
+                            <img src="" alt="mail-icon" />
+                            <p className="font-md font-regular">{client.email}</p>
+                        </div>
+                        <div className="flex-row items-center space-between">
+                            <img src="" alt="phone-icon" />
+                            <p className="font-md font-regular">{client.telefone}</p>
+                        </div>
                     </div>
-                    <div className="flex-row items-center space-between">
-                        <img src="" alt="phone-icon" />
-                        <p className="font-md font-regular">(DDD) 00000-0000</p>
+                    <div className="flex-row items-center">
+                        <p>R$ 00.000,00</p>
+                    </div>
+                    <div className="flex-row items-center">
+                        <p>R$ 00.000,00</p>
+                    </div>
+                    <div className={`flex-row items-center ${client.debtPaid ? "green" : "red"}`} >
+                        <p className="green">{ok ? "EM DIA" : "INADIMPLENTE"}</p>
+                    </div>
+                    <div className="flex-row items-center">
+                        <img src="" alt="edit-icon" />
                     </div>
                 </div>
-                <div className="flex-row items-center">
-                    <p>R$ 00.000,00</p>
-                </div>
-                <div className="flex-row items-center">
-                    <p>R$ 00.000,00</p>
-                </div>
-                <div className="flex-row items-center">
-                    <p className="green">EM DIA</p>
-                </div>
-                <div className="flex-row items-center">
-                    <img src="" alt="edit-icon" />
-                </div>
-            </div>
+            ))}
         </div>
     );
 }

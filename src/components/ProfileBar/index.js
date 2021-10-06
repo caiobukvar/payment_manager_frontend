@@ -2,7 +2,7 @@ import './styles.css';
 import React, { useContext } from 'react';
 import ProfileIcon from '../../assets/profile-icon.svg';
 import ProfileEditMenu from '../ProfileEditMenu';
-import MenuContext from '../../MenuContext';
+import MenuContext from '../../contexts/MenuContext';
 
 function ProfileBar() {
     const { menuOpen, setMenuOpen } = useContext(MenuContext);

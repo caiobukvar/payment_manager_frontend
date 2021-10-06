@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import Sidebar from '../../components/Sidebar';
 import ProfileBar from '../../components/ProfileBar';
 import ModalEditProfile from '../../components/ModalEditProfile';
-import ModalContext from '../../ModalContext';
+import ModalContext from '../../contexts/ModalContext';
 
 function Layout({ children }) {
     const { value, setValue } = useContext(ModalContext);

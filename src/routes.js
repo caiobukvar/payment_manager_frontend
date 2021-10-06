@@ -10,10 +10,10 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Client from './pages/Client';
 import Layout from './components/Layout';
-import ModalContext from './ModalContext';
-import AuthContext from './AuthContext';
-import UserContext from './UserContext';
-import MenuContext from './MenuContext';
+import ModalContext from './contexts/ModalContext';
+import AuthContext from './contexts/AuthContext';
+import UserContext from './contexts/UserContext';
+import MenuContext from './contexts/MenuContext';
 
 function ProtectedRoutes(props) {
     const { token } = useContext(AuthContext);

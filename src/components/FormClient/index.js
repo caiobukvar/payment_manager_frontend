@@ -1,11 +1,13 @@
 import './styles.css';
 import { useForm } from 'react-hook-form';
 import React, { useState, useContext } from 'react';
-import AuthContext from '../../AuthContext'
+import AuthContext from '../../contexts/AuthContext'
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 
 function FormClient() {
+    const [errorEmail, setErrorEmail] = useState('');
+
     const { token } = useContext(AuthContext);
     const [novosDadosCliente, setNovosDadosCliente] = useState({
         nome: '',
@@ -13,49 +15,55 @@ function FormClient() {
         cpf: '',
         telefone: '',
         cep: '',
-        endereco: '',
+        logradouro: '',
+        complemento: '',
         bairro: '',
         cidade: '',
-        complemento: '',
         referencia: ''
     });
 
     const { register, handleSubmit } = useForm();
     const history = useHistory();
 
-    async function addClient() {
+    async function addClient(novosDadosCliente) {
         novosDadosCliente.telefone.replace(/[^0-9]/g, '');
         novosDadosCliente.cpf.replace(/[^0-9]/g, '');
         novosDadosCliente.cep.replace(/[^0-9]/g, '');
 
-        const response = await fetch("https://paymentmanager-api.herokuapp.com/",
+        const response = await fetch("https://paymentmanager-api.herokuapp.com/registerCustomers",
             {
-                method: "PUT",
-                body: JSON.stringify(),
+                method: "POST",
+                body: JSON.stringify(novosDadosCliente),
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
                 }
             });
 
-        const clientList = await response.json();
-        console.log(clientList);
+        const clientListResponse = await response.json();
+        console.log(clientListResponse);
 
         if (response.ok) {
-            toast.sucess("Cliente adicionado com sucesso");
-            console.log("renderizar adicionar cliente caso não tenha nada no BD");
-        } else {
-            toast.error("Ocorreu um erro inesperado")
+            toast.success("Cliente cadastrado com sucesso!");
         }
+        else {
+            const err = true;
 
+            if (clientListResponse === "E-mail já cadastrado.") {
+                toast.error("E-mail já cadastrado.");
+                setErrorEmail(err);
+            } else {
+                toast.error("Ocorreu um erro inesperado!");
+            }
+        }
     }
-    console.log('fetch post para add cliente no db, dentro do user');
-
+    function handleError() {
+        setErrorEmail(false);
+    }
 
     function returnHome() {
         history.push("/");
     }
-
 
     return (
         <>
@@ -80,7 +88,7 @@ function FormClient() {
                     />
                     <label htmlFor="email" className="font-md-bold">E-mail</label>
                     <input
-                        className="border-dark pad-sm large mt-sm"
+                        className={`border-dark pad-sm large mt-sm ${errorEmail ? 'inputError' : ''}`}
                         type="text"
                         title="email"
                         id="email"
@@ -91,20 +99,22 @@ function FormClient() {
                             setNovosDadosCliente({
                                 ...novosDadosCliente,
                                 email: e.target.value
-                            })
+                            },
+                                handleError()
+                            )
                         }}
                     />
                 </div>
                 <div className="flex-row">
                     <div className="flex-column mb-md">
-                        <label htmlFor="CPF" className="font-md-bold">CPF</label>
+                        <label htmlFor="cpf" className="font-md-bold">CPF</label>
                         <input
                             className="border-dark pad-sm mt-sm"
                             type="text"
-                            title="CPF"
-                            id="CPF"
+                            title="cpf"
+                            id="cpf"
                             placeholder="Digite o CPF do cliente"
-                            {...register("CPF", { required: true })}
+                            {...register("cpf", { required: true })}
                             value={novosDadosCliente.cpf}
                             maxLength="14"
                             onChange={(e) => {
@@ -174,12 +184,12 @@ function FormClient() {
                             title="adress"
                             id="adress"
                             placeholder="Digite o endereço do cliente"
-                            {...register("endereco")}
-                            value={novosDadosCliente.endereco}
+                            {...register("logradouro")}
+                            value={novosDadosCliente.logradouro}
                             onChange={(e) => {
                                 setNovosDadosCliente({
                                     ...novosDadosCliente,
-                                    endereco: e.target.value
+                                    logradouro: e.target.value
                                 })
                             }}
                         />

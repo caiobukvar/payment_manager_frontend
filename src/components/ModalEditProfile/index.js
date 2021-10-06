@@ -3,8 +3,8 @@ import React, { useState, useContext } from 'react';
 import CloseIcon from '../../assets/close-icon.svg';
 import InputPassword from '../InputPassword/InputPassword';
 import { useForm } from 'react-hook-form';
-import AuthContext from '../../AuthContext';
-import UserContext from '../../UserContext';
+import AuthContext from '../../contexts/AuthContext';
+import UserContext from '../../contexts/UserContext';
 import { toast } from 'react-toastify';
 
 function ModalEditProfile({ setValue }) {
@@ -100,6 +100,7 @@ function ModalEditProfile({ setValue }) {
                                     value={newPassword}
                                     setValue={setNewPassword}
                                     register={register}
+                                    onChange
                                 />
                             </div>
                             <div className="flex-column border-bt">

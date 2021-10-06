@@ -4,8 +4,8 @@ import { Link, useHistory } from 'react-router-dom';
 import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import InputPassword from "../../components/InputPassword/InputPassword"
-import AuthContext from '../../AuthContext';
-import UserContext from '../../UserContext';
+import AuthContext from '../../contexts/AuthContext';
+import UserContext from '../../contexts/UserContext';
 import { toast } from 'react-toastify';
 
 function SignIn() {
@@ -56,6 +56,7 @@ function SignIn() {
     function handleError() {
         setErrorEmail(false);
     }
+
     const [signInValues, setSignInValues] = useState({
         email: ''
     });

@@ -5,7 +5,7 @@ import House from '../../assets/house.svg';
 import Money from '../../assets/money.svg';
 import Clients from '../../assets/clients.svg';
 import { NavLink } from 'react-router-dom'
-import MenuContext from '../../MenuContext';
+import MenuContext from '../../contexts/MenuContext';
 
 function Sidebar() {
     const { setMenuOpen } = useContext(MenuContext);

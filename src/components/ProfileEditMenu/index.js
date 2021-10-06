@@ -2,9 +2,9 @@ import './styles.css';
 import React, { useContext } from 'react';
 import Edit from '../../assets/edit.svg';
 import Exit from '../../assets/exit.svg';
-import ModalContext from '../../ModalContext';
-import AuthContext from '../../AuthContext';
-import MenuContext from '../../MenuContext';
+import ModalContext from '../../contexts/ModalContext';
+import AuthContext from '../../contexts/AuthContext';
+import MenuContext from '../../contexts/MenuContext';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
