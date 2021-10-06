@@ -1,18 +1,31 @@
 import './styles.css';
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import LogoWhite from '../../assets/logo-white.svg';
 import House from '../../assets/house.svg';
 import Money from '../../assets/money.svg';
 import Clients from '../../assets/clients.svg';
 import { NavLink } from 'react-router-dom'
 import MenuContext from '../../contexts/MenuContext';
+import ModalClientContext from '../../contexts/ModalClientContext';
 
 function Sidebar() {
     const { setMenuOpen } = useContext(MenuContext);
+    const { setValueModalClient } = useContext(ModalClientContext);
+    const history = useHistory();
 
     function handleCloseProfileDropdown() {
         setMenuOpen(false);
     }
+    function handleCloseClientEdit() {
+        setValueModalClient(false);
+    }
+    function handleGoToCharges() {
+        history.push("/charges");
+    }
+
+
+
     return (
         <div className="background-dark sidebar flex-column items-center">
             <div className="mt-lg flex-column items-center content-center full-width">
@@ -45,13 +58,13 @@ function Sidebar() {
                     activeClassName={
                         "active"
                     }
-                    onClick={handleCloseProfileDropdown}
+                    onClick={handleCloseProfileDropdown, handleCloseClientEdit}
                 >
                     <img src={Clients} alt="clients" className="img-resize ml-xl" />
                     <h2 className="ml-md font-md">CLIENTES</h2>
                 </NavLink>
             </div>
-            <button type="submit" className="btn-pink-bright mt-xxl font-md-bold">
+            <button type="submit" className="btn-pink-bright mt-xxl font-md-bold" onClick={handleGoToCharges}>
                 Criar cobrança
             </button>
         </div >
