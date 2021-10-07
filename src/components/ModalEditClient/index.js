@@ -28,7 +28,7 @@ function ModalEditClient() {
     const { register, handleSubmit } = useForm();
     const history = useHistory();
 
-    async function addClient(dadosParaAtualizar) {
+    async function updateClientData(dadosParaAtualizar) {
         dadosParaAtualizar.telefone.replace(/[^0-9]/g, '');
         dadosParaAtualizar.cpf.replace(/[^0-9]/g, '');
         dadosParaAtualizar.cep.replace(/[^0-9]/g, '');
@@ -48,6 +48,7 @@ function ModalEditClient() {
 
         if (response.ok) {
             toast.success("Cliente atualizado com sucesso!");
+            history.push('/client');
         }
         else {
             const err = true;
@@ -70,7 +71,7 @@ function ModalEditClient() {
 
     return (
         <div className="modal dark-bg box-shadow ">
-            < form onSubmit={handleSubmit(addClient)} className="modal-content flex-column content-center items-center modal-padding" >
+            < form onSubmit={handleSubmit(updateClientData)} className="modal-content modal-size flex-column content-center items-center modal-padding" >
                 <img src={CloseIcon}
                     alt="close-icon"
                     className="modal-close-icon"

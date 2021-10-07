@@ -44,6 +44,12 @@
     border-top-right-radius: 16px;
 }
 
+.white-bg {
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 16px;
+}
+
 .full-width {
     width: 100%;
 }

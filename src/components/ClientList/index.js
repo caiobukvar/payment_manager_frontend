@@ -1,6 +1,9 @@
 import "./styles.css";
 import React, { useContext } from "react";
 import ModalClientContext from "../../contexts/ModalClientContext";
+import editIcon from '../../assets/edit.svg'
+import phoneIcon from '../../assets/phone.svg'
+import mailIcon from '../../assets/mail.svg'
 
 
 function ClientList({ userClientList, handleLoadClientData }) {
@@ -21,32 +24,34 @@ function ClientList({ userClientList, handleLoadClientData }) {
                     <p className="flex-basis">Status</p>
                 </div>
                 {userClientList.map(client => (
-                    <div className="flex-row list-padding" key={client.id} onClick={() => { handleLoadClientData(client.id) }}>
-                        <div className="flex-column client-box content-center space-between flex-basis">
+                    <div className="flex-row list-padding white-bg" key={client.id} onClick={() => { handleLoadClientData(client.id) }}>
+                        <div className="flex-column client-box content-center space-between flex-basis enabled">
                             <h3 className="font-md-bold">{client.nome}</h3>
-                            <div className="flex-row items-center gap-sm">
-                                <img src="" alt="mail-icon" />
+                            <div className="flex-row items-center gap-xs">
+                                <img src={mailIcon} alt="mail-icon" />
                                 <p className="font-md font-regular">{client.email}</p>
                             </div>
-                            <div className="flex-row items-center gap-sm">
-                                <img src="" alt="phone-icon" />
+                            <div className="flex-row items-center gap-xs">
+                                <img src={phoneIcon} alt="phone-icon" />
                                 <p className="font-md font-regular">{client.telefone}</p>
                             </div>
                         </div>
                         <div className="flex-row items-center flex-basis">
-                            <p>{client.cobrancas.filter(client.status === "pendente")}</p>
+                            <p>R$ 00.000,00</p>
                         </div>
                         <div className="flex-row items-center flex-basis">
-                            <p>{client.cobrancas.filter(client.status === "pago")}</p>
+                            <p>R$ 00.000,00</p>
                         </div>
                         <div className={`flex-row items-center flex-basis ${client.debtPaid ? "green" : "red"}`} >
                             <p className="green">{client.debtPaid ? "EM DIA" : "INADIMPLENTE"}</p>
                         </div>
                         <div className="flex-row items-center flex-basis" >
-                            <p className="green"> "EM DIA"</p>
-                        </div>
-                        <div className="flex-row items-center flex-basis">
-                            <img src="" alt="edit-icon" onClick={handleModal} />
+                            <img
+                                src={editIcon}
+                                alt="edit-icon"
+                                className="enabled"
+                                onClick={handleModal}
+                            />
                         </div>
                     </div>
                 ))}

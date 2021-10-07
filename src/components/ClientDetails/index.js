@@ -2,7 +2,7 @@ import './styles.css';
 import React, { useState, useContext } from 'react';
 import CloseIcon from '../../assets/close-icon.svg';
 
-function ClientDetails() {
+function ClientDetails({ clientData }) {
     return (
         <div>
             <div>

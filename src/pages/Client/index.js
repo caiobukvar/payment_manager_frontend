@@ -8,7 +8,6 @@ import AuthContext from '../../contexts/AuthContext';
 
 function Client() {
     const [clientData, setClientData] = useState();
-
     const { token } = useContext(AuthContext);
     const [userClientList, setUserClientList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
