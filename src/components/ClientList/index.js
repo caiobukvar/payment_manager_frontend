@@ -1,6 +1,9 @@
 import "./styles.css";
 import React, { useContext } from "react";
 import ModalClientContext from "../../contexts/ModalClientContext";
+import AddClientModalContext from "../../contexts/AddClientModalContext";
+import FormClient from '../FormClient'
+
 import editIcon from '../../assets/edit.svg'
 import phoneIcon from '../../assets/phone.svg'
 import mailIcon from '../../assets/mail.svg'
@@ -8,7 +11,7 @@ import mailIcon from '../../assets/mail.svg'
 
 function ClientList({ userClientList, handleLoadClientData }) {
     const { setValueModalClient } = useContext(ModalClientContext);
-
+    const { setValueModalAddClient } = useContext(AddClientModalContext);
 
     function handleModal() {
         setValueModalClient(true);
@@ -21,6 +24,9 @@ function ClientList({ userClientList, handleLoadClientData }) {
         <>
             <div className="flex-colum list-box">
                 <button className="btn-white-large mb-xl" onClick={handleAddClient}>Adicionar cliente</button>
+
+                {setValueModalAddClient === true ? <FormClient /> : ''}
+
                 <div className="flex-row border-grey white list-padding">
                     <p className="flex-basis">Cliente</p>
                     <p className="flex-basis">Cobranças Feitas</p>

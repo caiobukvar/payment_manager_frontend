@@ -15,6 +15,7 @@ import AuthContext from './contexts/AuthContext';
 import UserContext from './contexts/UserContext';
 import MenuContext from './contexts/MenuContext';
 import ModalClientContext from './contexts/ModalClientContext';
+import AddClientModalContext from './contexts/AddClientModalContext';
 
 function ProtectedRoutes(props) {
     const { token } = useContext(AuthContext);
@@ -27,6 +28,7 @@ function ProtectedRoutes(props) {
 function Routes() {
     const [value, setValue] = useState(false);
     const [valueModalClient, setValueModalClient] = useState(false);
+    const [valueModalAddClient, setValueModalAddClient] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
 
     const [userInfo, setUserInfo] = useState(() => {
@@ -59,16 +61,20 @@ function Routes() {
                                 <MenuContext.Provider
                                     value={{ menuOpen, setMenuOpen }}
                                 >
-                                    <ModalClientContext.Provider
-                                        value={{ valueModalClient, setValueModalClient }}
+                                    <AddClientModalContext.Provider
+                                        value={{ valueModalAddClient, setValueModalAddClient }}
                                     >
-                                        <Layout>
-                                            <Route path="/" exact component={Main} />
+                                        <ModalClientContext.Provider
+                                            value={{ valueModalClient, setValueModalClient }}
+                                        >
+                                            <Layout>
+                                                <Route path="/" exact component={Main} />
 
-                                            <Route path="/client" component={Client} />
+                                                <Route path="/client" component={Client} />
 
-                                        </Layout>
-                                    </ModalClientContext.Provider>
+                                            </Layout>
+                                        </ModalClientContext.Provider>
+                                    </AddClientModalContext.Provider>
                                 </MenuContext.Provider>
                             </ModalContext.Provider>
                         </ProtectedRoutes>
