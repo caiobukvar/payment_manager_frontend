@@ -8,6 +8,7 @@ import React, { useState, useContext } from 'react';
 import Main from './pages/Main';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import Charges from './pages/Charges';
 import Client from './pages/Client';
 import Layout from './components/Layout';
 import ModalContext from './contexts/ModalContext';
@@ -16,6 +17,7 @@ import UserContext from './contexts/UserContext';
 import MenuContext from './contexts/MenuContext';
 import ModalClientContext from './contexts/ModalClientContext';
 import AddClientModalContext from './contexts/AddClientModalContext';
+
 
 function ProtectedRoutes(props) {
     const { token } = useContext(AuthContext);
@@ -69,8 +71,8 @@ function Routes() {
                                         >
                                             <Layout>
                                                 <Route path="/" exact component={Main} />
-
                                                 <Route path="/client" component={Client} />
+                                                <Route path="/charges" component={Charges} />
 
                                             </Layout>
                                         </ModalClientContext.Provider>

@@ -42,3 +42,27 @@
 .space-evenly {
     justify-content: space-evenly;
 }
+
+.flex-bar {
+    flex: 0 0 220px;
+}
+
+.flex-bar:first-child {
+    flex: 0 0 100px;
+}
+
+.flex-bar:nth-child(2) {
+    flex: 0 0 250px;
+}
+
+.flex-bar:nth-child(3) {
+    flex: 0 0 300px;
+}
+
+.flex-bar:nth-child(5) {
+    flex: 0 0 140px;
+}
+
+.flex-bar:last-child {
+    flex: 0 0 160px;
+}
