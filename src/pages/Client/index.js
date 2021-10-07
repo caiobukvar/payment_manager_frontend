@@ -1,27 +1,48 @@
 import './styles.css'
 import FormClient from '../../components/FormClient';
 import ClientList from '../../components/ClientList';
+import ClientDetails from '../../components/ClientDetails';
 import React, { useEffect, useContext, useState } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 
+
 function Client() {
+    const [clientData, setClientData] = useState();
+
     const { token } = useContext(AuthContext);
     const [userClientList, setUserClientList] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [modalClientDetails, setModalClientDetails] = useState(false);
+
+    async function handleLoadClientData(id) {
+        const response = await fetch(`https://paymentmanager-api.herokuapp.com/customerData?id=${id}`,
+            {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+        const dataClient = await response.json();
+        setClientData(dataClient);
+        setModalClientDetails(true);
+        console.log(dataClient);
+    }
 
     useEffect(() => {
         async function UserClientInfo() {
-
             const response = await fetch('https://paymentmanager-api.herokuapp.com/listCustomers',
                 {
                     method: 'GET',
-                    body: JSON.stringify(),
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`
                     }
                 });
-            const clientList = await response.json();
-            setUserClientList(clientList);
+            const clientData = await response.json();
+            console.log(clientData);
+            setUserClientList(clientData);
+            setIsLoading(false);
         }
         UserClientInfo();
     }, []);
@@ -29,8 +50,17 @@ function Client() {
 
     return (
         <div className="flex-column content-center mt-large">
-            {userClientList.length > 0 ? <ClientList /> : <FormClient />}
-
+            {isLoading && <span>BOTAR COMPONENTE DE LOADING</span>}
+            {
+                !isLoading && (userClientList.length > 0
+                    ? <ClientList
+                        userClientList={userClientList}
+                        handleLoadClientData={handleLoadClientData}
+                    />
+                    : <FormClient />
+                )
+            }
+            {modalClientDetails && <ClientDetails />}
         </div>
     );
 }

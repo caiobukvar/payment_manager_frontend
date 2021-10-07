@@ -17,9 +17,7 @@ function Sidebar() {
     function handleCloseProfileDropdown() {
         setMenuOpen(false);
     }
-    function handleCloseClientEdit() {
-        setValueModalClient(false);
-    }
+
     function handleGoToCharges() {
         history.push("/charges");
     }
@@ -58,7 +56,7 @@ function Sidebar() {
                     activeClassName={
                         "active"
                     }
-                    onClick={handleCloseProfileDropdown, handleCloseClientEdit}
+                    onClick={handleCloseProfileDropdown}
                 >
                     <img src={Clients} alt="clients" className="img-resize ml-xl" />
                     <h2 className="ml-md font-md">CLIENTES</h2>

@@ -10,3 +10,15 @@
 .list-padding {
     padding: 0 30px;
 }
+
+.flex-basis {
+    flex: 0 0 250px;
+}
+
+.flex-basis:first-child {
+    flex: 0 0 300px;
+}
+
+.flex-basis:last-child {
+    flex: 0 0 80px;
+}
