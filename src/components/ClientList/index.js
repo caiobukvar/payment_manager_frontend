@@ -34,10 +34,10 @@ function ClientList({ userClientList, handleLoadClientData }) {
                             </div>
                         </div>
                         <div className="flex-row items-center flex-basis">
-                            <p>R$ 00.000,00</p>
+                            <p>{client.cobrancas.filter(client.status === "pendente")}</p>
                         </div>
                         <div className="flex-row items-center flex-basis">
-                            <p>R$ 00.000,00</p>
+                            <p>{client.cobrancas.filter(client.status === "pago")}</p>
                         </div>
                         <div className={`flex-row items-center flex-basis ${client.debtPaid ? "green" : "red"}`} >
                             <p className="green">{client.debtPaid ? "EM DIA" : "INADIMPLENTE"}</p>
