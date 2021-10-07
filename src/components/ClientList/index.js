@@ -38,7 +38,7 @@ function ClientList({ userClientList, handleLoadClientData, setModalClientDetail
                 </div>
                 {userClientList.map(client => (
                     <div className="flex-row list-padding white-bg" key={client.id} onClick={() => { handleLoadClientData(client.id), handleClientDetailsModal }}>
-                        <div className="flex-column client-box content-center space-between flex-basis enabled">
+                        <div className="flex-column client-box content-center flex-basis enabled ">
                             <h3 className="font-md-bold">{client.nome}</h3>
                             <div className="flex-row items-center gap-xs">
                                 <img src={mailIcon} alt="mail-icon" />

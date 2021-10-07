@@ -1,8 +1,9 @@
 import './styles.css'
+import React, { useEffect, useContext, useState } from 'react';
+import { CircularProgress } from '@mui/material';
 import FormClient from '../../components/FormClient';
 import ClientList from '../../components/ClientList';
 import ClientDetails from '../../components/ClientDetails';
-import React, { useEffect, useContext, useState } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 
 
@@ -49,14 +50,17 @@ function Client() {
 
     return (
         <div className="flex-column content-center mt-large">
-            {isLoading && <span>BOTAR COMPONENTE DE LOADING</span>}
+            {isLoading &&
+                <div className="modal" >
+                    <CircularProgress />
+                </div>}
             {
-                !isLoading && (userClientList.length > 0
-                    ? <ClientList
+                !isLoading && (userClientList.length > 0 ?
+                    <ClientList
                         userClientList={userClientList}
                         handleLoadClientData={handleLoadClientData}
-                    />
-                    : <FormClient />
+                    /> :
+                    <FormClient />
                 )
             }
             {modalClientDetails && <ClientDetails />}
