@@ -9,14 +9,18 @@ import mailIcon from '../../assets/mail.svg'
 function ClientList({ userClientList, handleLoadClientData }) {
     const { setValueModalClient } = useContext(ModalClientContext);
 
+
     function handleModal() {
         setValueModalClient(true);
+    }
+    function handleAddClient() {
+        setValueModalAddClient(true);
     }
 
     return (
         <>
             <div className="flex-colum list-box">
-                <button className="btn-white-large mb-xl">Adicionar cliente</button>
+                <button className="btn-white-large mb-xl" onClick={handleAddClient}>Adicionar cliente</button>
                 <div className="flex-row border-grey white list-padding">
                     <p className="flex-basis">Cliente</p>
                     <p className="flex-basis">Cobranças Feitas</p>
