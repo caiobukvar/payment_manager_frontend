@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import CloseIcon from '../../assets/close-icon.svg';
 
 function ClientDetails({ clientData }) {
+    console.log(clientData);
     return (
         <div>
             <div>

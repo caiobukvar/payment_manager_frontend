@@ -9,7 +9,7 @@ import phoneIcon from '../../assets/phone.svg'
 import mailIcon from '../../assets/mail.svg'
 
 
-function ClientList({ userClientList, handleLoadClientData }) {
+function ClientList({ userClientList, handleLoadClientData, setModalClientDetails }) {
     const { setValueModalClient } = useContext(ModalClientContext);
     const { setValueModalAddClient } = useContext(AddClientModalContext);
 
@@ -18,6 +18,9 @@ function ClientList({ userClientList, handleLoadClientData }) {
     }
     function handleAddClient() {
         setValueModalAddClient(true);
+    }
+    function handleClientDetailsModal() {
+        setModalClientDetails(true);
     }
 
     return (
@@ -34,7 +37,7 @@ function ClientList({ userClientList, handleLoadClientData }) {
                     <p className="flex-basis">Status</p>
                 </div>
                 {userClientList.map(client => (
-                    <div className="flex-row list-padding white-bg" key={client.id} onClick={() => { handleLoadClientData(client.id) }}>
+                    <div className="flex-row list-padding white-bg" key={client.id} onClick={() => { handleLoadClientData(client.id), handleClientDetailsModal }}>
                         <div className="flex-column client-box content-center space-between flex-basis enabled">
                             <h3 className="font-md-bold">{client.nome}</h3>
                             <div className="flex-row items-center gap-xs">
