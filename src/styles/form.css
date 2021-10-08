@@ -28,3 +28,35 @@
     border-radius: 15px;
     padding: 45px 61px;
 }
+
+.input-charges {
+    height: 30px;
+    width: 50%;
+    background-color: white;
+    border: 1px solid #374952;
+    border-radius: 8px;
+}
+
+.input-charges-large {
+    height: 60px;
+    width: 50%;
+    background-color: white;
+    border: 1px solid #374952;
+    border-radius: 8px;
+}
+
+.input-charges-line {
+    height: 40px;
+    width: 340px;
+    background-color: white;
+    border: 1px solid #374952;
+    border-radius: 8px;
+}
+
+.input-charges-line-small {
+    height: 40px;
+    width: 180px;
+    background-color: white;
+    border: 1px solid #374952;
+    border-radius: 8px;
+}

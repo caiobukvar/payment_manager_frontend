@@ -85,3 +85,7 @@
 .disabled {
     cursor: not-allowed;
 }
+
+.padY-sm {
+    padding: 10px 15px;
+}

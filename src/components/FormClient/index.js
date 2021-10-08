@@ -2,13 +2,16 @@ import './styles.css';
 import { useForm } from 'react-hook-form';
 import React, { useState, useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext'
+import AddClientModalContext from '../../contexts/AddClientModalContext'
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 
 function FormClient() {
     const [errorEmail, setErrorEmail] = useState('');
-
     const { token } = useContext(AuthContext);
+    const { setValueModalAddClient } = useContext(AddClientModalContext);
+    const { register, handleSubmit } = useForm();
+    const history = useHistory();
     const [novosDadosCliente, setNovosDadosCliente] = useState({
         nome: '',
         email: '',
@@ -22,8 +25,6 @@ function FormClient() {
         referencia: ''
     });
 
-    const { register, handleSubmit } = useForm();
-    const history = useHistory();
 
     async function addClient(novosDadosCliente) {
         novosDadosCliente.telefone.replace(/[^0-9]/g, '');
@@ -61,13 +62,12 @@ function FormClient() {
         setErrorEmail(false);
     }
 
-    function returnHome() {
-        history.push("/");
+    function returnClient() {
+        setValueModalAddClient(false)
     }
 
     return (
         <>
-            <h2 className="position-left">{'//'} ADICIONAR CLIENTE</h2>
             < form onSubmit={handleSubmit(addClient)} className="form-borderless mg-top" >
                 <div className="flex-column ">
                     <label htmlFor="name" className="font-md-bold">Nome</label>
@@ -272,7 +272,7 @@ function FormClient() {
                     </div>
                 </div>
                 <div className="flex-row mt-lg">
-                    <button className="btn-white-client" onClick={returnHome}>
+                    <button className="btn-white-client" onClick={returnClient}>
                         Cancelar
                     </button>
                     {

@@ -17,6 +17,7 @@ import UserContext from './contexts/UserContext';
 import MenuContext from './contexts/MenuContext';
 import ModalClientContext from './contexts/ModalClientContext';
 import AddClientModalContext from './contexts/AddClientModalContext';
+import AddChargeModalContext from './contexts/AddChargeModalContext';
 
 
 function ProtectedRoutes(props) {
@@ -32,6 +33,7 @@ function Routes() {
     const [valueModalClient, setValueModalClient] = useState(false);
     const [valueModalAddClient, setValueModalAddClient] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [valueModalAddCharges, setValueModalAddCharges] = useState(false);
 
     const [userInfo, setUserInfo] = useState(() => {
         const localUserInfo = localStorage.getItem('info-usuario');
@@ -69,12 +71,16 @@ function Routes() {
                                         <ModalClientContext.Provider
                                             value={{ valueModalClient, setValueModalClient }}
                                         >
-                                            <Layout>
-                                                <Route path="/" exact component={Main} />
-                                                <Route path="/client" component={Client} />
-                                                <Route path="/charges" component={Charges} />
+                                            <AddChargeModalContext.Provider
+                                                value={{ valueModalAddCharges, setValueModalAddCharges }}
+                                            >
+                                                <Layout>
+                                                    <Route path="/" exact component={Main} />
+                                                    <Route path="/client" component={Client} />
+                                                    <Route path="/charges" component={Charges} />
 
-                                            </Layout>
+                                                </Layout>
+                                            </AddChargeModalContext.Provider>
                                         </ModalClientContext.Provider>
                                     </AddClientModalContext.Provider>
                                 </MenuContext.Provider>

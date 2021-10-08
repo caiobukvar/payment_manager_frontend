@@ -9,7 +9,7 @@ import phoneIcon from '../../assets/phone.svg'
 import mailIcon from '../../assets/mail.svg'
 
 
-function ClientList({ userClientList, handleLoadClientData, setModalClientDetails }) {
+function ClientList({ userClientList, handleLoadClientCharges, setModalClientDetails }) {
     const { setValueModalClient } = useContext(ModalClientContext);
     const { setValueModalAddClient } = useContext(AddClientModalContext);
 
@@ -28,8 +28,6 @@ function ClientList({ userClientList, handleLoadClientData, setModalClientDetail
             <div className="flex-colum list-box">
                 <button className="btn-white-large mb-xl" onClick={handleAddClient}>Adicionar cliente</button>
 
-                {setValueModalAddClient === true ? <FormClient /> : ''}
-
                 <div className="flex-row border-grey white list-padding">
                     <p className="flex-basis">Cliente</p>
                     <p className="flex-basis">Cobranças Feitas</p>
@@ -37,7 +35,7 @@ function ClientList({ userClientList, handleLoadClientData, setModalClientDetail
                     <p className="flex-basis">Status</p>
                 </div>
                 {userClientList.map(client => (
-                    <div className="flex-row list-padding white-bg" key={client.id} onClick={() => { handleLoadClientData(client.id), handleClientDetailsModal }}>
+                    <div className="flex-row list-padding white-bg" key={client.id} onClick={() => { handleLoadClientCharges(client.id), handleClientDetailsModal }}>
                         <div className="flex-column client-box content-center flex-basis enabled ">
                             <h3 className="font-md-bold">{client.nome}</h3>
                             <div className="flex-row items-center gap-xs">

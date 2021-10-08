@@ -1,6 +1,5 @@
 import './styles.css';
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import LogoWhite from '../../assets/logo-white.svg';
 import House from '../../assets/house.svg';
 import Money from '../../assets/money.svg';
@@ -8,21 +7,20 @@ import Clients from '../../assets/clients.svg';
 import { NavLink } from 'react-router-dom'
 import MenuContext from '../../contexts/MenuContext';
 import ModalClientContext from '../../contexts/ModalClientContext';
+import AddChargeModalContext from '../../contexts/AddChargeModalContext';
 
 function Sidebar() {
     const { setMenuOpen } = useContext(MenuContext);
     const { setValueModalClient } = useContext(ModalClientContext);
-    const history = useHistory();
+    const { setValueModalAddCharges } = useContext(AddChargeModalContext);
 
     function handleCloseProfileDropdown() {
         setMenuOpen(false);
     }
 
-    function handleGoToCharges() {
-        history.push("/charges");
+    function handleCreateCharge() {
+        setValueModalAddCharges(true);
     }
-
-
 
     return (
         <div className="background-dark sidebar flex-column items-center">
@@ -62,7 +60,7 @@ function Sidebar() {
                     <h2 className="ml-md font-md">CLIENTES</h2>
                 </NavLink>
             </div>
-            <button type="submit" className="btn-pink-bright mt-xxl font-md-bold" onClick={handleGoToCharges}>
+            <button type="submit" className="btn-pink-bright mt-xxl font-md-bold" onClick={handleCreateCharge}>
                 Criar cobrança
             </button>
         </div >
