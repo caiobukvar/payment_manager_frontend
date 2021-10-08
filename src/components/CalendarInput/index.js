@@ -10,7 +10,7 @@ function CalendarInput() {
 
     return (
         <div className="flex-column">
-            <label htmlFor="value" className="font-md-bold ">Vencimento</label>
+            <label htmlFor="value" className="font-md-bold">Vencimento</label>
             <LocalizationProvider dateAdapter={AdapterDateFns} sx={{
                 backgroundColor: "white",
             }}>

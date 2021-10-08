@@ -43,7 +43,7 @@ function Charges() {
             }
             {valueModalAddCharges &&
                 <div className="modal">
-                    <div className="modal-content">
+                    <div className="modal-content ml-lg">
                         <AddCharges />
                         <img src={CloseIcon}
                             alt="close-icon"

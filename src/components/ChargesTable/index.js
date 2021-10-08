@@ -8,6 +8,9 @@ function ChargesTable() {
     function handleOpenAddCharge() {
         setValueModalAddCharges(true);
     }
+    function handleOpenCharge() {
+        return;
+    }
 
     return (
         <div className="flex-column content-center mt-large">
@@ -21,9 +24,9 @@ function ChargesTable() {
                     <p className="flex-bar">Status</p>
                     <p className="flex-bar">Vencimento</p>
                 </div>
-                <div className="flex-row list-padding white-bg" key="" onClick="" >
-                    <div className="flex-row white-bg" key="{client.id}" onClick="">
-                        <div className="flex-column content-center flex-bar enabled">
+                <div className="flex-row list-padding white-bg" key="" onClick={handleOpenCharge} >
+                    <div className="flex-row white-bg enabled" key="{client.id}" onClick="">
+                        <div className="flex-column content-center flex-bar">
                             <h3 className="font-md-bold">#3</h3>
                         </div>
                         <div className="flex-row items-center flex-bar">

@@ -1,11 +1,22 @@
 .MuiOutlinedInput-root {
-    width: 340px;
+    width: 366px;
     background-color: white;
     border: 1px solid #374952;
     border-radius: 8px !important;
     padding: 1px;
+    margin-top: 10px;
 }
 
-.MuiFormControl-root {
-    padding: 1px;
+.MuiOutlinedInput-root:hover {
+    border: unset;
+}
+
+.MuiInputLabel-root {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.MuiOutlinedInput-root:focus {
+    border: 1px solid #374952;
 }

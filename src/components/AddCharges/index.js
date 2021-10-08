@@ -8,7 +8,7 @@ import AddChargeModalContext from '../../contexts/AddChargeModalContext';
 
 function AddCharges() {
     const { setValueModalAddCharges } = useContext(AddChargeModalContext);
-    const [newCharge, setNewCharge] = useState();
+    const [newCharge, setNewCharge] = useState('');
 
     const clientListById = [
         // .map na lista de clientes (pegando o id e nome) dentro do usuario
@@ -26,7 +26,7 @@ function AddCharges() {
     }
 
     return (
-        < form onSubmit="" className="form-borderless" >
+        < form onSubmit="" className="form-borderless-charges" >
             <div className="items-center">
                 <div className="flex-column mt-lg">
                     <label className="font-md-bold mt-lg mb-md" htmlFor="description">Cliente</label>
@@ -34,7 +34,11 @@ function AddCharges() {
                         disablePortal
                         id="combo-box-demo"
                         options={clientListById}
-                        sx={{ width: 632 }}
+                        sx={{
+                            width: 632,
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}
                         renderInput={(params) => <TextField {...params} label="Selecione um cliente" />}
                     />
                 </div>
@@ -55,7 +59,7 @@ function AddCharges() {
                         name="chargeStatus"
                         placeholder=""
                         id="chargeStatus"
-                        className="input-charges padY-sm mt-md"
+                        className="input-charges-large padY-sm mt-md"
                     />
                 </div>
                 <div className="flex-row">
@@ -72,10 +76,11 @@ function AddCharges() {
                     </div>
                     {/* COMPONENTE DE CALENDÁRIO */}
                     <div className="flex-column ml-lg mt-custom">
-                        <CalendarInput />
+                        <CalendarInput
+                        />
                     </div>
                 </div>
-                <div className="flex-row mt-lg">
+                <div className="flex-row mt-xl ml-xxl">
                     <button className="btn-white-client" onClick={handleReturn}>
                         Cancelar
                     </button>

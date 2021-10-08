@@ -29,6 +29,19 @@
     padding: 45px 61px;
 }
 
+.form-borderless-charges {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    left: 50%;
+    transform: translateX(-5%);
+    background-color: white;
+    border-radius: 15px;
+    padding: 45px 60px 45px 100px;
+}
+
 .input-charges {
     height: 30px;
     width: 50%;
@@ -39,7 +52,7 @@
 
 .input-charges-large {
     height: 60px;
-    width: 50%;
+    width: 95%;
     background-color: white;
     border: 1px solid #374952;
     border-radius: 8px;
