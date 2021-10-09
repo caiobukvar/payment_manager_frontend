@@ -11,6 +11,7 @@ import SignUp from './pages/SignUp';
 import Charges from './pages/Charges';
 import Client from './pages/Client';
 import Layout from './components/Layout';
+import ClientDataContextProvider from './components/ClientDataContextProvider';
 import ModalContext from './contexts/ModalContext';
 import AuthContext from './contexts/AuthContext';
 import UserContext from './contexts/UserContext';
@@ -18,7 +19,7 @@ import MenuContext from './contexts/MenuContext';
 import ModalEditClientContext from './contexts/ModalEditClientContext';
 import AddClientModalContext from './contexts/AddClientModalContext';
 import AddChargeModalContext from './contexts/AddChargeModalContext';
-import ClientDataContextProvider from './components/ClientDataContextProvider';
+import ChargeContext from './contexts/ChargeContext';
 
 
 function ProtectedRoutes(props) {
@@ -34,7 +35,7 @@ function Routes() {
     const [valueModalEditClient, setValueModalEditClient] = useState(false);
     const [valueModalAddClient, setValueModalAddClient] = useState(false);
     const [valueModalAddCharges, setValueModalAddCharges] = useState(false);
-
+    const [chargesList, setChargesList] = useState('');
     const [menuOpen, setMenuOpen] = useState(false);
 
     const [userInfo, setUserInfo] = useState(() => {
@@ -77,11 +78,15 @@ function Routes() {
                                                 value={{ valueModalAddCharges, setValueModalAddCharges }}
                                             >
                                                 <ClientDataContextProvider>
-                                                    <Layout>
-                                                        <Route path="/" exact component={Main} />
-                                                        <Route path="/client" component={Client} />
-                                                        <Route path="/charges" component={Charges} />
-                                                    </Layout>
+                                                    <ChargeContext.Provider
+                                                        value={{ chargesList, setChargesList }}
+                                                    >
+                                                        <Layout>
+                                                            <Route path="/" exact component={Main} />
+                                                            <Route path="/client" component={Client} />
+                                                            <Route path="/charges" component={Charges} />
+                                                        </Layout>
+                                                    </ChargeContext.Provider>
                                                 </ClientDataContextProvider>
                                             </AddChargeModalContext.Provider>
                                         </ModalEditClientContext.Provider>
@@ -92,7 +97,7 @@ function Routes() {
                     </Switch>
                 </Router>
             </UserContext.Provider>
-        </AuthContext.Provider>
+        </AuthContext.Provider >
     )
 }
 

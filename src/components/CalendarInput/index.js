@@ -19,11 +19,14 @@ function CalendarInput() {
                         }
                     }}
                     value={value}
+
                     onChange={(newValue) => {
                         setValue(newValue);
                     }}
                     renderInput={(params) =>
-                        <TextField {...params}
+                        <TextField
+                            {...params}
+                            {...register("vencimento", { required: true })}
                         />}
                 />
             </LocalizationProvider>

@@ -2,18 +2,17 @@ import React, { useState, useEffect, useContext } from 'react'
 import './styles.css';
 import ChargesTable from '../../components/ChargesTable';
 import AuthContext from '../../contexts/AuthContext';
-
-
+import ChargeContext from '../../contexts/ChargeContext';
 
 function Charges() {
     const [isLoading, setIsLoading] = useState(true);
-    const [chargesList, setChargesList] = useState([]);
+    const { chargesList, setChargesList } = useContext(ChargeContext);
     const { token } = useContext(AuthContext);
 
 
     useEffect(() => {
         async function UserChargesInfo() {
-            const response = await fetch('https://paymentmanager-api.herokuapp.com/allBillings',
+            const response = await fetch('https://paymentmanager-api.herokuapp.com/getBillings',
                 {
                     method: 'GET',
                     headers: {

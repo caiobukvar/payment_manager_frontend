@@ -3,8 +3,6 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import CalendarInput from '../CalendarInput';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 
 import AddChargeModalContext from '../../contexts/AddChargeModalContext';
 import useClientData from '../../hooks/useClientData';
@@ -52,8 +50,9 @@ function AddCharges() {
     //SELECT - MATERIAL UI
     const [inputValue, setInputValue] = React.useState('');
 
-    const handleChange = (event) => {
-        setInputValue(event.target.value);
+    const handleChange = (e) => {
+        console.log(e.target.value);
+        setInputValue(e.target.value);
     };
 
 
@@ -62,26 +61,16 @@ function AddCharges() {
             <div className="items-center">
                 <div className="flex-column mt-lg">
                     <label className="font-md-bold mt-lg mb-md" htmlFor="description">Cliente</label>
-                    <Select
-                        value={inputValue}
-                        onChange={handleChange}
-                        {...register('cliente', { required: true })}
-                        displayEmpty
-                        inputProps={{ 'aria-label': 'Without label' }}
-                    >
-                        <MenuItem value="">
-                            <em>Selecione um cliente</em>
-                        </MenuItem>
+                    <select name="" id="" value={inputValue} onChange={handleChange}>,
                         {clientArray.map((client) => (
-                            <MenuItem
+                            <option
                                 value={client.id}
+                                {...register("cliente", { required: true })}
                             >
                                 {client.nome}
-                            </MenuItem>
+                            </option>
                         ))}
-
-
-                    </Select>
+                    </select>
                 </div>
                 <div className="flex-column">
                     <label className="font-md-bold mt-lg" htmlFor="description">Descrição</label>
@@ -91,6 +80,7 @@ function AddCharges() {
                         placeholder=""
                         id="description"
                         className="input-charges-large padY-sm mt-md"
+                        {...register("descricao", { required: true })}
                     />
                 </div>
                 <div className="flex-column">
@@ -101,6 +91,7 @@ function AddCharges() {
                         placeholder=""
                         id="chargeStatus"
                         className="input-charges-large padY-sm mt-md"
+                        {...register("status", { required: true })}
                     />
                 </div>
                 <div className="flex-row">
@@ -113,11 +104,14 @@ function AddCharges() {
                             placeholder=""
                             id="chargeValue"
                             className="input-charges-line-small padY-sm mt-md"
+                            {...register("valor", { required: true })}
                         />
                     </div>
-                    {/* COMPONENTE DE CALENDÁRIO - DIA/MES/ANO */}
+                    {/* COMPONENTE DE CALENDÁRIO - MES/DIA/ANO */}
                     <div className="flex-column ml-lg mt-custom">
-                        <CalendarInput />
+                        <CalendarInput
+                            register
+                        />
                     </div>
                 </div>
                 <div className="flex-row mt-xl ml-xxl">

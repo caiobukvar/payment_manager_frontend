@@ -1,9 +1,11 @@
 import './styles.css';
 import { useContext } from 'react';
 import AddChargeModalContext from '../../contexts/AddChargeModalContext';
+import ChargeContext from '../../contexts/ChargeContext';
 
 function ChargesTable() {
     const { setValueModalAddCharges } = useContext(AddChargeModalContext);
+    const { chargesList } = useContext(ChargeContext);
 
     function handleOpenAddCharge() {
         setValueModalAddCharges(true);
@@ -24,27 +26,29 @@ function ChargesTable() {
                     <p className="flex-bar">Status</p>
                     <p className="flex-bar">Vencimento</p>
                 </div>
-                <div className="flex-row list-padding white-bg" key="" onClick={handleOpenCharge} >
-                    <div className="flex-row white-bg enabled" key="{client.id}" onClick="">
-                        <div className="flex-column content-center flex-bar">
-                            <h3 className="font-md-bold">#3</h3>
+                <div className="flex-row list-padding white-bg" onClick={handleOpenCharge} >
+                    {chargesList.map(charge => (
+                        <div className="flex-row white-bg enabled" key={charge.id}>
+                            <div className="flex-column content-center flex-bar">
+                                <h3 className="font-md-bold">{`# ${charge.id}`}</h3>
+                            </div>
+                            <div className="flex-row items-center flex-bar">
+                                <span>{charge.nome}</span>
+                            </div>
+                            <div className="flex-row items-center flex-bar">
+                                <span>{charge.descricao}</span>
+                            </div>
+                            <div className="flex-row items-center flex-bar">
+                                <span>{`R$ ${charge.valor}`}</span>
+                            </div>
+                            <div className="flex-row items-center flex-bar" >
+                                <span className="green">{charge.status}</span>
+                            </div>
+                            <div className="flex-row items-center flex-bar" >
+                                <span>{charge.vencimento}</span>
+                            </div>
                         </div>
-                        <div className="flex-row items-center flex-bar">
-                            <span>Cliente 3</span>
-                        </div>
-                        <div className="flex-row items-center flex-bar">
-                            <span>Pagamento relativo a...</span>
-                        </div>
-                        <div className="flex-row items-center flex-bar">
-                            <span>R$ 00.000,00</span>
-                        </div>
-                        <div className="flex-row items-center flex-bar" >
-                            <span className="green">PAGO</span>
-                        </div>
-                        <div className="flex-row items-center flex-bar" >
-                            <span>12/12/2021</span>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
         </div >
