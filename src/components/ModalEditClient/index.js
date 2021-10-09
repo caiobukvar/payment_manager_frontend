@@ -4,13 +4,13 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import AuthContext from '../../contexts/AuthContext'
-import ModalClientContext from '../../contexts/ModalClientContext'
+import ModalEditClientContext from '../../contexts/ModalEditClientContext'
 import CloseIcon from '../../assets/close-icon.svg'
 
 function ModalEditClient() {
     const [errorEmail, setErrorEmail] = useState('');
     const { token } = useContext(AuthContext);
-    const { setValueModalClient } = useContext(ModalClientContext);
+    const { setValueModalEditClient } = useContext(ModalEditClientContext);
 
     const [dadosParaAtualizar, setDadosParaAtualizar] = useState({
         nome: '',
@@ -66,7 +66,7 @@ function ModalEditClient() {
     }
 
     function handleCloseModal() {
-        setValueModalClient(false);
+        setValueModalEditClient(false);
     }
 
     return (
@@ -75,7 +75,7 @@ function ModalEditClient() {
                 <img src={CloseIcon}
                     alt="close-icon"
                     className="modal-close-icon"
-                    onClick={() => { setValueModalClient(false) }}
+                    onClick={() => { setValueModalEditClient(false) }}
                 />
                 <div className="flex-column ">
                     <label htmlFor="name" className="font-md-bold">Nome</label>

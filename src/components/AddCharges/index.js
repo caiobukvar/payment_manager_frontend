@@ -1,46 +1,87 @@
 import './styles.css';
-import { useContext, useState } from 'react';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import React, { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
+
 import CalendarInput from '../CalendarInput';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+
 import AddChargeModalContext from '../../contexts/AddChargeModalContext';
+import useClientData from '../../hooks/useClientData';
 
 
 function AddCharges() {
     const { setValueModalAddCharges } = useContext(AddChargeModalContext);
-    const [newCharge, setNewCharge] = useState('');
 
-    const clientListById = [
-        // .map na lista de clientes (pegando o id e nome) dentro do usuario
-        {
-            // label: `${client.nome}`
-            label: "Cliente 1"
-        },
-        {
-            label: "Cliente 2"
+    const { clientArray } = useClientData();
+    const { register, handleSubmit } = useForm();
+
+
+    const [newCharge, setNewCharge] = useState({
+        cliente: "",
+        descricao: "",
+        status: "",
+        valor: "",
+        vencimento: ""
+    });
+
+    async function addCharge(newCharge) {
+
+        const response = await fetch("https://paymentmanager-api.herokuapp.com/registerBilling",
+            {
+                method: "POST",
+                body: JSON.stringify(newCharge),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+        const chargeData = await response.json();
+        console.log(chargeData);
+        if (response.ok) {
+            toast.success("Cobrança cadastrada!");
         }
-    ];
+
+    };
 
     function handleReturn() {
         setValueModalAddCharges(false);
     }
 
+    //SELECT - MATERIAL UI
+    const [inputValue, setInputValue] = React.useState('');
+
+    const handleChange = (event) => {
+        setInputValue(event.target.value);
+    };
+
+
     return (
-        < form onSubmit="" className="form-borderless-charges" >
+        < form onSubmit={handleSubmit(addCharge)} className="form-borderless-charges" >
             <div className="items-center">
                 <div className="flex-column mt-lg">
                     <label className="font-md-bold mt-lg mb-md" htmlFor="description">Cliente</label>
-                    <Autocomplete
-                        disablePortal
-                        id="combo-box-demo"
-                        options={clientListById}
-                        sx={{
-                            width: 632,
-                            justifyContent: "center",
-                            alignItems: "center"
-                        }}
-                        renderInput={(params) => <TextField {...params} label="Selecione um cliente" />}
-                    />
+                    <Select
+                        value={inputValue}
+                        onChange={handleChange}
+                        {...register('cliente', { required: true })}
+                        displayEmpty
+                        inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                        <MenuItem value="">
+                            <em>Selecione um cliente</em>
+                        </MenuItem>
+                        {clientArray.map((client) => (
+                            <MenuItem
+                                value={client.id}
+                            >
+                                {client.nome}
+                            </MenuItem>
+                        ))}
+
+
+                    </Select>
                 </div>
                 <div className="flex-column">
                     <label className="font-md-bold mt-lg" htmlFor="description">Descrição</label>
@@ -74,10 +115,9 @@ function AddCharges() {
                             className="input-charges-line-small padY-sm mt-md"
                         />
                     </div>
-                    {/* COMPONENTE DE CALENDÁRIO */}
+                    {/* COMPONENTE DE CALENDÁRIO - DIA/MES/ANO */}
                     <div className="flex-column ml-lg mt-custom">
-                        <CalendarInput
-                        />
+                        <CalendarInput />
                     </div>
                 </div>
                 <div className="flex-row mt-xl ml-xxl">

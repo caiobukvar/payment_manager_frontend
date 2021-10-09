@@ -1,8 +1,7 @@
-import "./styles.css";
 import React, { useContext } from "react";
-import ModalClientContext from "../../contexts/ModalClientContext";
+import "./styles.css";
+import ModalEditClientContext from "../../contexts/ModalEditClientContext";
 import AddClientModalContext from "../../contexts/AddClientModalContext";
-import FormClient from '../FormClient'
 
 import editIcon from '../../assets/edit.svg'
 import phoneIcon from '../../assets/phone.svg'
@@ -10,11 +9,11 @@ import mailIcon from '../../assets/mail.svg'
 
 
 function ClientList({ userClientList, handleLoadClientCharges, setModalClientDetails }) {
-    const { setValueModalClient } = useContext(ModalClientContext);
+    const { setValueModalEditClient } = useContext(ModalEditClientContext);
     const { setValueModalAddClient } = useContext(AddClientModalContext);
 
     function handleModal() {
-        setValueModalClient(true);
+        setValueModalEditClient(true);
     }
     function handleAddClient() {
         setValueModalAddClient(true);

@@ -6,12 +6,12 @@ import Money from '../../assets/money.svg';
 import Clients from '../../assets/clients.svg';
 import { NavLink } from 'react-router-dom'
 import MenuContext from '../../contexts/MenuContext';
-import ModalClientContext from '../../contexts/ModalClientContext';
+import ModalEditClientContext from '../../contexts/ModalEditClientContext';
 import AddChargeModalContext from '../../contexts/AddChargeModalContext';
 
 function Sidebar() {
     const { setMenuOpen } = useContext(MenuContext);
-    const { setValueModalClient } = useContext(ModalClientContext);
+    const { setValueModalEditClient } = useContext(ModalEditClientContext);
     const { setValueModalAddCharges } = useContext(AddChargeModalContext);
 
     function handleCloseProfileDropdown() {

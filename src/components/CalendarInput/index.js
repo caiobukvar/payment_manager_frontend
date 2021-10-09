@@ -11,17 +11,19 @@ function CalendarInput() {
     return (
         <div className="flex-column">
             <label htmlFor="value" className="font-md-bold">Vencimento</label>
-            <LocalizationProvider dateAdapter={AdapterDateFns} sx={{
-                backgroundColor: "white",
-            }}>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
+                    customStyles={{
+                        dateInputStyle: {
+                            borderWidth: 0
+                        }
+                    }}
                     value={value}
                     onChange={(newValue) => {
                         setValue(newValue);
                     }}
                     renderInput={(params) =>
                         <TextField {...params}
-
                         />}
                 />
             </LocalizationProvider>

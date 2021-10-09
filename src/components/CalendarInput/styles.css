@@ -7,16 +7,21 @@
     margin-top: 10px;
 }
 
-.MuiOutlinedInput-root:hover {
-    border: unset;
-}
-
 .MuiInputLabel-root {
     text-align: center;
     justify-content: center;
     align-items: center;
 }
 
-.MuiOutlinedInput-root:focus {
-    border: 1px solid #374952;
+.MuiOutlinedInput-input:focus {
+    outline: none !important;
+}
+
+.MuiOutlinedInput-input:hover {
+    outline: none !important;
+}
+
+.MuiOutlinedInput-input:active {
+    outline: none !important;
+    outline-color: white !important;
 }

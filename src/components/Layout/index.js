@@ -1,15 +1,23 @@
-import './styles.css';
 import React, { useContext } from 'react';
+import './styles.css';
+
 import Sidebar from '../../components/Sidebar';
 import ProfileBar from '../../components/ProfileBar';
 import ModalEditProfile from '../../components/ModalEditProfile';
-import ModalContext from '../../contexts/ModalContext';
-import ModalClientContext from '../../contexts/ModalClientContext';
+import AddCharges from '../../components/AddCharges';
+
 import ModalEditClient from "../ModalEditClient";
+
+import ModalEditClientContext from '../../contexts/ModalEditClientContext';
+import ModalContext from '../../contexts/ModalContext';
+import AddChargeModalContext from '../../contexts/AddChargeModalContext';
+
+import CloseIcon from '../../assets/close-icon.svg';
 
 function Layout({ children }) {
     const { value, setValue } = useContext(ModalContext);
-    const { valueModalClient, setValueModalClient } = useContext(ModalClientContext);
+    const { valueModalEditClient, setValueModalEditClient } = useContext(ModalEditClientContext);
+    const { valueModalAddCharges, setValueModalAddCharges } = useContext(AddChargeModalContext);
 
     return (
         <div className="flex-row align-start">
@@ -24,11 +32,23 @@ function Layout({ children }) {
                     setValue={setValue}
                 />
             }
-            {valueModalClient &&
+            {valueModalEditClient &&
                 <ModalEditClient
-                    value={valueModalClient}
-                    setValue={setValueModalClient}
+                    value={valueModalEditClient}
+                    setValue={setValueModalEditClient}
                 />
+            }
+            {valueModalAddCharges &&
+                <div className="modal">
+                    <div className="modal-content ml-lg">
+                        <AddCharges />
+                        <img src={CloseIcon}
+                            alt="close-icon"
+                            className="modal-close-icon"
+                            onClick={() => { setValueModalAddCharges(false) }}
+                        />
+                    </div>
+                </div>
             }
         </div>
     );

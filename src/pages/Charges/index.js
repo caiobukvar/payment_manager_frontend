@@ -1,21 +1,19 @@
-import './styles.css';
 import React, { useState, useEffect, useContext } from 'react'
+import './styles.css';
 import ChargesTable from '../../components/ChargesTable';
-import AddCharges from '../../components/AddCharges';
-import CloseIcon from '../../assets/close-icon.svg'
 import AuthContext from '../../contexts/AuthContext';
-import AddChargeModalContext from '../../contexts/AddChargeModalContext';
+
 
 
 function Charges() {
     const [isLoading, setIsLoading] = useState(true);
-    const [chargesList, setChargesList] = useState(true);
+    const [chargesList, setChargesList] = useState([]);
     const { token } = useContext(AuthContext);
-    const { valueModalAddCharges, setValueModalAddCharges } = useContext(AddChargeModalContext);
+
 
     useEffect(() => {
         async function UserChargesInfo() {
-            const response = await fetch('https://paymentmanager-api.herokuapp.com/getBillings',
+            const response = await fetch('https://paymentmanager-api.herokuapp.com/allBillings',
                 {
                     method: 'GET',
                     headers: {
@@ -41,18 +39,7 @@ function Charges() {
                     <AddCharges />
                 )
             }
-            {valueModalAddCharges &&
-                <div className="modal">
-                    <div className="modal-content ml-lg">
-                        <AddCharges />
-                        <img src={CloseIcon}
-                            alt="close-icon"
-                            className="modal-close-icon"
-                            onClick={() => { setValueModalAddCharges(false) }}
-                        />
-                    </div>
-                </div>
-            }
+
 
         </div>
     )

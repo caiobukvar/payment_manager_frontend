@@ -1,10 +1,11 @@
 import './styles.css';
 import { useForm } from 'react-hook-form';
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import AuthContext from '../../contexts/AuthContext'
 import AddClientModalContext from '../../contexts/AddClientModalContext'
 import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
 
 function FormClient() {
     const [errorEmail, setErrorEmail] = useState('');
@@ -46,6 +47,7 @@ function FormClient() {
 
         if (response.ok) {
             toast.success("Cliente cadastrado com sucesso!");
+            history.push("/");
         }
         else {
             const err = true;
@@ -58,6 +60,7 @@ function FormClient() {
             }
         }
     }
+
     function handleError() {
         setErrorEmail(false);
     }

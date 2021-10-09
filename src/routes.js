@@ -15,9 +15,10 @@ import ModalContext from './contexts/ModalContext';
 import AuthContext from './contexts/AuthContext';
 import UserContext from './contexts/UserContext';
 import MenuContext from './contexts/MenuContext';
-import ModalClientContext from './contexts/ModalClientContext';
+import ModalEditClientContext from './contexts/ModalEditClientContext';
 import AddClientModalContext from './contexts/AddClientModalContext';
 import AddChargeModalContext from './contexts/AddChargeModalContext';
+import ClientDataContextProvider from './components/ClientDataContextProvider';
 
 
 function ProtectedRoutes(props) {
@@ -30,10 +31,11 @@ function ProtectedRoutes(props) {
 
 function Routes() {
     const [value, setValue] = useState(false);
-    const [valueModalClient, setValueModalClient] = useState(false);
+    const [valueModalEditClient, setValueModalEditClient] = useState(false);
     const [valueModalAddClient, setValueModalAddClient] = useState(false);
-    const [menuOpen, setMenuOpen] = useState(false);
     const [valueModalAddCharges, setValueModalAddCharges] = useState(false);
+
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const [userInfo, setUserInfo] = useState(() => {
         const localUserInfo = localStorage.getItem('info-usuario');
@@ -68,20 +70,21 @@ function Routes() {
                                     <AddClientModalContext.Provider
                                         value={{ valueModalAddClient, setValueModalAddClient }}
                                     >
-                                        <ModalClientContext.Provider
-                                            value={{ valueModalClient, setValueModalClient }}
+                                        <ModalEditClientContext.Provider
+                                            value={{ valueModalEditClient, setValueModalEditClient }}
                                         >
                                             <AddChargeModalContext.Provider
                                                 value={{ valueModalAddCharges, setValueModalAddCharges }}
                                             >
-                                                <Layout>
-                                                    <Route path="/" exact component={Main} />
-                                                    <Route path="/client" component={Client} />
-                                                    <Route path="/charges" component={Charges} />
-
-                                                </Layout>
+                                                <ClientDataContextProvider>
+                                                    <Layout>
+                                                        <Route path="/" exact component={Main} />
+                                                        <Route path="/client" component={Client} />
+                                                        <Route path="/charges" component={Charges} />
+                                                    </Layout>
+                                                </ClientDataContextProvider>
                                             </AddChargeModalContext.Provider>
-                                        </ModalClientContext.Provider>
+                                        </ModalEditClientContext.Provider>
                                     </AddClientModalContext.Provider>
                                 </MenuContext.Provider>
                             </ModalContext.Provider>
