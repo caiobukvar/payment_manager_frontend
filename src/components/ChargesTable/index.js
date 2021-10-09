@@ -26,10 +26,10 @@ function ChargesTable() {
                     <p className="flex-bar">Status</p>
                     <p className="flex-bar">Vencimento</p>
                 </div>
-                <div className="flex-row list-padding white-bg" onClick={handleOpenCharge} >
-                    {chargesList.map((charge) => (
-                        <div className="flex-row white-bg enabled" key={charge.id}>
-                            <div className="flex-column content-center flex-bar">
+                {chargesList.map((charge) => (
+                    <div className="flex-column list-padding white-bg" onClick={handleOpenCharge} key={charge.id} >
+                        <div className="flex-row white-bg enabled">
+                            <div className="flex-column content-center flex-bar gap-sm" >
                                 <h3 className="font-md-bold">{`# ${charge.id}`}</h3>
                             </div>
                             <div className="flex-row items-center flex-bar">
@@ -42,14 +42,19 @@ function ChargesTable() {
                                 <span>{`R$ ${charge.valor}`}</span>
                             </div>
                             <div className="flex-row items-center flex-bar" >
-                                <span className="green">{charge.status}</span>
+                                {/* COMO FAZER VERIFICAÇÃO TRIPLA? (pendente / pago / vencido) */}
+                                <span className={
+                                    `${charge.status}` === "Pendente" ? "blue" : '' &&
+                                        `${charge.status}` === "Vencida" ? "red" : '' &&
+                                            `${charge.status}` === "pago" ? "green" : ''
+                                }>{charge.status}</span>
                             </div>
                             <div className="flex-row items-center flex-bar" >
                                 <span>{charge.vencimento}</span>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
         </div >
     );

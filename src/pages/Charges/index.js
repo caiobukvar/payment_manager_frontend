@@ -10,7 +10,7 @@ function Charges() {
     const { token } = useContext(AuthContext);
 
     useEffect(() => {
-        async function UserChargesInfo() {
+        async function loadAllUserBillings() {
             const response = await fetch('https://paymentmanager-api.herokuapp.com/allUserBillings',
                 {
                     method: 'GET',
@@ -20,11 +20,13 @@ function Charges() {
                     }
                 });
             const clientCharges = await response.json();
+
             console.log(clientCharges);
+
             setChargesList(clientCharges);
             setIsLoading(false);
         }
-        UserChargesInfo();
+        loadAllUserBillings();
     }, []);
 
     return (
