@@ -9,10 +9,9 @@ function Charges() {
     const { chargesList, setChargesList } = useContext(ChargeContext);
     const { token } = useContext(AuthContext);
 
-
     useEffect(() => {
         async function UserChargesInfo() {
-            const response = await fetch('https://paymentmanager-api.herokuapp.com/getBillings',
+            const response = await fetch('https://paymentmanager-api.herokuapp.com/allUserBillings',
                 {
                     method: 'GET',
                     headers: {
