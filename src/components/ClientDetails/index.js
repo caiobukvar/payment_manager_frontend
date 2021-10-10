@@ -4,7 +4,7 @@ import CloseIcon from '../../assets/close-icon.svg';
 import MailIcon from '../../assets/mail.svg';
 import PhoneIcon from '../../assets/phone.svg';
 
-function ClientDetails({ clientCharges }) {
+function ClientDetails({ clientCharges, setModalClientDetails }) {
     console.log(clientCharges);
     return (
         <div className="modal">

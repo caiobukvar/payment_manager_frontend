@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
+
 import './styles.css';
+
+import { CircularProgress } from '@mui/material';
+
 import ChargesTable from '../../components/ChargesTable';
+import AddCharges from '../../components/AddCharges';
+
 import AuthContext from '../../contexts/AuthContext';
 import ChargeContext from '../../contexts/ChargeContext';
 
@@ -21,26 +27,37 @@ function Charges() {
                 });
             const clientCharges = await response.json();
 
-            console.log(clientCharges);
+            if (response.ok) {
+                setChargesList(clientCharges);
+                setIsLoading(false);
+            } else {
+                setChargesList([]);
+                setIsLoading(false);
+            }
 
-            setChargesList(clientCharges);
-            setIsLoading(false);
         }
         loadAllUserBillings();
     }, []);
 
     return (
         <div>
+            {isLoading &&
+                <div className="modal-circular" >
+                    <CircularProgress color="secondary" />
+                </div>
+            }
             {
                 !isLoading && (chargesList.length > 0 ?
                     <ChargesTable
                         chargesList={chargesList}
-                    /> :
-                    <AddCharges />
+                    />
+                    :
+                    <div className="mt-xxl">
+                        <h2 className="position-left">{'//'} ADICIONAR COBRANÇA</h2>
+                        <AddCharges />
+                    </div>
                 )
             }
-
-
         </div>
     )
 };

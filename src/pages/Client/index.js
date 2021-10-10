@@ -61,7 +61,11 @@ function Client() {
                     </div>
                 )
             }
-            {modalClientDetails && <ClientDetails />}
+            {modalClientDetails &&
+                <ClientDetails
+                    modalClientDetails={modalClientDetails}
+                    setModalClientDetails={setModalClientDetails}
+                />}
             {valueModalAddClient &&
                 <div className="modal">
                     <div className="modal-content">
