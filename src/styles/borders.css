@@ -39,6 +39,12 @@
     box-shadow: 0 0 1em rgb(0, 0, 0, 0.2);
 }
 
+.box-shadow-charges {
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0 0 1em rgb(0, 0, 0, 0.2);
+}
+
 .border-round-top {
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
@@ -52,4 +58,8 @@
 
 .full-width {
     width: 100%;
+}
+
+.border-right {
+    border-right: 2px solid #DDDDDD;
 }

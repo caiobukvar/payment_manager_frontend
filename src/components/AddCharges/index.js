@@ -47,8 +47,7 @@ function AddCharges() {
         setValueModalAddCharges(false);
     }
 
-    //SELECT - MATERIAL UI
-    const [inputValue, setInputValue] = React.useState('');
+    const [inputValue, setInputValue] = useState('');
 
     const handleChange = (e) => {
         console.log(e.target.value);
@@ -57,15 +56,22 @@ function AddCharges() {
 
 
     return (
-        < form onSubmit={handleSubmit(addCharge)} className="form-borderless-charges" >
+        <form onSubmit={handleSubmit(addCharge)} className="form-borderless-charges" >
             <div className="items-center">
                 <div className="flex-column mt-lg">
                     <label className="font-md-bold mt-lg mb-md" htmlFor="description">Cliente</label>
-                    <select name="" id="" value={inputValue} onChange={handleChange}>,
+                    <select name="clientes" id="clientes" className="input-select" value={inputValue} onChange={handleChange}>,
                         {clientArray.map((client) => (
                             <option
                                 value={client.id}
+                                placeholder={client.nome}
                                 {...register("cliente", { required: true })}
+                                onChange={(e) => {
+                                    setNewCharge({
+                                        ...newCharge,
+                                        cliente: e.target.value
+                                    })
+                                }}
                             >
                                 {client.nome}
                             </option>
@@ -81,6 +87,12 @@ function AddCharges() {
                         id="description"
                         className="input-charges-large padY-sm mt-md"
                         {...register("descricao", { required: true })}
+                        onChange={(e) => {
+                            setNewCharge({
+                                ...newCharge,
+                                descricao: e.target.value
+                            })
+                        }}
                     />
                 </div>
                 <div className="flex-column">
@@ -92,10 +104,16 @@ function AddCharges() {
                         id="chargeStatus"
                         className="input-charges-large padY-sm mt-md"
                         {...register("status", { required: true })}
+                        onChange={(e) => {
+                            setNewCharge({
+                                ...newCharge,
+                                status: e.target.value
+                            })
+                        }}
                     />
                 </div>
                 <div className="flex-row">
-                    {/* FORMATAR VALOR */}
+                    {/* FORMATAR VALOR - regex: \d{1,3}(?:\.\d{3})*?,\d{2} */}
                     <div className="flex-column">
                         <label className="font-md-bold mt-lg" htmlFor="chargeValue">Valor</label>
                         <input
@@ -105,6 +123,12 @@ function AddCharges() {
                             id="chargeValue"
                             className="input-charges-line-small padY-sm mt-md"
                             {...register("valor", { required: true })}
+                            onChange={(e) => {
+                                setNewCharge({
+                                    ...newCharge,
+                                    valor: e.target.value
+                                })
+                            }}
                         />
                     </div>
                     {/* COMPONENTE DE CALENDÁRIO - MES/DIA/ANO */}

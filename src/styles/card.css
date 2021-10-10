@@ -23,3 +23,11 @@
 .pad-md {
     padding: 0px 12px;
 }
+
+.pad-client-details {
+    padding: 8px;
+}
+
+.pad-vertical {
+    padding: 30px 0px 40px 0px;
+}

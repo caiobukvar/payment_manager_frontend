@@ -34,7 +34,7 @@ function ClientList({ userClientList, handleLoadClientCharges, setModalClientDet
                     <p className="flex-basis">Status</p>
                 </div>
                 {userClientList.map(client => (
-                    <div className="flex-row list-padding white-bg" key={client.id} onClick={() => { handleLoadClientCharges(client.id), handleClientDetailsModal }}>
+                    <div className="flex-row list-padding white-bg mb-md" key={client.id} onClick={() => { handleLoadClientCharges(client.id), handleClientDetailsModal }}>
                         <div className="flex-column client-box content-center flex-basis enabled ">
                             <h3 className="font-md-bold">{client.nome}</h3>
                             <div className="flex-row items-center gap-xs">
@@ -52,8 +52,8 @@ function ClientList({ userClientList, handleLoadClientCharges, setModalClientDet
                         <div className="flex-row items-center flex-basis">
                             <p>R$ 00.000,00</p>
                         </div>
-                        <div className={`flex-row items-center flex-basis ${client.debtPaid ? "green" : "red"}`} >
-                            <p className="green">{client.debtPaid ? "EM DIA" : "INADIMPLENTE"}</p>
+                        <div className={`flex-row items-center flex-basis ${client.status === "inadimplente" ? "red" : "green"}`} >
+                            <p className="green">{client.status === "inadimplente" ? "INADIMPLENTE" : "EM DIA"}</p>
                         </div>
                         <div className="flex-row items-center flex-basis" >
                             <img

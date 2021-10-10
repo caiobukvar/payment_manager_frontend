@@ -35,9 +35,9 @@ function Client() {
                 }
             });
 
-        const clientCharges = await response.json();
+        const data = await response.json();
 
-        setClientCharges(clientCharges);
+        setClientCharges(data);
         setModalClientDetails(true);
         console.log(clientCharges);
     }

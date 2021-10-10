@@ -7,10 +7,10 @@ import AuthContext from '../../contexts/AuthContext'
 import ModalEditClientContext from '../../contexts/ModalEditClientContext'
 import CloseIcon from '../../assets/close-icon.svg'
 
-function ModalEditClient() {
+function ModalEditClient({ clientCharges }) {
     const [errorEmail, setErrorEmail] = useState('');
     const { token } = useContext(AuthContext);
-    const { setValueModalEditClient } = useContext(ModalEditClientContext);
+    const { valueModalEditClient, setValueModalEditClient } = useContext(ModalEditClientContext);
 
     const [dadosParaAtualizar, setDadosParaAtualizar] = useState({
         nome: '',
@@ -84,7 +84,7 @@ function ModalEditClient() {
                         type="text"
                         title="name"
                         id="name"
-                        placeholder="Digite o nome do cliente"
+                        placeholder={clientCharges.nome}
                         {...register("nome", { required: true })}
                         value={dadosParaAtualizar.nome}
                         onChange={(e) => {

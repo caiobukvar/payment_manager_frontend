@@ -60,7 +60,7 @@
 
 .input-charges-line {
     height: 40px;
-    width: 340px;
+    width: 100%;
     background-color: white;
     border: 1px solid #374952;
     border-radius: 8px;
@@ -69,6 +69,14 @@
 .input-charges-line-small {
     height: 40px;
     width: 180px;
+    background-color: white;
+    border: 1px solid #374952;
+    border-radius: 8px;
+}
+
+.input-select {
+    height: 60px;
+    width: 100%;
     background-color: white;
     border: 1px solid #374952;
     border-radius: 8px;
