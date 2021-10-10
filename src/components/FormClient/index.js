@@ -48,6 +48,7 @@ function FormClient() {
         if (response.ok) {
             toast.success("Cliente cadastrado com sucesso!");
             history.push("/");
+            setValueModalAddClient(false);
         }
         else {
             const err = true;
