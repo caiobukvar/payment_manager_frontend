@@ -3,22 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.8",
+=======
+    "@babel/core": "^7.0.0",
+>>>>>>> fix
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
+<<<<<<< HEAD
     "@material-ui/core": "^5.0.0-beta.5",
+=======
+>>>>>>> fix
     "@mui/lab": "^5.0.0-alpha.50",
     "@mui/material": "^5.0.3",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
+<<<<<<< HEAD
     "babel-loader": "^8.2.2",
     "babel-preset-react-app": "3",
     "babel-runtime": "^6.26.0",
     "browserslist": "^4.17.3",
+=======
+    "@testing-library/user-event": "^12.1.10",
+>>>>>>> fix
     "cors": "^2.8.5",
     "date-fns": "^2.25.0",
     "react": "^17.0.2",

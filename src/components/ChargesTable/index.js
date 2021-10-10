@@ -4,9 +4,8 @@ import AddChargeModalContext from '../../contexts/AddChargeModalContext';
 import ChargeContext from '../../contexts/ChargeContext';
 
 function ChargesTable() {
-    const { setValueModalAddCharges } = useContext(AddChargeModalContext);
     const { chargesList } = useContext(ChargeContext);
-
+    const { setValueModalAddCharges } = useContext(AddChargeModalContext);
     function handleOpenAddCharge() {
         setValueModalAddCharges(true);
     }
@@ -42,11 +41,8 @@ function ChargesTable() {
                                 <span>{`R$ ${charge.valor}`}</span>
                             </div>
                             <div className="flex-row items-center flex-bar" >
-                                {/* COMO FAZER VERIFICAÇÃO TRIPLA? (pendente / pago / vencido) */}
                                 <span className={
-                                    `${charge.status}` === "Pendente" ? "blue" : '' &&
-                                        `${charge.status}` === "Vencida" ? "red" : '' &&
-                                            `${charge.status}` === "pago" ? "green" : ''
+                                    `${charge.status}` === "Pendente" ? "blue" : `${charge.status}` === "Vencida" ? "red" : `${charge.status}` === "pago" ? "green" : ''
                                 }>{charge.status}</span>
                             </div>
                             <div className="flex-row items-center flex-bar" >
