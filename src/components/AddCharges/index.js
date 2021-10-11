@@ -14,7 +14,6 @@ function AddCharges() {
     const { clientArray } = useClientData();
     const { register, handleSubmit } = useForm();
 
-
     const [newCharge, setNewCharge] = useState({
         cliente: "",
         descricao: "",
@@ -47,10 +46,8 @@ function AddCharges() {
         setValueModalAddCharges(false);
     }
 
-    const handleChange = (e) => {
-        console.log(e.target.value);
-        setInputValue(e.target.value);
-    };
+
+
 
 
     return (
@@ -58,25 +55,25 @@ function AddCharges() {
             <div className="items-center">
                 <div className="flex-column mt-lg">
                     <label className="font-md-bold mt-lg mb-md" htmlFor="description">Cliente</label>
-                    <select name="clientes"
-                        id="clientes"
+                    <select
+                        type="text"
+                        name="cliente"
+                        placeholder=""
+                        id="cliente"
                         className="input-select"
-                        key={newCharge}
-                        value={newCharge}
-                        onChange={handleChange}
                         {...register("cliente", { required: true })}
+                        onChange={(e) => {
+                            setNewCharge({
+                                ...newCharge,
+                                cliente: e.target.value
+                            })
+                        }}
                     >
                         {clientArray.map((client) => (
                             <option
                                 value={client.id}
                                 key={client.id}
                                 placeholder={client.nome}
-                                onChange={(e) => {
-                                    setNewCharge({
-                                        ...newCharge,
-                                        cliente: e.target.value
-                                    })
-                                }}
                             >
                                 {client.nome}
                             </option>
@@ -88,7 +85,7 @@ function AddCharges() {
                     <input
                         type="text"
                         name="description"
-                        placeholder=""
+                        placeholder="Insira descrição da cobrança"
                         id="description"
                         className="input-charges-large padY-sm mt-md"
                         {...register("descricao", { required: true })}
@@ -101,13 +98,13 @@ function AddCharges() {
                     />
                 </div>
                 <div className="flex-column">
-                    <label className="font-md-bold mt-lg" htmlFor="chargeStatus">Status</label>
-                    <input
+                    <label className="font-md-bold mt-lg" htmlFor="status">Status</label>
+                    <select
                         type="text"
-                        name="chargeStatus"
-                        placeholder=""
-                        id="chargeStatus"
-                        className="input-charges-large padY-sm mt-md"
+                        name="status"
+                        placeholder="status"
+                        id="status"
+                        className="input-select"
                         {...register("status", { required: true })}
                         onChange={(e) => {
                             setNewCharge({
@@ -115,17 +112,34 @@ function AddCharges() {
                                 status: e.target.value
                             })
                         }}
-                    />
+                    >
+                        <option disabled selected value>selecione um status</option>
+                        <option
+                            value="pago"
+                            key="pago"
+                            placeholder="pago"
+                        >
+                            pago
+                        </option>
+                        <option
+                            value="pendente"
+                            key="pendente"
+                            placeholder="pendente"
+                        >
+                            pendente
+                        </option>
+                        ))
+                    </select>
                 </div>
                 <div className="flex-row">
                     {/* FORMATAR VALOR - regex: \d{1,3}(?:\.\d{3})*?,\d{2} */}
                     <div className="flex-column">
-                        <label className="font-md-bold mt-lg" htmlFor="chargeValue">Valor</label>
+                        <label className="font-md-bold mt-lg" htmlFor="valor">Valor</label>
                         <input
                             type="text"
-                            name="chargeValue"
-                            placeholder=""
-                            id="chargeValue"
+                            name="valor"
+                            placeholder="Insira o valor"
+                            id="valor"
                             className="input-charges-line-small padY-sm mt-md"
                             {...register("valor", { required: true })}
                             onChange={(e) => {
@@ -135,11 +149,14 @@ function AddCharges() {
                                 })
                             }}
                         />
+
                     </div>
                     {/* COMPONENTE DE CALENDÁRIO - MES/DIA/ANO */}
                     <div className="flex-column ml-lg mt-custom">
                         <CalendarInput
                             register
+                            newCharge
+                            setNewCharge
                         />
                     </div>
                 </div>
