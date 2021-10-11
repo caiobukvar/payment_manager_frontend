@@ -3,6 +3,7 @@ import "./styles.css";
 import ModalEditClientContext from "../../contexts/ModalEditClientContext";
 import AddClientModalContext from "../../contexts/AddClientModalContext";
 
+
 import editIcon from '../../assets/edit.svg'
 import phoneIcon from '../../assets/phone.svg'
 import mailIcon from '../../assets/mail.svg'
@@ -12,15 +13,20 @@ function ClientList({ userClientList, handleLoadClientCharges, setModalClientDet
     const { setValueModalEditClient } = useContext(ModalEditClientContext);
     const { setValueModalAddClient } = useContext(AddClientModalContext);
 
-    function handleModal() {
-        setValueModalEditClient(true);
+
+    function handleStorage(id) {
+        localStorage.setItem('client-id', id)
     }
+
     function handleAddClient() {
         setValueModalAddClient(true);
     }
+
     function handleClientDetailsModal() {
         setModalClientDetails(true);
     }
+
+
 
     return (
         <>
@@ -34,8 +40,8 @@ function ClientList({ userClientList, handleLoadClientCharges, setModalClientDet
                     <p className="flex-basis">Status</p>
                 </div>
                 {userClientList.map(client => (
-                    <div className="flex-row list-padding white-bg mb-md" key={client.id} onClick={() => { handleLoadClientCharges(client.id), handleClientDetailsModal }}>
-                        <div className="flex-column client-box content-center flex-basis enabled ">
+                    <div className="flex-row list-padding white-bg mb-md" key={client.id} >
+                        <div className="flex-column client-box content-center flex-basis enabled" onClick={() => { handleLoadClientCharges(client.id), handleClientDetailsModal }}>
                             <h3 className="font-md-bold">{client.nome}</h3>
                             <div className="flex-row items-center gap-xs">
                                 <img src={mailIcon} alt="mail-icon" />
@@ -47,7 +53,7 @@ function ClientList({ userClientList, handleLoadClientCharges, setModalClientDet
                             </div>
                         </div>
                         <div className="flex-row items-center flex-basis">
-                            <p>R$ 00.000,00</p>
+                            <p>R$ {client.valortotalcobrancasfeitas}</p>
                         </div>
                         <div className="flex-row items-center flex-basis">
                             <p>R$ 00.000,00</p>
@@ -60,7 +66,7 @@ function ClientList({ userClientList, handleLoadClientCharges, setModalClientDet
                                 src={editIcon}
                                 alt="edit-icon"
                                 className="enabled"
-                                onClick={handleModal}
+                                onClick={() => { handleStorage(client.id), setValueModalEditClient(true) }}
                             />
                         </div>
                     </div>

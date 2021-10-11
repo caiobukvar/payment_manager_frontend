@@ -9,6 +9,7 @@ import ClientDetails from '../../components/ClientDetails';
 
 import AuthContext from '../../contexts/AuthContext';
 import AddClientModalContext from '../../contexts/AddClientModalContext';
+import ModalEditClientContext from '../../contexts/ModalEditClientContext';
 
 import CloseIcon from '../../assets/close-icon.svg';
 import useClientData from '../../hooks/useClientData';
@@ -17,12 +18,11 @@ import useClientData from '../../hooks/useClientData';
 function Client() {
     const [clientCharges, setClientCharges] = useState();
     const [modalClientDetails, setModalClientDetails] = useState(false);
-
+    const { setValueModalEditClient } = useContext(ModalEditClientContext);
     const { clientArray, isLoading } = useClientData();
 
     const { token } = useContext(AuthContext);
     const { valueModalAddClient, setValueModalAddClient } = useContext(AddClientModalContext);
-
 
     // Pegar info COBRANÇAS no CLIENTE
     async function handleLoadClientCharges(id) {
@@ -39,7 +39,6 @@ function Client() {
 
         setClientCharges(data);
         setModalClientDetails(true);
-        console.log(clientCharges);
     }
 
     return (
@@ -66,18 +65,6 @@ function Client() {
                     modalClientDetails={modalClientDetails}
                     setModalClientDetails={setModalClientDetails}
                 />}
-            {valueModalAddClient &&
-                <div className="modal">
-                    <div className="modal-content">
-                        <FormClient />
-                        <img src={CloseIcon}
-                            alt="close-icon"
-                            className="modal-close-icon"
-                            onClick={() => { setValueModalAddClient(false) }}
-                        />
-                    </div>
-                </div>
-            }
             {valueModalAddClient &&
                 <div className="modal">
                     <div className="modal-content">

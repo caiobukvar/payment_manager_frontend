@@ -22,6 +22,7 @@ import AddChargeModalContext from './contexts/AddChargeModalContext';
 import ChargeContext from './contexts/ChargeContext';
 
 
+
 function ProtectedRoutes(props) {
     const { token } = useContext(AuthContext);
 
@@ -35,8 +36,9 @@ function Routes() {
     const [valueModalEditClient, setValueModalEditClient] = useState(false);
     const [valueModalAddClient, setValueModalAddClient] = useState(false);
     const [valueModalAddCharges, setValueModalAddCharges] = useState(false);
-    const [chargesList, setChargesList] = useState('');
     const [menuOpen, setMenuOpen] = useState(false);
+
+    const [chargesList, setChargesList] = useState('');
 
     const [userInfo, setUserInfo] = useState(() => {
         const localUserInfo = localStorage.getItem('info-usuario');
@@ -83,7 +85,9 @@ function Routes() {
                                                     >
                                                         <Layout>
                                                             <Route path="/" exact component={Main} />
+
                                                             <Route path="/client" component={Client} />
+
                                                             <Route path="/charges" component={Charges} />
                                                         </Layout>
                                                     </ChargeContext.Provider>

@@ -20,12 +20,10 @@ function ClientDataContextProvider({ children }) {
                     }
                 });
             const clientData = await response.json();
-            console.log(clientData);
 
             if (response.ok) {
                 setClientArray(clientData);
             }
-
             setIsLoading(false);
         }
         UserClientInfo();

@@ -1,11 +1,11 @@
 import './styles.css';
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import CloseIcon from '../../assets/close-icon.svg';
 import MailIcon from '../../assets/mail.svg';
 import PhoneIcon from '../../assets/phone.svg';
 
 function ClientDetails({ clientCharges, setModalClientDetails }) {
-    console.log(clientCharges);
+
     return (
         <div className="modal">
             <div className="flex-row modal-content modal-padding modal-size-card space-evenly">
@@ -66,19 +66,20 @@ function ClientDetails({ clientCharges, setModalClientDetails }) {
                 </div>
                 <div className="flex-row half-width mt-xl">
                     <div className="flex-column full-width pad-md content-center items-center">
-                        {/* {clientCharges.map((charge) => {
-                            { charge.id }
-                        })} */}
-                        <div className="box-shadow-charges pad-card charge-card flex-row">
-                            <div className="flex-column space-between">
-                                <span>`id cobrança + descricao cobranca`</span>
-                                <span>data cobrança</span>
-                            </div>
-                            <div className="flex-column space-between">
-                                <span>valor cobrança</span>
-                                <span>status cobrança</span>
-                            </div>
-                        </div>
+                        {(Array.isArray(clientCharges)
+                            ? clientCharges.map((charge) => {
+                                <div className="box-shadow-charges pad-card charge-card flex-row" key={charge.id}>
+                                    <div className="flex-column space-between">
+                                        <span>`${charge.id} + descricao cobranca`</span>
+                                        <span>data cobrança</span>
+                                    </div>
+                                    <div className="flex-column space-between">
+                                        <span>valor cobrança</span>
+                                        <span>status cobrança</span>
+                                    </div>
+                                </div>
+                            })
+                            : '')}
                     </div>
                 </div>
             </div>

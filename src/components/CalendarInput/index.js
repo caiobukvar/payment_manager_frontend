@@ -21,12 +21,12 @@ function CalendarInput() {
                         }
                     }}
                     value={value}
-                    {...register('vencimento', { required: true })}
                     onChange={(newValue) => {
-                        setValue(newValue);
+                        setValue(newValue.vencimento);
                     }}
                     renderInput={(params) =>
                         <TextField
+                            {...register('vencimento', { required: true })}
                             {...params}
                         />}
                 />

@@ -19,6 +19,8 @@ function Layout({ children }) {
     const { valueModalEditClient, setValueModalEditClient } = useContext(ModalEditClientContext);
     const { valueModalAddCharges, setValueModalAddCharges } = useContext(AddChargeModalContext);
 
+
+
     return (
         <div className="flex-row align-start">
             <Sidebar />

@@ -1,16 +1,67 @@
-import './styles.css';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import AuthContext from '../../contexts/AuthContext'
-import ModalEditClientContext from '../../contexts/ModalEditClientContext'
-import CloseIcon from '../../assets/close-icon.svg'
 
-function ModalEditClient({ clientCharges }) {
+import './styles.css';
+
+import CloseIcon from '../../assets/close-icon.svg';
+import AuthContext from '../../contexts/AuthContext';
+import ModalEditClientContext from '../../contexts/ModalEditClientContext';
+
+function ModalEditClient() {
     const [errorEmail, setErrorEmail] = useState('');
+    const [autocomplete, setAutocomplete] = useState('');
     const { token } = useContext(AuthContext);
-    const { valueModalEditClient, setValueModalEditClient } = useContext(ModalEditClientContext);
+    const { setValueModalEditClient } = useContext(ModalEditClientContext);
+    const { register, handleSubmit, watch, setValue, setError } = useForm();
+    const history = useHistory();
+
+    const id = localStorage.getItem('client-id', id);
+
+
+    useEffect(() => {
+        async function UserClientInfo(id) {
+            const response = await fetch(`https://paymentmanager-api.herokuapp.com/getDataCustomer?id=${id}`,
+                {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+            const clientData = await response.json();
+            if (response.ok) {
+                setAutocomplete(clientData[0]);
+            }
+        }
+        UserClientInfo(id);
+    }, []);
+
+
+
+    let cepWatch = watch('cep', '');
+
+    useEffect(() => {
+        if (cepWatch.length >= 8) {
+            console.log(cepWatch)
+            handleAutoCompleteAdress();
+        }
+    }, [cepWatch]);
+
+    async function handleAutoCompleteAdress() {
+        try {
+            const response = await fetch(`https://viacep.com.br/ws/${cepWatch}/json/`);
+            const { logradouro, bairro, localidade } = await response.json();
+            console.log({ logradouro, bairro, localidade })
+            setValue('logradouro', logradouro);
+            setValue('bairro', bairro);
+            setValue('cidade', localidade);
+        } catch (error) {
+            toast.error('Digite um CEP válido!');
+            setError('');
+        }
+    }
 
     const [dadosParaAtualizar, setDadosParaAtualizar] = useState({
         nome: '',
@@ -25,15 +76,14 @@ function ModalEditClient({ clientCharges }) {
         referencia: ''
     });
 
-    const { register, handleSubmit } = useForm();
-    const history = useHistory();
+
 
     async function updateClientData(dadosParaAtualizar) {
         dadosParaAtualizar.telefone.replace(/[^0-9]/g, '');
         dadosParaAtualizar.cpf.replace(/[^0-9]/g, '');
         dadosParaAtualizar.cep.replace(/[^0-9]/g, '');
 
-        const response = await fetch("https://paymentmanager-api.herokuapp.com/editCustomer",
+        const response = await fetch(`https://paymentmanager-api.herokuapp.com/editDataCustomer?id=${id}`,
             {
                 method: "PUT",
                 body: JSON.stringify(dadosParaAtualizar),
@@ -61,6 +111,7 @@ function ModalEditClient({ clientCharges }) {
             }
         }
     }
+
     function handleError() {
         setErrorEmail(false);
     }
@@ -75,7 +126,7 @@ function ModalEditClient({ clientCharges }) {
                 <img src={CloseIcon}
                     alt="close-icon"
                     className="modal-close-icon"
-                    onClick={() => { setValueModalEditClient(false) }}
+                    onClick={handleCloseModal}
                 />
                 <div className="flex-column ">
                     <label htmlFor="name" className="font-md-bold">Nome</label>
@@ -84,7 +135,7 @@ function ModalEditClient({ clientCharges }) {
                         type="text"
                         title="name"
                         id="name"
-                        placeholder={clientCharges.nome}
+                        placeholder={autocomplete.nome}
                         {...register("nome", { required: true })}
                         value={dadosParaAtualizar.nome}
                         onChange={(e) => {
@@ -100,7 +151,7 @@ function ModalEditClient({ clientCharges }) {
                         type="text"
                         title="email"
                         id="email"
-                        placeholder="Digite o email do cliente"
+                        placeholder={autocomplete.email}
                         {...register("email", { required: true })}
                         value={dadosParaAtualizar.email}
                         onChange={(e) => {
@@ -121,7 +172,7 @@ function ModalEditClient({ clientCharges }) {
                             type="text"
                             title="cpf"
                             id="cpf"
-                            placeholder="Digite o CPF do cliente"
+                            placeholder={autocomplete.cpf}
                             {...register("cpf", { required: true })}
                             value={dadosParaAtualizar.cpf}
                             maxLength="14"
@@ -144,7 +195,7 @@ function ModalEditClient({ clientCharges }) {
                             type="text"
                             title="phone"
                             id="phone"
-                            placeholder="Digite o telefone do cliente"
+                            placeholder={autocomplete.telefone}
                             {...register("telefone", { required: true })}
                             value={dadosParaAtualizar.telefone}
                             maxLength="15"
@@ -169,17 +220,14 @@ function ModalEditClient({ clientCharges }) {
                             type="text"
                             title="CEP"
                             id="CEP"
-                            placeholder="Digite o CEP do cliente"
+                            placeholder={autocomplete.cep}
                             {...register("cep")}
                             value={dadosParaAtualizar.cep}
-                            maxLength="10"
+                            maxLength="8"
                             onChange={(e) => {
                                 setDadosParaAtualizar({
                                     ...dadosParaAtualizar,
                                     cep: e.target.value
-                                        .replace(/\D/g, "")
-                                        .replace(/^(\d{2})(\d)/g, "$1.$2")
-                                        .replace(/(\d{3})(\d)/, '$1-$2')
                                 })
                             }}
                         />
@@ -191,7 +239,7 @@ function ModalEditClient({ clientCharges }) {
                             type="text"
                             title="adress"
                             id="adress"
-                            placeholder="Digite o endereço do cliente"
+                            placeholder={autocomplete.logradouro}
                             {...register("logradouro")}
                             value={dadosParaAtualizar.logradouro}
                             onChange={(e) => {
@@ -211,7 +259,7 @@ function ModalEditClient({ clientCharges }) {
                             type="text"
                             title="neighbourhood"
                             id="neighbourhood"
-                            placeholder="Digite o bairro do cliente"
+                            placeholder={autocomplete.bairro}
                             {...register("bairro")}
                             value={dadosParaAtualizar.bairro}
                             onChange={(e) => {
@@ -229,7 +277,7 @@ function ModalEditClient({ clientCharges }) {
                             type="text"
                             title="city"
                             id="city"
-                            placeholder="Digite a cidade do cliente"
+                            placeholder={autocomplete.cidade}
                             {...register("cidade")}
                             value={dadosParaAtualizar.cidade}
                             onChange={(e) => {
@@ -249,7 +297,7 @@ function ModalEditClient({ clientCharges }) {
                             type="text"
                             title="complement"
                             id="complement"
-                            placeholder="Digite o complemento do cliente"
+                            placeholder={autocomplete.complemento}
                             {...register("complemento")}
                             value={dadosParaAtualizar.complemento}
                             onChange={(e) => {
@@ -267,7 +315,7 @@ function ModalEditClient({ clientCharges }) {
                             type="text"
                             title="reference"
                             id="reference"
-                            placeholder="Digite um ponto de referência"
+                            placeholder={autocomplete.referencia}
                             {...register("referencia")}
                             value={dadosParaAtualizar.referencia}
                             onChange={(e) => {

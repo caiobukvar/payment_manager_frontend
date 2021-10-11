@@ -47,8 +47,6 @@ function AddCharges() {
         setValueModalAddCharges(false);
     }
 
-    const [inputValue, setInputValue] = useState('');
-
     const handleChange = (e) => {
         console.log(e.target.value);
         setInputValue(e.target.value);
@@ -60,12 +58,19 @@ function AddCharges() {
             <div className="items-center">
                 <div className="flex-column mt-lg">
                     <label className="font-md-bold mt-lg mb-md" htmlFor="description">Cliente</label>
-                    <select name="clientes" id="clientes" className="input-select" value={inputValue} onChange={handleChange}>,
+                    <select name="clientes"
+                        id="clientes"
+                        className="input-select"
+                        key={newCharge}
+                        value={newCharge}
+                        onChange={handleChange}
+                        {...register("cliente", { required: true })}
+                    >
                         {clientArray.map((client) => (
                             <option
                                 value={client.id}
+                                key={client.id}
                                 placeholder={client.nome}
-                                {...register("cliente", { required: true })}
                                 onChange={(e) => {
                                     setNewCharge({
                                         ...newCharge,
@@ -147,8 +152,7 @@ function AddCharges() {
                             newCharge.cliente &&
                             newCharge.descricao &&
                             newCharge.status &&
-                            newCharge.valor &&
-                            newCharge.vencimento
+                            newCharge.valor
                         )
                             ? <button type="submit" className="btn-pink-bright-client ml-md enabled">
                                 Criar cobrança

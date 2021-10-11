@@ -53,7 +53,7 @@ function Charges() {
                     />
                     :
                     <div className="mt-xxl">
-                        <h2 className="position-left">{'//'} ADICIONAR COBRANÇA</h2>
+                        <h2 className="position-left">{'//'} CRIAR COBRANÇA</h2>
                         <AddCharges />
                     </div>
                 )
