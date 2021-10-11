@@ -98,6 +98,7 @@ function ModalEditClient() {
 
         if (response.ok) {
             toast.success("Cliente atualizado com sucesso!");
+            setValueModalEditClient(false);
             history.push('/client');
         }
         else {

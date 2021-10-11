@@ -1,10 +1,42 @@
+import React, { useContext, useEffect, useState } from 'react';
+
 import './styles.css';
-import React from 'react';
+
 import CloseIcon from '../../assets/close-icon.svg';
 import MailIcon from '../../assets/mail.svg';
 import PhoneIcon from '../../assets/phone.svg';
 
-function ClientDetails({ clientCharges, setModalClientDetails }) {
+import AuthContext from '../../contexts/AuthContext';
+
+function ClientDetails({ setModalClientDetails }) {
+    const { token } = useContext(AuthContext);
+
+    const id = localStorage.getItem('client-id', id)
+    console.log("id:", id)
+
+    const [infoForClientDetails, setInfoForClientDetails] = useState('');
+
+    useEffect(() => {
+        async function ClientInfo(id) {
+            const response = await fetch(`https://paymentmanager-api.herokuapp.com/getBillings?id=${id}`,
+                {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+            const clientInfo = await response.json();
+
+            if (response.ok) {
+                setInfoForClientDetails(clientInfo)
+                console.log("info da request getBillings?id=${id}", infoForClientDetails);
+                console.log("array de info, pos 1:", infoForClientDetails[1]);
+            }
+        }
+        ClientInfo(id);
+    }, []);
+
 
     return (
         <div className="modal">
@@ -66,8 +98,8 @@ function ClientDetails({ clientCharges, setModalClientDetails }) {
                 </div>
                 <div className="flex-row half-width mt-xl">
                     <div className="flex-column full-width pad-md content-center items-center">
-                        {(Array.isArray(clientCharges)
-                            ? clientCharges.map((charge) => {
+                        {(Array.isArray(infoForClientDetails)
+                            ? infoForClientDetails.map((charge) => {
                                 <div className="box-shadow-charges pad-card charge-card flex-row" key={charge.id}>
                                     <div className="flex-column space-between">
                                         <span>`${charge.id} + descricao cobranca`</span>
