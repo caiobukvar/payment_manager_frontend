@@ -15,6 +15,12 @@ function ChargesTable() {
     function handleOpenCharge() {
         return;
     }
+    const dataFormatada =
+        (vencimento) => {
+            let data = new Date(vencimento);
+            data.setHours(data.getHours() + 3)
+            return new Date(data).toLocaleDateString('pt-br')
+        }
 
     return (
         <div className="flex-column content-center mt-large">
@@ -49,7 +55,7 @@ function ChargesTable() {
                                 }>{charge.status}</span>
                             </div>
                             <div className="flex-row items-center flex-bar" >
-                                <span>{charge.vencimento}</span>
+                                <span>{dataFormatada(charge.vencimento)}</span>
                             </div>
                         </div>
                     </div>

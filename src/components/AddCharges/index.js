@@ -8,11 +8,14 @@ import AuthContext from '../../contexts/AuthContext';
 import useClientData from '../../hooks/useClientData';
 
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router';
 
 
 function AddCharges() {
     const { setValueModalAddCharges } = useContext(AddChargeModalContext);
     const { token } = useContext(AuthContext);
+
+    const history = useHistory();
 
     const { clientArray } = useClientData();
 
@@ -45,7 +48,7 @@ function AddCharges() {
 
         if (response.ok) {
             toast.success("Cobrança cadastrada!");
-            setValueModalAddCharges(false);
+            history.push("/charges")
         }
 
     };

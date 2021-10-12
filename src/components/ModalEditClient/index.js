@@ -136,9 +136,9 @@ function ModalEditClient() {
                         type="text"
                         title="name"
                         id="name"
-                        placeholder={autocomplete.nome}
+                        placeholder=""
                         {...register("nome", { required: true })}
-                        value={dadosParaAtualizar.nome}
+                        value={autocomplete.nome}
                         onChange={(e) => {
                             setDadosParaAtualizar({
                                 ...dadosParaAtualizar,
