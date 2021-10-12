@@ -8,28 +8,20 @@ import DatePicker from '@mui/lab/DatePicker';
 
 function CalendarInput({ newCharge, setNewCharge }) {
     const { register } = useForm();
+    const [value, setValue] = useState(null);
 
     return (
         <div className="flex-column">
             <label htmlFor="vencimento" className="font-md-bold">Vencimento</label>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DatePicker
-                    renderInput={(params) =>
-                        <TextField
-                            {...register('vencimento', { required: true })}
-                            value="vencimento"
-                            placeholder=""
-                            id="vencimento"
-                            onChange={(e) => {
-                                setNewCharge({
-                                    ...newCharge,
-                                    vencimento: e.target.value
-                                })
-                            }}
-                            {...params}
-                        />}
-                />
-            </LocalizationProvider>
+            <DatePicker
+                label="Vencimento"
+                value={value}
+                onChange={(newValue) => {
+                    setValue(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+            />
+
         </div>
 
     );

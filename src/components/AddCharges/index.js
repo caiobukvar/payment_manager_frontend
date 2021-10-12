@@ -2,16 +2,23 @@ import './styles.css';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import CalendarInput from '../CalendarInput';
+import TextField from '@mui/material/TextField';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
 
 import AddChargeModalContext from '../../contexts/AddChargeModalContext';
+import AuthContext from '../../contexts/AuthContext';
+
 import useClientData from '../../hooks/useClientData';
 
 
 function AddCharges() {
     const { setValueModalAddCharges } = useContext(AddChargeModalContext);
+    const { token } = useContext(AuthContext);
 
     const { clientArray } = useClientData();
+    const [value, setValue] = useState(null);
     const { register, handleSubmit } = useForm();
 
     const [newCharge, setNewCharge] = useState({
@@ -21,6 +28,7 @@ function AddCharges() {
         valor: "",
         vencimento: ""
     });
+    console.log(newCharge)
 
     async function addCharge(newCharge) {
 
@@ -122,7 +130,7 @@ function AddCharges() {
                             pago
                         </option>
                         <option
-                            value="pendente"
+                            value="Pendente"
                             key="pendente"
                             placeholder="pendente"
                         >
@@ -136,7 +144,7 @@ function AddCharges() {
                     <div className="flex-column">
                         <label className="font-md-bold mt-lg" htmlFor="valor">Valor</label>
                         <input
-                            type="text"
+                            type="number"
                             name="valor"
                             placeholder="Insira o valor"
                             id="valor"
@@ -152,12 +160,26 @@ function AddCharges() {
 
                     </div>
                     {/* COMPONENTE DE CALENDÁRIO - MES/DIA/ANO */}
+
                     <div className="flex-column ml-lg mt-custom">
-                        <CalendarInput
-                            register
-                            newCharge
-                            setNewCharge
-                        />
+                        <label htmlFor="vencimento" className="font-md-bold">Vencimento</label>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                value={value}
+                                onChange={(newValue) => {
+                                    setValue(newValue);
+                                }}
+
+                                renderInput={(params) => <TextField
+                                    {...params}
+                                    id="vencimento"
+                                    name="vencimento"
+                                    {...register("vencimento", {
+                                        required: true
+                                    })}
+                                />}
+                            />
+                        </LocalizationProvider>
                     </div>
                 </div>
                 <div className="flex-row mt-xl ml-xxl">
