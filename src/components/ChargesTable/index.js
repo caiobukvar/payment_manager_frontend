@@ -6,6 +6,9 @@ import ChargeContext from '../../contexts/ChargeContext';
 function ChargesTable() {
     const { chargesList } = useContext(ChargeContext);
     const { setValueModalAddCharges } = useContext(AddChargeModalContext);
+
+
+
     function handleOpenAddCharge() {
         setValueModalAddCharges(true);
     }

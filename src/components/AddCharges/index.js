@@ -2,15 +2,12 @@ import './styles.css';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import TextField from '@mui/material/TextField';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
-
 import AddChargeModalContext from '../../contexts/AddChargeModalContext';
 import AuthContext from '../../contexts/AuthContext';
 
 import useClientData from '../../hooks/useClientData';
+
+import { toast } from 'react-toastify';
 
 
 function AddCharges() {
@@ -18,7 +15,7 @@ function AddCharges() {
     const { token } = useContext(AuthContext);
 
     const { clientArray } = useClientData();
-    const [value, setValue] = useState(null);
+
     const { register, handleSubmit } = useForm();
 
     const [newCharge, setNewCharge] = useState({
@@ -28,6 +25,7 @@ function AddCharges() {
         valor: "",
         vencimento: ""
     });
+
     console.log(newCharge)
 
     async function addCharge(newCharge) {
@@ -44,8 +42,10 @@ function AddCharges() {
 
         const chargeData = await response.json();
         console.log(chargeData);
+
         if (response.ok) {
             toast.success("Cobrança cadastrada!");
+            setValueModalAddCharges(false);
         }
 
     };
@@ -53,10 +53,6 @@ function AddCharges() {
     function handleReturn() {
         setValueModalAddCharges(false);
     }
-
-
-
-
 
     return (
         <form onSubmit={handleSubmit(addCharge)} className="form-borderless-charges" >
@@ -68,7 +64,7 @@ function AddCharges() {
                         name="cliente"
                         placeholder=""
                         id="cliente"
-                        className="input-select"
+                        className="input-select padY-sm"
                         {...register("cliente", { required: true })}
                         onChange={(e) => {
                             setNewCharge({
@@ -77,6 +73,7 @@ function AddCharges() {
                             })
                         }}
                     >
+                        <option value=""></option>
                         {clientArray.map((client) => (
                             <option
                                 value={client.id}
@@ -112,7 +109,7 @@ function AddCharges() {
                         name="status"
                         placeholder="status"
                         id="status"
-                        className="input-select"
+                        className="input-select padY-sm"
                         {...register("status", { required: true })}
                         onChange={(e) => {
                             setNewCharge({
@@ -159,27 +156,22 @@ function AddCharges() {
                         />
 
                     </div>
-                    {/* COMPONENTE DE CALENDÁRIO - MES/DIA/ANO */}
-
-                    <div className="flex-column ml-lg mt-custom">
-                        <label htmlFor="vencimento" className="font-md-bold">Vencimento</label>
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DatePicker
-                                value={value}
-                                onChange={(newValue) => {
-                                    setValue(newValue);
-                                }}
-
-                                renderInput={(params) => <TextField
-                                    {...params}
-                                    id="vencimento"
-                                    name="vencimento"
-                                    {...register("vencimento", {
-                                        required: true
-                                    })}
-                                />}
-                            />
-                        </LocalizationProvider>
+                    <div className="flex-column ml-lg">
+                        <label htmlFor="vencimento" className="font-md-bold mt-lg">Vencimento</label>
+                        <input
+                            type='date'
+                            name="vencimento"
+                            className="input-charges-large input-vencimento pad-vencimento mt-md"
+                            {...register("vencimento", { required: true })}
+                            onChange={(e) => {
+                                let data = new Date(e.target.value);
+                                data.setHours(data.getHours() + 3)
+                                setNewCharge({
+                                    ...newCharge,
+                                    vencimento: new Date(data).toLocaleDateString('pt-br')
+                                })
+                            }}
+                        />
                     </div>
                 </div>
                 <div className="flex-row mt-xl ml-xxl">
@@ -202,7 +194,7 @@ function AddCharges() {
                     }
                 </div>
             </div>
-        </form>
+        </form >
     );
 }
 
