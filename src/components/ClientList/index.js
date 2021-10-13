@@ -25,6 +25,7 @@ function ClientList({ handleLoadClientCharges }) {
     function handleClick(client) {
         handleLoadClientCharges(client.id);
         setClientInformation(client);
+        localStorage.setItem('client-id', client.id);
         setModalClientDetails(true);
     }
 

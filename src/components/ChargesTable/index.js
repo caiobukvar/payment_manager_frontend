@@ -37,8 +37,8 @@ function ChargesTable() {
                 {chargesList.map((charge) => (
                     <div className="flex-column list-padding white-bg" onClick={handleOpenCharge} key={charge.id} >
                         <div className="flex-row white-bg enabled">
-                            <div className="flex-column content-center flex-bar gap-sm" >
-                                <h3 className="font-md-bold">{`# ${charge.id}`}</h3>
+                            <div className="flex-column content-center flex-bar" >
+                                <h3 className="font-md-custom gray">{`# ${charge.id}`}</h3>
                             </div>
                             <div className="flex-row items-center flex-bar">
                                 <span>{charge.nome}</span>
@@ -53,7 +53,7 @@ function ChargesTable() {
                                 <span className={
                                     `${charge.status}` === "pendente" ? "blue" : `${charge.status}` === "pago" ? "green" : `${charge.status}` === "vencida" ? "red" : ''
                                 }>
-                                    {charge.status}
+                                    <p>{(charge.status).toUpperCase()}</p>
                                 </span>
                             </div>
                             <div className="flex-row items-center flex-bar" >
