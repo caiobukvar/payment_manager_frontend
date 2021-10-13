@@ -38,31 +38,6 @@ function ModalEditClient() {
         UserClientInfo(id);
     }, []);
 
-
-
-    let cepWatch = watch('cep', '');
-
-    useEffect(() => {
-        if (cepWatch.length >= 8) {
-            console.log(cepWatch)
-            handleAutoCompleteAdress();
-        }
-    }, [cepWatch]);
-
-    async function handleAutoCompleteAdress() {
-        try {
-            const response = await fetch(`https://viacep.com.br/ws/${cepWatch}/json/`);
-            const { logradouro, bairro, localidade } = await response.json();
-            console.log({ logradouro, bairro, localidade })
-            setValue('logradouro', logradouro);
-            setValue('bairro', bairro);
-            setValue('cidade', localidade);
-        } catch (error) {
-            toast.error('Digite um CEP válido!');
-            setError('');
-        }
-    }
-
     const [dadosParaAtualizar, setDadosParaAtualizar] = useState({
         nome: '',
         email: '',
@@ -75,7 +50,6 @@ function ModalEditClient() {
         cidade: '',
         referencia: ''
     });
-
 
 
     async function updateClientData(dadosParaAtualizar) {
@@ -154,7 +128,7 @@ function ModalEditClient() {
                         id="email"
                         placeholder={autocomplete.email}
                         {...register("email", { required: true })}
-                        value={dadosParaAtualizar.email}
+                        value={autocomplete.email}
                         onChange={(e) => {
                             setDadosParaAtualizar({
                                 ...dadosParaAtualizar,
@@ -175,7 +149,7 @@ function ModalEditClient() {
                             id="cpf"
                             placeholder={autocomplete.cpf}
                             {...register("cpf", { required: true })}
-                            value={dadosParaAtualizar.cpf}
+                            value={autocomplete.cpf}
                             maxLength="14"
                             onChange={(e) => {
                                 setDadosParaAtualizar({
@@ -198,7 +172,7 @@ function ModalEditClient() {
                             id="phone"
                             placeholder={autocomplete.telefone}
                             {...register("telefone", { required: true })}
-                            value={dadosParaAtualizar.telefone}
+                            value={autocomplete.telefone}
                             maxLength="15"
                             onChange={(e) => {
                                 setDadosParaAtualizar({
@@ -223,13 +197,10 @@ function ModalEditClient() {
                             id="CEP"
                             placeholder={autocomplete.cep}
                             {...register("cep")}
-                            value={dadosParaAtualizar.cep}
+                            value={autocomplete.cep}
                             maxLength="8"
                             onChange={(e) => {
-                                setDadosParaAtualizar({
-                                    ...dadosParaAtualizar,
-                                    cep: e.target.value
-                                })
+                                setCep(e.target.value);
                             }}
                         />
                     </div>
@@ -242,7 +213,7 @@ function ModalEditClient() {
                             id="adress"
                             placeholder={autocomplete.logradouro}
                             {...register("logradouro")}
-                            value={dadosParaAtualizar.logradouro}
+                            value={autocomplete.logradouro}
                             onChange={(e) => {
                                 setDadosParaAtualizar({
                                     ...dadosParaAtualizar,
@@ -262,7 +233,7 @@ function ModalEditClient() {
                             id="neighbourhood"
                             placeholder={autocomplete.bairro}
                             {...register("bairro")}
-                            value={dadosParaAtualizar.bairro}
+                            value={autocomplete.bairro}
                             onChange={(e) => {
                                 setDadosParaAtualizar({
                                     ...dadosParaAtualizar,
@@ -280,7 +251,7 @@ function ModalEditClient() {
                             id="city"
                             placeholder={autocomplete.cidade}
                             {...register("cidade")}
-                            value={dadosParaAtualizar.cidade}
+                            value={autocomplete.cidade}
                             onChange={(e) => {
                                 setDadosParaAtualizar({
                                     ...dadosParaAtualizar,
@@ -300,7 +271,7 @@ function ModalEditClient() {
                             id="complement"
                             placeholder={autocomplete.complemento}
                             {...register("complemento")}
-                            value={dadosParaAtualizar.complemento}
+                            value={autocomplete.complemento}
                             onChange={(e) => {
                                 setDadosParaAtualizar({
                                     ...dadosParaAtualizar,
@@ -318,7 +289,7 @@ function ModalEditClient() {
                             id="reference"
                             placeholder={autocomplete.referencia}
                             {...register("referencia")}
-                            value={dadosParaAtualizar.referencia}
+                            value={autocomplete.referencia}
                             onChange={(e) => {
                                 setDadosParaAtualizar({
                                     ...dadosParaAtualizar,

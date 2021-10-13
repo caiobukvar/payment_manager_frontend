@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./styles.css";
 import ModalEditClientContext from "../../contexts/ModalEditClientContext";
 import AddClientModalContext from "../../contexts/AddClientModalContext";
@@ -7,26 +7,26 @@ import AddClientModalContext from "../../contexts/AddClientModalContext";
 import editIcon from '../../assets/edit.svg'
 import phoneIcon from '../../assets/phone.svg'
 import mailIcon from '../../assets/mail.svg'
+import useClientData from "../../hooks/useClientData";
+import ClientDetails from "../ClientDetails";
 
 
-function ClientList({ userClientList, handleLoadClientCharges, setModalClientDetails }) {
+function ClientList({ handleLoadClientCharges }) {
     const { setValueModalEditClient } = useContext(ModalEditClientContext);
     const { setValueModalAddClient } = useContext(AddClientModalContext);
+    const [modalClientDetails, setModalClientDetails] = useState(false);
+    const { clientArray } = useClientData();
 
-
-    function handleStorage(id) {
-        localStorage.setItem('client-id', id)
-    }
+    const [clientInformation, setClientInformation] = useState();
 
     function handleAddClient() {
         setValueModalAddClient(true);
     }
-
-    function handleClientDetailsModal() {
+    function handleClick(client) {
+        handleLoadClientCharges(client.id);
+        setClientInformation(client);
         setModalClientDetails(true);
     }
-
-
 
     return (
         <>
@@ -39,9 +39,9 @@ function ClientList({ userClientList, handleLoadClientCharges, setModalClientDet
                     <p className="flex-basis">Cobranças Recebidas</p>
                     <p className="flex-basis">Status</p>
                 </div>
-                {userClientList.map(client => (
+                {clientArray.map(client => (
                     <div className="flex-row list-padding white-bg mb-md" key={client.id} >
-                        <div className="flex-column client-box content-center flex-basis enabled" onClick={() => { handleLoadClientCharges(client.id), handleClientDetailsModal }}>
+                        <div className="flex-column client-box content-center flex-basis enabled" onClick={() => handleClick(client)}>
                             <h3 className="font-md-bold">{client.nome}</h3>
                             <div className="flex-row items-center gap-xs">
                                 <img src={mailIcon} alt="mail-icon" />
@@ -53,25 +53,41 @@ function ClientList({ userClientList, handleLoadClientCharges, setModalClientDet
                             </div>
                         </div>
                         <div className="flex-row items-center flex-basis">
-                            <p>R$ {client.valortotalcobrancasfeitas}</p>
+                            <p>{parseFloat(client.valortotalcobrancasfeitas)}</p>
                         </div>
                         <div className="flex-row items-center flex-basis">
-                            <p>R$ 00.000,00</p>
+                            <p>{parseFloat(client.valortotalcobrancaspagas).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                         </div>
-                        <div className={`flex-row items-center flex-basis ${client.status === "inadimplente" ? "red" : "green"}`} >
-                            <p className="green">{client.status === "inadimplente" ? "INADIMPLENTE" : "EM DIA"}</p>
+                        <div className="flex-row items-center flex-basis" >
+                            {((client.valortotalcobrancasfeitas || 0) - (client.valortotalcobrancaspagas || 0) === 0) ?
+                                (<p className="green">
+                                    EM DIA
+                                </p>)
+                                :
+                                (<p className="red">
+                                    INADIMPLENTE
+                                </p>)
+                            }
+
                         </div>
                         <div className="flex-row items-center flex-basis" >
                             <img
                                 src={editIcon}
                                 alt="edit-icon"
                                 className="enabled"
-                                onClick={() => { handleStorage(client.id), setValueModalEditClient(true) }}
+                                onClick={() => { setClientInformation(client), setValueModalEditClient(true) }}
                             />
                         </div>
                     </div>
                 ))}
             </div>
+            {modalClientDetails &&
+                <ClientDetails
+                    clientInformation={clientInformation}
+                    modalClientDetails={modalClientDetails}
+                    setModalClientDetails={setModalClientDetails}
+                    handleLoadClientCharges={handleLoadClientCharges}
+                />}
         </>
     );
 }

@@ -34,7 +34,6 @@ function Charges() {
                 setChargesList([]);
                 setIsLoading(false);
             }
-
         }
         loadAllUserBillings();
     }, []);

@@ -32,7 +32,6 @@ function AddCharges() {
     console.log(newCharge)
 
     async function addCharge(newCharge) {
-
         const response = await fetch("https://paymentmanager-api.herokuapp.com/registerBilling",
             {
                 method: "POST",
@@ -48,6 +47,7 @@ function AddCharges() {
 
         if (response.ok) {
             toast.success("Cobrança cadastrada!");
+            setValueModalAddCharges(false);
             history.push("/charges")
         }
 
@@ -121,7 +121,7 @@ function AddCharges() {
                             })
                         }}
                     >
-                        <option disabled selected value>selecione um status</option>
+                        <option disabled value="">selecione um status</option>
                         <option
                             value="pago"
                             key="pago"

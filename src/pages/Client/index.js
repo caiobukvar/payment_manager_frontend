@@ -5,11 +5,10 @@ import { CircularProgress } from '@mui/material';
 
 import FormClient from '../../components/FormClient';
 import ClientList from '../../components/ClientList';
-import ClientDetails from '../../components/ClientDetails';
+
 
 import AuthContext from '../../contexts/AuthContext';
 import AddClientModalContext from '../../contexts/AddClientModalContext';
-import ModalEditClientContext from '../../contexts/ModalEditClientContext';
 
 import CloseIcon from '../../assets/close-icon.svg';
 import useClientData from '../../hooks/useClientData';
@@ -17,12 +16,11 @@ import useClientData from '../../hooks/useClientData';
 
 function Client() {
     const [clientCharges, setClientCharges] = useState();
-    const [modalClientDetails, setModalClientDetails] = useState(false);
-    const { setValueModalEditClient } = useContext(ModalEditClientContext);
     const { clientArray, isLoading } = useClientData();
 
     const { token } = useContext(AuthContext);
     const { valueModalAddClient, setValueModalAddClient } = useContext(AddClientModalContext);
+
 
     // Pegar info COBRANÇAS no CLIENTE
     async function handleLoadClientCharges(id) {
@@ -36,9 +34,8 @@ function Client() {
             });
 
         const data = await response.json();
-
+        console.log("handleLoadClientCharges data", data)
         setClientCharges(data);
-        setModalClientDetails(true);
     }
 
     return (
@@ -51,6 +48,8 @@ function Client() {
             {
                 !isLoading && (clientArray.length > 0 ?
                     <ClientList
+                        modalClientDetails
+                        setModalClientDetails
                         userClientList={clientArray}
                         handleLoadClientCharges={handleLoadClientCharges}
                     /> :
@@ -60,11 +59,6 @@ function Client() {
                     </div>
                 )
             }
-            {modalClientDetails &&
-                <ClientDetails
-                    modalClientDetails={modalClientDetails}
-                    setModalClientDetails={setModalClientDetails}
-                />}
             {valueModalAddClient &&
                 <div className="modal">
                     <div className="modal-content">

@@ -43,16 +43,18 @@ function ChargesTable() {
                             <div className="flex-row items-center flex-bar">
                                 <span>{charge.nome}</span>
                             </div>
-                            <div className="flex-row items-center flex-bar">
+                            <div className="flex-row items-center flex-bar description" id="overflow">
                                 <span>{charge.descricao}</span>
                             </div>
                             <div className="flex-row items-center flex-bar">
-                                <span>{`R$ ${charge.valor}`}</span>
+                                <span>{parseFloat(charge.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                             </div>
                             <div className="flex-row items-center flex-bar" >
                                 <span className={
-                                    `${charge.status}` === "Pendente" ? "blue" : `${charge.status}` === "Vencida" ? "red" : `${charge.status}` === "pago" ? "green" : ''
-                                }>{charge.status}</span>
+                                    `${charge.status}` === "pendente" ? "blue" : `${charge.status}` === "pago" ? "green" : `${charge.status}` === "vencida" ? "red" : ''
+                                }>
+                                    {charge.status}
+                                </span>
                             </div>
                             <div className="flex-row items-center flex-bar" >
                                 <span>{dataFormatada(charge.vencimento)}</span>
