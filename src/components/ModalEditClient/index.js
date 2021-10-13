@@ -8,10 +8,11 @@ import './styles.css';
 import CloseIcon from '../../assets/close-icon.svg';
 import AuthContext from '../../contexts/AuthContext';
 import ModalEditClientContext from '../../contexts/ModalEditClientContext';
+import useClientData from '../../hooks/useClientData';
 
 function ModalEditClient() {
+  const { UserClientInfo } = useClientData();
   const [errorEmail, setErrorEmail] = useState('');
-  const [autocomplete, setAutocomplete] = useState('');
   const { token } = useContext(AuthContext);
   const { setValueModalEditClient } = useContext(ModalEditClientContext);
   const [dadosParaAtualizar, setDadosParaAtualizar] = useState({
@@ -52,7 +53,7 @@ function ModalEditClient() {
   }, []);
 
 
-  async function updateClientData(dadosParaAtualizar) {
+  async function updateClientData() {
     dadosParaAtualizar.telefone.replace(/[^0-9]/g, '');
     dadosParaAtualizar.cpf.replace(/[^0-9]/g, '');
     dadosParaAtualizar.cep.replace(/[^0-9]/g, '');
@@ -68,11 +69,10 @@ function ModalEditClient() {
       });
 
     const clientListResponse = await response.json();
-
     if (response.ok) {
       toast.success("Cliente atualizado com sucesso!");
+      await UserClientInfo();
       setValueModalEditClient(false);
-      history.push('/client');
     }
     else {
       const err = true;
@@ -109,7 +109,7 @@ function ModalEditClient() {
             type="text"
             title="name"
             id="name"
-            placeholder=""
+            placeholder="Nome"
             {...register("nome", { required: true })}
             value={dadosParaAtualizar.nome}
             onChange={(e) => {
