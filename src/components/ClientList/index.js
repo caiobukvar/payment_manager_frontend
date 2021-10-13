@@ -54,7 +54,7 @@ function ClientList({ handleLoadClientCharges }) {
                             </div>
                         </div>
                         <div className="flex-row items-center flex-basis">
-                            <p>{parseFloat(client.valortotalcobrancasfeitas)}</p>
+                            <p>{parseFloat(client.valortotalcobrancasfeitas).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                         </div>
                         <div className="flex-row items-center flex-basis">
                             <p>{parseFloat(client.valortotalcobrancaspagas).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
