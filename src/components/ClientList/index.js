@@ -84,7 +84,7 @@ function ClientList({ handleLoadClientCharges }) {
             </div>
             {modalClientDetails &&
                 <ClientDetails
-                    clientInformation={clientInformation}
+                    clientId={clientInformation.id}
                     modalClientDetails={modalClientDetails}
                     setModalClientDetails={setModalClientDetails}
                     handleLoadClientCharges={handleLoadClientCharges}

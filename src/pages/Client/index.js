@@ -15,64 +15,63 @@ import useClientData from '../../hooks/useClientData';
 
 
 function Client() {
-    const [clientCharges, setClientCharges] = useState();
-    const { clientArray, isLoading } = useClientData();
+  const [clientCharges, setClientCharges] = useState();
+  const { clientArray, isLoading } = useClientData();
 
-    const { token } = useContext(AuthContext);
-    const { valueModalAddClient, setValueModalAddClient } = useContext(AddClientModalContext);
+  const { token } = useContext(AuthContext);
+  const { valueModalAddClient, setValueModalAddClient } = useContext(AddClientModalContext);
 
 
-    // Pegar info COBRANÇAS no CLIENTE
-    async function handleLoadClientCharges(id) {
-        const response = await fetch(`https://paymentmanager-api.herokuapp.com/getBillings?id=${id}`,
-            {
-                method: 'GET',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            });
+  // Pegar info COBRANÇAS no CLIENTE
+  async function handleLoadClientCharges(id) {
+    const response = await fetch(`https://paymentmanager-api.herokuapp.com/getBillings?id=${id}`,
+      {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      });
 
-        const data = await response.json();
-        console.log("handleLoadClientCharges data", data)
-        setClientCharges(data);
-    }
+    const data = await response.json();
+    setClientCharges(data);
+  }
 
-    return (
-        <div className="flex-column content-center mt-large">
-            {isLoading &&
-                <div className="modal-circular" >
-                    <CircularProgress color="secondary" />
-                </div>
-            }
-            {
-                !isLoading && (clientArray.length > 0 ?
-                    <ClientList
-                        modalClientDetails
-                        setModalClientDetails
-                        userClientList={clientArray}
-                        handleLoadClientCharges={handleLoadClientCharges}
-                    /> :
-                    <div>
-                        <h2 className="position-left">{'//'} ADICIONAR CLIENTE</h2>
-                        <FormClient />
-                    </div>
-                )
-            }
-            {valueModalAddClient &&
-                <div className="modal">
-                    <div className="modal-content">
-                        <FormClient />
-                        <img src={CloseIcon}
-                            alt="close-icon"
-                            className="modal-close-icon"
-                            onClick={() => { setValueModalAddClient(false) }}
-                        />
-                    </div>
-                </div>
-            }
+  return (
+    <div className="flex-column content-center mt-large">
+      {isLoading &&
+        <div className="modal-circular" >
+          <CircularProgress color="secondary" />
         </div>
-    );
+      }
+      {
+        !isLoading && (clientArray.length > 0 ?
+          <ClientList
+            modalClientDetails
+            setModalClientDetails
+            userClientList={clientArray}
+            handleLoadClientCharges={handleLoadClientCharges}
+          /> :
+          <div>
+            <h2 className="position-left">{'//'} ADICIONAR CLIENTE</h2>
+            <FormClient />
+          </div>
+        )
+      }
+      {valueModalAddClient &&
+        <div className="modal">
+          <div className="modal-content">
+            <FormClient />
+            <img src={CloseIcon}
+              alt="close-icon"
+              className="modal-close-icon"
+              onClick={() => { setValueModalAddClient(false) }}
+            />
+          </div>
+        </div>
+      }
+    </div>
+  );
 }
 
 export default Client;
