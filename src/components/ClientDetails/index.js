@@ -11,7 +11,7 @@ function ClientDetails({ setModalClientDetails, clientId }) {
 
   const [loading, setLoading] = useState(false);
   const [customerData, setCustomerData] = useState([]);
-  const [clientData, setClientData] = useState([]);
+  const [clientData, setClientData] = useState({});
 
   useEffect(() => {
     try {
@@ -47,7 +47,7 @@ function ClientDetails({ setModalClientDetails, clientId }) {
           logradouro,
           complemento,
           referencia
-        } = data[0];
+        } = data;
 
         const clientDetails = {
           nome,

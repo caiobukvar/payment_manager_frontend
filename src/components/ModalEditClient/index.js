@@ -46,7 +46,7 @@ function ModalEditClient() {
         });
       const clientData = await response.json();
       if (response.ok) {
-        setDadosParaAtualizar(clientData[0]);
+        setDadosParaAtualizar(clientData);
       }
     }
     UserClientInfo(id);
