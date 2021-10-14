@@ -199,7 +199,10 @@ function ModalEditClient() {
               value={dadosParaAtualizar.cep}
               maxLength="8"
               onChange={(e) => {
-                setCep(e.target.value);
+                setDadosParaAtualizar({
+                  ...dadosParaAtualizar,
+                  cep: e.target.value
+                })
               }}
             />
           </div>

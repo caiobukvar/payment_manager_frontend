@@ -20,6 +20,7 @@ import ModalEditClientContext from './contexts/ModalEditClientContext';
 import AddClientModalContext from './contexts/AddClientModalContext';
 import AddChargeModalContext from './contexts/AddChargeModalContext';
 import ChargeContext from './contexts/ChargeContext';
+import EditChargeModalContext from './contexts/EditChargeModalContext';
 
 
 
@@ -33,11 +34,11 @@ function ProtectedRoutes(props) {
 
 function Routes() {
   const [value, setValue] = useState(false);
-  const [valueModalEditClient, setValueModalEditClient] = useState(false);
   const [valueModalAddClient, setValueModalAddClient] = useState(false);
   const [valueModalAddCharges, setValueModalAddCharges] = useState(false);
+  const [valueModalEditClient, setValueModalEditClient] = useState(false);
+  const [valueModalEditCharges, setValueModalEditCharges] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
   const [chargesList, setChargesList] = useState('');
 
   const [userInfo, setUserInfo] = useState(() => {
@@ -81,13 +82,17 @@ function Routes() {
                           <ChargeContext.Provider
                             value={{ chargesList, setChargesList }}
                           >
-                            <Layout>
-                              <Route path="/" exact component={Main} />
+                            <EditChargeModalContext.Provider
+                              value={{ valueModalEditCharges, setValueModalEditCharges }}
+                            >
+                              <Layout>
+                                <Route path="/" exact component={Main} />
 
-                              <Route path="/client" component={Client} />
+                                <Route path="/client" component={Client} />
 
-                              <Route path="/charges" component={Charges} />
-                            </Layout>
+                                <Route path="/charges" component={Charges} />
+                              </Layout>
+                            </EditChargeModalContext.Provider>
                           </ChargeContext.Provider>
                         </ClientDataContextProvider>
                       </AddChargeModalContext.Provider>

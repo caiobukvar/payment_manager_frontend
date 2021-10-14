@@ -1,20 +1,25 @@
 import './styles.css';
 import { useContext } from 'react';
+
 import AddChargeModalContext from '../../contexts/AddChargeModalContext';
+import EditChargeModalContext from '../../contexts/EditChargeModalContext';
 import ChargeContext from '../../contexts/ChargeContext';
+
+import ModalEditCharges from '../../components/ModalEditCharges';
 
 function ChargesTable() {
     const { chargesList } = useContext(ChargeContext);
     const { setValueModalAddCharges } = useContext(AddChargeModalContext);
-
-
+    const { valueModalEditCharges, setValueModalEditCharges } = useContext(EditChargeModalContext);
 
     function handleOpenAddCharge() {
         setValueModalAddCharges(true);
     }
-    function handleOpenCharge() {
-        return;
+
+    function handleOpenEditCharge() {
+        setValueModalEditCharges(true);
     }
+
     const dataFormatada =
         (vencimento) => {
             let data = new Date(vencimento);
@@ -35,7 +40,7 @@ function ChargesTable() {
                     <p className="flex-bar">Vencimento</p>
                 </div>
                 {chargesList.map((charge) => (
-                    <div className="flex-column list-padding white-bg" onClick={handleOpenCharge} key={charge.id} >
+                    <div className="flex-column list-padding white-bg" onClick={handleOpenEditCharge} key={charge.id}>
                         <div className="flex-row white-bg enabled">
                             <div className="flex-column content-center flex-bar" >
                                 <h3 className="font-md-custom gray">{`# ${charge.id}`}</h3>
@@ -63,6 +68,13 @@ function ChargesTable() {
                     </div>
                 ))}
             </div>
+            {valueModalEditCharges &&
+                <div className="modal">
+                    <div className="modal-content">
+                        <ModalEditCharges />
+                    </div>
+                </div>
+            }
         </div >
     );
 }

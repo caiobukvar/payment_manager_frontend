@@ -33,7 +33,7 @@ function ClientDetails({ setModalClientDetails, clientId }) {
 
         const data = await response.json();
 
-        if (!data.length) {
+        if (!data) {
           return;
         }
 
@@ -46,7 +46,8 @@ function ClientDetails({ setModalClientDetails, clientId }) {
           cidade,
           logradouro,
           complemento,
-          referencia
+          referencia,
+          cobrancas
         } = data;
 
         const clientDetails = {
@@ -58,12 +59,12 @@ function ClientDetails({ setModalClientDetails, clientId }) {
           cidade,
           logradouro,
           complemento,
-          referencia,
+          referencia
         }
 
         const billings = [];
 
-        for (const billing of data) {
+        for (const billing of cobrancas) {
           billings.push({
             id: billing.id,
             descricao: billing.descricao,
@@ -73,6 +74,7 @@ function ClientDetails({ setModalClientDetails, clientId }) {
           });
         }
 
+        console.log("billings: ", billings);
 
         if (response.ok) {
           setCustomerData(billings);
@@ -157,7 +159,7 @@ function ClientDetails({ setModalClientDetails, clientId }) {
           </div>
           <div className="flex-row half-width mt-xl">
             <div className="flex-column full-width pad-md content-center items-center">
-              {customerData && customerData.map((charge) => {
+              {customerData && customerData.map((charge) => (
                 <div className="box-shadow-charges pad-card charge-card flex-row" key={charge.id}>
                   <div className="flex-column space-between">
                     <span>`"#"${charge.id} ${charge.descricao}`</span>
@@ -168,7 +170,7 @@ function ClientDetails({ setModalClientDetails, clientId }) {
                     <span>{charge.status}</span>
                   </div>
                 </div>
-              })}
+              ))}
             </div>
           </div>
         </div>
@@ -176,4 +178,6 @@ function ClientDetails({ setModalClientDetails, clientId }) {
     </div>
   );
 }
+
+
 export default ClientDetails;

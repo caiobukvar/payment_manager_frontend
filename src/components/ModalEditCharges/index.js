@@ -2,17 +2,20 @@ import './styles.css';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import AddChargeModalContext from '../../contexts/AddChargeModalContext';
+import EditChargeModalContext from '../../contexts/EditChargeModalContext';
 import AuthContext from '../../contexts/AuthContext';
 
 import useClientData from '../../hooks/useClientData';
 
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router';
 
 
-function AddCharges() {
-    const { setValueModalAddCharges } = useContext(AddChargeModalContext);
+function EditCharges() {
+    const { setValueModalEditCharges } = useContext(EditChargeModalContext);
     const { token } = useContext(AuthContext);
+
+    const history = useHistory();
 
     const { clientArray } = useClientData();
 
@@ -26,10 +29,10 @@ function AddCharges() {
         vencimento: ""
     });
 
-    async function addCharge(newCharge) {
+    async function EditCharge(newCharge) {
         const response = await fetch("https://paymentmanager-api.herokuapp.com/registerBilling",
             {
-                method: "POST",
+                method: "PUT",
                 body: JSON.stringify(newCharge),
                 headers: {
                     "Content-Type": "application/json",
@@ -42,16 +45,18 @@ function AddCharges() {
 
         if (response.ok) {
             toast.success("Cobrança cadastrada!");
-            setValueModalAddCharges(false);
+            setValueModalEditCharges(false);
+            history.push("/charges")
         }
+
     };
 
     function handleReturn() {
-        setValueModalAddCharges(false);
+        setValueModalEditCharges(false);
     }
 
     return (
-        <form onSubmit={handleSubmit(addCharge)} className="form-borderless-charges" >
+        <form onSubmit={handleSubmit(EditCharge)} className="form-borderless-charges" >
             <div className="items-center">
                 <div className="flex-column mt-lg">
                     <label className="font-md-bold mt-lg mb-md" htmlFor="description">Cliente</label>
@@ -133,7 +138,6 @@ function AddCharges() {
                     </select>
                 </div>
                 <div className="flex-row">
-                    {/* FORMATAR VALOR - regex: \d{1,3}(?:\.\d{3})*?,\d{2} */}
                     <div className="flex-column">
                         <label className="font-md-bold mt-lg" htmlFor="valor">Valor</label>
                         <input
@@ -170,6 +174,7 @@ function AddCharges() {
                         />
                     </div>
                 </div>
+                {/* ADICIONAR BOTAO PARA CONFIRMAR EXCLUSÃO AQUI */}
                 <div className="flex-row mt-xl ml-xxl">
                     <button className="btn-white-client" onClick={handleReturn}>
                         Cancelar
@@ -182,10 +187,10 @@ function AddCharges() {
                             newCharge.valor
                         )
                             ? <button type="submit" className="btn-pink-bright-client ml-md enabled">
-                                Criar cobrança
+                                Editar cobrança
                             </button>
                             : <button type="submit" className="btn-pink-client ml-md disabled" disabled>
-                                Criar cobrança
+                                Editar cobrança
                             </button>
                     }
                 </div>
@@ -194,4 +199,4 @@ function AddCharges() {
     );
 }
 
-export default AddCharges;
+export default EditCharges;
