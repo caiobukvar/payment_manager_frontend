@@ -2,6 +2,12 @@
     height: 80px;
 }
 
-.pad-card {
-    padding: 20px;
+.custom-scroll {
+    max-height: 400px;
+    overflow-Y: scroll;
+    padding-bottom: 10px;
+}
+
+.items-end {
+    align-items: flex-end;
 }

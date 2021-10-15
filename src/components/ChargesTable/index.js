@@ -41,15 +41,15 @@ function ChargesTable() {
                 </div>
                 {chargesList.map((charge) => (
                     <div className="flex-column list-padding white-bg" onClick={handleOpenEditCharge} key={charge.id}>
-                        <div className="flex-row white-bg enabled">
+                        <div className="flex-row white-bg enabled height-fix">
                             <div className="flex-column content-center flex-bar" >
                                 <h3 className="font-md-custom gray">{`# ${charge.id}`}</h3>
                             </div>
                             <div className="flex-row items-center flex-bar">
                                 <span>{charge.nome}</span>
                             </div>
-                            <div className="flex-row items-center flex-bar description" id="overflow">
-                                <span>{charge.descricao}</span>
+                            <div className="flex-row items-center flex-bar">
+                                <span className="overflow">{charge.descricao}</span>
                             </div>
                             <div className="flex-row items-center flex-bar">
                                 <span>{parseFloat(charge.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>

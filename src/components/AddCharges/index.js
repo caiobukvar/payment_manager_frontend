@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import AddChargeModalContext from '../../contexts/AddChargeModalContext';
 import AuthContext from '../../contexts/AuthContext';
+import ChargeContext from '../../contexts/ChargeContext';
 
 import useClientData from '../../hooks/useClientData';
 
@@ -12,6 +13,7 @@ import { toast } from 'react-toastify';
 
 function AddCharges() {
     const { setValueModalAddCharges } = useContext(AddChargeModalContext);
+    const { chargesList, setChargesList } = useContext(ChargeContext);
     const { token } = useContext(AuthContext);
 
     const { clientArray } = useClientData();
@@ -37,11 +39,11 @@ function AddCharges() {
                 }
             });
 
-        const chargeData = await response.json();
-        console.log(chargeData);
+        const result = await response.json();
 
         if (response.ok) {
             toast.success("Cobrança cadastrada!");
+            setChargesList([...chargesList, ...result]);
             setValueModalAddCharges(false);
         }
     };
@@ -114,7 +116,7 @@ function AddCharges() {
                             })
                         }}
                     >
-                        <option disabled value="">selecione um status</option>
+                        <option value="">selecione um status</option>
                         <option
                             value="pago"
                             key="pago"
@@ -133,7 +135,6 @@ function AddCharges() {
                     </select>
                 </div>
                 <div className="flex-row">
-                    {/* FORMATAR VALOR - regex: \d{1,3}(?:\.\d{3})*?,\d{2} */}
                     <div className="flex-column">
                         <label className="font-md-bold mt-lg" htmlFor="valor">Valor</label>
                         <input

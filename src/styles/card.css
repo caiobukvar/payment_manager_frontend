@@ -24,6 +24,10 @@
     padding: 0px 12px;
 }
 
+.pad-lg {
+    padding: 20px;
+}
+
 .pad-client-details {
     padding: 8px;
 }

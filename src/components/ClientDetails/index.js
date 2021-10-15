@@ -1,5 +1,5 @@
-import { CircularProgress } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
+import { CircularProgress } from '@mui/material';
 import CloseIcon from '../../assets/close-icon.svg';
 import MailIcon from '../../assets/mail.svg';
 import PhoneIcon from '../../assets/phone.svg';
@@ -157,20 +157,28 @@ function ClientDetails({ setModalClientDetails, clientId }) {
               </div>
             </div>
           </div>
-          <div className="flex-row half-width mt-xl">
-            <div className="flex-column full-width pad-md content-center items-center">
-              {customerData && customerData.map((charge) => (
-                <div className="box-shadow-charges pad-card charge-card flex-row" key={charge.id}>
-                  <div className="flex-column space-between">
-                    <span>`"#"${charge.id} ${charge.descricao}`</span>
-                    <span>{charge.vencimento}</span>
+          <div className="flex-row half-width mt-xl items-end">
+            <div className="flex-column full-width pad-md custom-scroll items-center">
+              {customerData && customerData.map((charge) =>
+              (
+                <div className="box-shadow-charges space-between flex-row mt-lg pad-lg" key={charge.id}>
+                  <div className="flex-column space-evenly charge-card gray">
+                    <span><strong>#{charge.id}</strong> {charge.descricao}</span>
+                    <span className="font-date">{new Date(charge.vencimento).toLocaleDateString('pt-br')}</span>
                   </div>
-                  <div className="flex-column space-between">
-                    <span>{parseFloat(charge.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
-                    <span>{charge.status}</span>
+                  <div className="flex-column space-evenly charge-card gray text-right">
+                    <span><strong>{parseFloat(charge.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong></span>
+                    <span className={
+                      (charge.status === "pago" ? "green" : charge.status === "Pendente" ? "blue" : charge.status === "Vencida" ? "red" : '')
+                    }>
+                      <strong>
+                        {charge.status.toUpperCase()}
+                      </strong>
+                    </span>
                   </div>
                 </div>
-              ))}
+              )
+              )}
             </div>
           </div>
         </div>

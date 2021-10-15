@@ -18,6 +18,11 @@
     font-size: 12px;
 }
 
+.font-date {
+    font-size: 12px;
+    font-weight: bold;
+}
+
 .font-md-bold {
     font-size: 16px;
     font-weight: 600;
@@ -41,6 +46,10 @@ input {
 
 .text-center {
     text-align: center;
+}
+
+.text-right {
+    text-align: right;
 }
 
 .pink {

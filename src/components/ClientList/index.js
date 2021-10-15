@@ -22,6 +22,7 @@ function ClientList({ handleLoadClientCharges }) {
     function handleAddClient() {
         setValueModalAddClient(true);
     }
+
     function handleClick(client) {
         handleLoadClientCharges(client.id);
         setClientInformation(client);
@@ -54,10 +55,10 @@ function ClientList({ handleLoadClientCharges }) {
                             </div>
                         </div>
                         <div className="flex-row items-center flex-basis">
-                            <p>{parseFloat(client.valortotalcobrancasfeitas).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
+                            <p className="font-regular">{parseFloat(client.valortotalcobrancasfeitas).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                         </div>
                         <div className="flex-row items-center flex-basis">
-                            <p>{parseFloat(client.valortotalcobrancaspagas).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
+                            <p className="font-regular">{parseFloat(client.valortotalcobrancaspagas).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                         </div>
                         <div className="flex-row items-center flex-basis" >
                             {((client.valortotalcobrancasfeitas || 0) - (client.valortotalcobrancaspagas || 0) === 0) ?
