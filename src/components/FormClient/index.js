@@ -1,18 +1,17 @@
 import './styles.css';
 import { useForm } from 'react-hook-form';
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import AuthContext from '../../contexts/AuthContext'
 import AddClientModalContext from '../../contexts/AddClientModalContext'
 import { toast } from 'react-toastify';
 
-function FormClient() {
+function FormClient({ handleLoadClientCharges }) {
     const [errorEmail, setErrorEmail] = useState('');
     const { token } = useContext(AuthContext);
     const { setValueModalAddClient } = useContext(AddClientModalContext);
     const { register, handleSubmit } = useForm();
-    const history = useHistory();
+    const [details, setDetails] = useState('');
     const [novosDadosCliente, setNovosDadosCliente] = useState({
         nome: '',
         email: '',
@@ -47,7 +46,6 @@ function FormClient() {
 
         if (response.ok) {
             toast.success("Cliente cadastrado com sucesso!");
-            history.push("/");
             setValueModalAddClient(false);
         }
         else {
@@ -61,6 +59,8 @@ function FormClient() {
             }
         }
     }
+
+
 
     function handleError() {
         setErrorEmail(false);

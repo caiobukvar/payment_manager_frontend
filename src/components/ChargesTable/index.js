@@ -1,7 +1,6 @@
 import './styles.css';
 import { useContext } from 'react';
 
-import AddChargeModalContext from '../../contexts/AddChargeModalContext';
 import EditChargeModalContext from '../../contexts/EditChargeModalContext';
 import ChargeContext from '../../contexts/ChargeContext';
 
@@ -9,15 +8,11 @@ import ModalEditCharges from '../../components/ModalEditCharges';
 
 function ChargesTable() {
     const { chargesList } = useContext(ChargeContext);
-    const { setValueModalAddCharges } = useContext(AddChargeModalContext);
     const { valueModalEditCharges, setValueModalEditCharges } = useContext(EditChargeModalContext);
-
-    function handleOpenAddCharge() {
-        setValueModalAddCharges(true);
-    }
 
     function handleOpenEditCharge() {
         setValueModalEditCharges(true);
+        // localStorage.setItem('client-data-on-click', charge.nome);
     }
 
     const dataFormatada =
@@ -30,7 +25,7 @@ function ChargesTable() {
     return (
         <div className="flex-column content-center mt-large">
             <div className="flex-column list-box">
-                <button className="btn-white-large mb-xl" onClick={handleOpenAddCharge}>Adicionar cobrança</button>
+
                 <div className="flex-row border-grey white list-padding">
                     <p className="flex-bar">ID</p>
                     <p className="flex-bar">Cliente</p>
@@ -40,7 +35,7 @@ function ChargesTable() {
                     <p className="flex-bar">Vencimento</p>
                 </div>
                 {chargesList.map((charge) => (
-                    <div className="flex-column list-padding white-bg" onClick={handleOpenEditCharge} key={charge.id}>
+                    <div className="flex-column list-padding white-bg" onClick={handleOpenEditCharge(charge)} key={charge.id}>
                         <div className="flex-row white-bg enabled height-fix">
                             <div className="flex-column content-center flex-bar" >
                                 <h3 className="font-md-custom gray">{`# ${charge.id}`}</h3>
@@ -71,7 +66,9 @@ function ChargesTable() {
             {valueModalEditCharges &&
                 <div className="modal">
                     <div className="modal-content">
-                        <ModalEditCharges />
+                        <ModalEditCharges
+
+                        />
                     </div>
                 </div>
             }

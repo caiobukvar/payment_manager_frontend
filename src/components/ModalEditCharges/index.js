@@ -29,6 +29,9 @@ function EditCharges() {
         vencimento: ""
     });
 
+    // const clientDataFromStorage = localStorage.getItem('client-id-on-click');
+    // console.log({ clientDataFromStorage })
+
     async function EditCharge(newCharge) {
         const response = await fetch("https://paymentmanager-api.herokuapp.com/registerBilling",
             {
@@ -51,7 +54,7 @@ function EditCharges() {
 
     };
 
-    function handleReturn() {
+    function handleCloseModal() {
         setValueModalEditCharges(false);
     }
 
@@ -176,7 +179,7 @@ function EditCharges() {
                 </div>
                 {/* ADICIONAR BOTAO PARA CONFIRMAR EXCLUSÃO AQUI */}
                 <div className="flex-row mt-xl ml-xxl">
-                    <button className="btn-white-client" onClick={handleReturn}>
+                    <button className="btn-white-client" onClick={handleCloseModal}>
                         Cancelar
                     </button>
                     {
@@ -184,7 +187,8 @@ function EditCharges() {
                             newCharge.cliente &&
                             newCharge.descricao &&
                             newCharge.status &&
-                            newCharge.valor
+                            newCharge.valor &&
+                            newCharge.vencimento
                         )
                             ? <button type="submit" className="btn-pink-bright-client ml-md enabled">
                                 Editar cobrança

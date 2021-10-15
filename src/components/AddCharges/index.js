@@ -180,7 +180,8 @@ function AddCharges() {
                             newCharge.cliente &&
                             newCharge.descricao &&
                             newCharge.status &&
-                            newCharge.valor
+                            newCharge.valor &&
+                            newCharge.vencimento
                         )
                             ? <button type="submit" className="btn-pink-bright-client ml-md enabled">
                                 Criar cobrança

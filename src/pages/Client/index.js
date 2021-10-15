@@ -54,14 +54,14 @@ function Client() {
           /> :
           <div>
             <h2 className="position-left">{'//'} ADICIONAR CLIENTE</h2>
-            <FormClient />
+            <FormClient handleLoadClientCharges={handleLoadClientCharges} />
           </div>
         )
       }
       {valueModalAddClient &&
         <div className="modal">
           <div className="modal-content">
-            <FormClient />
+            <FormClient handleLoadClientCharges={handleLoadClientCharges} />
             <img src={CloseIcon}
               alt="close-icon"
               className="modal-close-icon"
