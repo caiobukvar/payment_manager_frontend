@@ -10,6 +10,8 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Charges from './pages/Charges';
 import Client from './pages/Client';
+import Reports from './pages/Reports';
+
 import Layout from './components/Layout';
 import ClientDataContextProvider from './components/ClientDataContextProvider';
 import ModalContext from './contexts/ModalContext';
@@ -93,9 +95,11 @@ function Routes() {
                                 <Layout>
                                   <Route path="/" exact component={Main} />
 
-                                  <Route path="/client" component={Client} />
+                                  <Route path="/clientes" component={Client} />
 
-                                  <Route path="/charges" component={Charges} />
+                                  <Route path="/relatorios" component={Reports} />
+
+                                  <Route path="/cobrancas" component={Charges} />
                                 </Layout>
                               </EditChargeModalContext.Provider>
                             </ChargeContext.Provider>

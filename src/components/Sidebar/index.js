@@ -36,7 +36,7 @@ function Sidebar() {
                     <h2 className="ml-md font-md">HOME</h2>
                 </NavLink>
                 <NavLink
-                    to="/charges"
+                    to="/cobrancas"
                     className="flex-row white sidebar-width items-center"
                     activeClassName={
                         "active"
@@ -47,7 +47,7 @@ function Sidebar() {
                     <h2 className="ml-md font-md">COBRANÇAS</h2>
                 </NavLink>
                 <NavLink
-                    to="/client"
+                    to="/clientes"
                     className="flex-row white sidebar-width items-center"
                     activeClassName={
                         "active"

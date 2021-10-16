@@ -37,7 +37,7 @@ function ChargesTable() {
                     <p className="flex-bar">Vencimento</p>
                 </div>
                 {chargesList.map((charge) => (
-                    <div className="flex-column list-padding white-bg mb-md" onClick={handleOpenEditCharge} key={charge.id}>
+                    <div className="flex-column list-padding white-bg" onClick={handleOpenEditCharge} key={charge.id}>
                         <div className="flex-row white-bg enabled">
                             <div className="flex-column content-center flex-bar" >
                                 <h3 className="font-md-custom gray">{`# ${charge.id}`}</h3>
