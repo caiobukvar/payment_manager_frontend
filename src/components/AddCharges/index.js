@@ -29,23 +29,29 @@ function AddCharges() {
     });
 
     async function addCharge(newCharge) {
-        const response = await fetch("https://paymentmanager-api.herokuapp.com/registerBilling",
-            {
-                method: "POST",
-                body: JSON.stringify(newCharge),
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            });
+        try {
+            const response = await fetch("https://paymentmanager-api.herokuapp.com/registerBilling",
+                {
+                    method: "POST",
+                    body: JSON.stringify(newCharge),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
 
-        const result = await response.json();
+            const result = await response.json();
 
-        if (response.ok) {
-            toast.success("Cobrança cadastrada!");
-            setChargesList([...chargesList, ...result]);
-            setValueModalAddCharges(false);
+            if (response.ok) {
+                toast.success("Cobrança cadastrada!");
+                setChargesList([...chargesList, ...result]);
+                setValueModalAddCharges(false);
+            }
+        } catch (error) {
+            console.log(error.message);
+            toast.error(error.message);
         }
+
     };
 
     function handleReturn() {
@@ -116,7 +122,7 @@ function AddCharges() {
                             })
                         }}
                     >
-                        <option value="">selecione um status</option>
+                        <option>selecione um status</option>
                         <option
                             value="pago"
                             key="pago"

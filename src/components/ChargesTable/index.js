@@ -1,10 +1,13 @@
-import './styles.css';
 import { useContext } from 'react';
+import './styles.css';
 
 import EditChargeModalContext from '../../contexts/EditChargeModalContext';
 import ChargeContext from '../../contexts/ChargeContext';
 
 import ModalEditCharges from '../../components/ModalEditCharges';
+
+
+import SearchBar from '../../components/SearchBar';
 
 function ChargesTable() {
     const { chargesList } = useContext(ChargeContext);
@@ -12,7 +15,6 @@ function ChargesTable() {
 
     function handleOpenEditCharge() {
         setValueModalEditCharges(true);
-        // localStorage.setItem('client-data-on-click', charge.nome);
     }
 
     const dataFormatada =
@@ -25,7 +27,7 @@ function ChargesTable() {
     return (
         <div className="flex-column content-center mt-large">
             <div className="flex-column list-box">
-
+                <SearchBar />
                 <div className="flex-row border-grey white list-padding">
                     <p className="flex-bar">ID</p>
                     <p className="flex-bar">Cliente</p>
@@ -35,8 +37,8 @@ function ChargesTable() {
                     <p className="flex-bar">Vencimento</p>
                 </div>
                 {chargesList.map((charge) => (
-                    <div className="flex-column list-padding white-bg" onClick={handleOpenEditCharge(charge)} key={charge.id}>
-                        <div className="flex-row white-bg enabled height-fix">
+                    <div className="flex-column list-padding white-bg" onClick={handleOpenEditCharge} key={charge.id}>
+                        <div className="flex-row white-bg enabled">
                             <div className="flex-column content-center flex-bar" >
                                 <h3 className="font-md-custom gray">{`# ${charge.id}`}</h3>
                             </div>
@@ -51,7 +53,9 @@ function ChargesTable() {
                             </div>
                             <div className="flex-row items-center flex-bar" >
                                 <span className={
-                                    `${charge.status}` === "pendente" ? "blue" : `${charge.status}` === "pago" ? "green" : `${charge.status}` === "vencida" ? "red" : ''
+                                    `${charge.status}` === "pendente" ? "blue" :
+                                        `${charge.status}` === "pago" ? "green" :
+                                            `${charge.status}` === "vencida" ? "red" : ''
                                 }>
                                     <p>{(charge.status).toUpperCase()}</p>
                                 </span>

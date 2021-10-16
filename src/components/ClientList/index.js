@@ -10,6 +10,8 @@ import mailIcon from '../../assets/mail.svg'
 import useClientData from "../../hooks/useClientData";
 import ClientDetails from "../ClientDetails";
 
+import SearchBar from '../../components/SearchBar';
+
 
 function ClientList({ handleLoadClientCharges }) {
     const { setValueModalEditClient } = useContext(ModalEditClientContext);
@@ -30,10 +32,14 @@ function ClientList({ handleLoadClientCharges }) {
         setModalClientDetails(true);
     }
 
+
     return (
         <>
-            <div className="flex-colum list-box">
-                <button className="btn-white-large mb-xl" onClick={handleAddClient}>Adicionar cliente</button>
+            <div className="flex-column list-box">
+                <div className="flex-row">
+                    <button className="btn-white-large" onClick={handleAddClient}>Adicionar cliente</button>
+                    <SearchBar />
+                </div>
 
                 <div className="flex-row border-grey white list-padding">
                     <p className="flex-basis">Cliente</p>

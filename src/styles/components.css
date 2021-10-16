@@ -1,0 +1,22 @@
+.search-box-container {
+    margin-left: auto;
+    margin-bottom: 25px;
+    width: 35%;
+    border: 2px solid #374952;
+    border-radius: 16px;
+}
+
+.search-box-input {
+    padding: 3px;
+    width: 100%;
+}
+
+.search-box-btn button {
+    all: unset;
+}
+
+.search-box-image {
+    width: 20%;
+    height: auto;
+    margin-right: 10px;
+}

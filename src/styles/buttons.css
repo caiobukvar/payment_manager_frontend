@@ -78,6 +78,20 @@
     cursor: pointer;
 }
 
+.search-box-btn {
+    padding: 5px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 12px;
+    background-color: #374952;
+    color: white;
+    width: 170px;
+    height: 38px;
+    border: 0;
+    cursor: pointer;
+}
+
 .enabled {
     cursor: pointer;
 }

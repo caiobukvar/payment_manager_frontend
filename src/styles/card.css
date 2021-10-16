@@ -28,6 +28,10 @@
     padding: 20px;
 }
 
+.pad-side {
+    padding: 0px 10px;
+}
+
 .pad-client-details {
     padding: 8px;
 }

@@ -8,20 +8,17 @@ import AuthContext from '../../contexts/AuthContext';
 import useClientData from '../../hooks/useClientData';
 
 import { toast } from 'react-toastify';
-import { useHistory } from 'react-router';
 
 
 function EditCharges() {
     const { setValueModalEditCharges } = useContext(EditChargeModalContext);
     const { token } = useContext(AuthContext);
 
-    const history = useHistory();
-
     const { clientArray } = useClientData();
 
     const { register, handleSubmit } = useForm();
 
-    const [newCharge, setNewCharge] = useState({
+    const [editData, setEditData] = useState({
         cliente: "",
         descricao: "",
         status: "",
@@ -32,26 +29,29 @@ function EditCharges() {
     // const clientDataFromStorage = localStorage.getItem('client-id-on-click');
     // console.log({ clientDataFromStorage })
 
-    async function EditCharge(newCharge) {
-        const response = await fetch("https://paymentmanager-api.herokuapp.com/registerBilling",
-            {
-                method: "PUT",
-                body: JSON.stringify(newCharge),
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            });
+    async function EditCharge(editData) {
+        try {
+            const response = await fetch("https://paymentmanager-api.herokuapp.com/registerBilling",
+                {
+                    method: "PUT",
+                    body: JSON.stringify(editData),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
 
-        const chargeData = await response.json();
-        console.log(chargeData);
+            const chargeData = await response.json();
+            console.log(chargeData);
 
-        if (response.ok) {
-            toast.success("Cobrança cadastrada!");
-            setValueModalEditCharges(false);
-            history.push("/charges")
+            if (response.ok) {
+                toast.success("Cobrança cadastrada!");
+                setValueModalEditCharges(false);
+            }
+        } catch (error) {
+            console.log(error.message);
+            //tratar erros - campos em branco
         }
-
     };
 
     function handleCloseModal() {
@@ -71,8 +71,8 @@ function EditCharges() {
                         className="input-select padY-sm"
                         {...register("cliente", { required: true })}
                         onChange={(e) => {
-                            setNewCharge({
-                                ...newCharge,
+                            setEditData({
+                                ...editData,
                                 cliente: e.target.value
                             })
                         }}
@@ -99,8 +99,8 @@ function EditCharges() {
                         className="input-charges-large padY-sm mt-md"
                         {...register("descricao", { required: true })}
                         onChange={(e) => {
-                            setNewCharge({
-                                ...newCharge,
+                            setEditData({
+                                ...editData,
                                 descricao: e.target.value
                             })
                         }}
@@ -116,13 +116,13 @@ function EditCharges() {
                         className="input-select padY-sm"
                         {...register("status", { required: true })}
                         onChange={(e) => {
-                            setNewCharge({
-                                ...newCharge,
+                            setEditData({
+                                ...editData,
                                 status: e.target.value
                             })
                         }}
                     >
-                        <option disabled value="">selecione um status</option>
+                        <option placeholder="" value="">Selecione um status...</option>
                         <option
                             value="pago"
                             key="pago"
@@ -151,8 +151,8 @@ function EditCharges() {
                             className="input-charges-line-small padY-sm mt-md"
                             {...register("valor", { required: true })}
                             onChange={(e) => {
-                                setNewCharge({
-                                    ...newCharge,
+                                setEditData({
+                                    ...editData,
                                     valor: e.target.value
                                 })
                             }}
@@ -169,8 +169,8 @@ function EditCharges() {
                             onChange={(e) => {
                                 let data = new Date(e.target.value);
                                 data.setHours(data.getHours() + 3)
-                                setNewCharge({
-                                    ...newCharge,
+                                setEditData({
+                                    ...editData,
                                     vencimento: new Date(data).toLocaleDateString('pt-br')
                                 })
                             }}
@@ -184,11 +184,11 @@ function EditCharges() {
                     </button>
                     {
                         (
-                            newCharge.cliente &&
-                            newCharge.descricao &&
-                            newCharge.status &&
-                            newCharge.valor &&
-                            newCharge.vencimento
+                            editData.cliente &&
+                            editData.descricao &&
+                            editData.status &&
+                            editData.valor &&
+                            editData.vencimento
                         )
                             ? <button type="submit" className="btn-pink-bright-client ml-md enabled">
                                 Editar cobrança

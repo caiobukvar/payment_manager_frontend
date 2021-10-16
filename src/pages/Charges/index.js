@@ -13,6 +13,7 @@ import ChargeContext from '../../contexts/ChargeContext';
 function Charges() {
     const [isLoading, setIsLoading] = useState(true);
     const { chargesList, setChargesList } = useContext(ChargeContext);
+
     const { token } = useContext(AuthContext);
 
     useEffect(() => {
