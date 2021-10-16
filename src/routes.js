@@ -21,6 +21,7 @@ import AddClientModalContext from './contexts/AddClientModalContext';
 import AddChargeModalContext from './contexts/AddChargeModalContext';
 import ChargeContext from './contexts/ChargeContext';
 import EditChargeModalContext from './contexts/EditChargeModalContext';
+import DeleteChargeModalContext from './contexts/DeleteChargeModalContext';
 
 
 
@@ -38,6 +39,7 @@ function Routes() {
   const [valueModalAddCharges, setValueModalAddCharges] = useState(false);
   const [valueModalEditClient, setValueModalEditClient] = useState(false);
   const [valueModalEditCharges, setValueModalEditCharges] = useState(false);
+  const [valueModalDeleteCharges, setValueModalDeleteCharges] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [chargesList, setChargesList] = useState('');
 
@@ -78,23 +80,27 @@ function Routes() {
                       <AddChargeModalContext.Provider
                         value={{ valueModalAddCharges, setValueModalAddCharges }}
                       >
-                        <ClientDataContextProvider>
-                          <ChargeContext.Provider
-                            value={{ chargesList, setChargesList }}
-                          >
-                            <EditChargeModalContext.Provider
-                              value={{ valueModalEditCharges, setValueModalEditCharges }}
+                        <DeleteChargeModalContext.Provider
+                          value={{ valueModalDeleteCharges, setValueModalDeleteCharges }}
+                        >
+                          <ClientDataContextProvider>
+                            <ChargeContext.Provider
+                              value={{ chargesList, setChargesList }}
                             >
-                              <Layout>
-                                <Route path="/" exact component={Main} />
+                              <EditChargeModalContext.Provider
+                                value={{ valueModalEditCharges, setValueModalEditCharges }}
+                              >
+                                <Layout>
+                                  <Route path="/" exact component={Main} />
 
-                                <Route path="/client" component={Client} />
+                                  <Route path="/client" component={Client} />
 
-                                <Route path="/charges" component={Charges} />
-                              </Layout>
-                            </EditChargeModalContext.Provider>
-                          </ChargeContext.Provider>
-                        </ClientDataContextProvider>
+                                  <Route path="/charges" component={Charges} />
+                                </Layout>
+                              </EditChargeModalContext.Provider>
+                            </ChargeContext.Provider>
+                          </ClientDataContextProvider>
+                        </DeleteChargeModalContext.Provider>
                       </AddChargeModalContext.Provider>
                     </ModalEditClientContext.Provider>
                   </AddClientModalContext.Provider>

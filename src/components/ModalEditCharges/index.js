@@ -4,14 +4,19 @@ import { useForm } from 'react-hook-form';
 
 import EditChargeModalContext from '../../contexts/EditChargeModalContext';
 import AuthContext from '../../contexts/AuthContext';
+import DeleteChargeModalContext from '../../contexts/DeleteChargeModalContext';
 
 import useClientData from '../../hooks/useClientData';
 
 import { toast } from 'react-toastify';
 
+import TrashIcon from '../../assets/trash.svg';
+import DeleteDropdown from '../../components/DeleteDropdown';
+
 
 function EditCharges() {
     const { setValueModalEditCharges } = useContext(EditChargeModalContext);
+    const { setValueModalDeleteCharges } = useContext(DeleteChargeModalContext);
     const { token } = useContext(AuthContext);
 
     const { clientArray } = useClientData();
@@ -56,6 +61,9 @@ function EditCharges() {
 
     function handleCloseModal() {
         setValueModalEditCharges(false);
+    }
+    function handleDeleteModal() {
+        setValueModalDeleteCharges(true);
     }
 
     return (
@@ -178,6 +186,11 @@ function EditCharges() {
                     </div>
                 </div>
                 {/* ADICIONAR BOTAO PARA CONFIRMAR EXCLUSÃO AQUI */}
+                <div className="flex-row items-center mt-xl">
+                    <img src={TrashIcon} alt="img-trash-icon" className="mr-sm" />
+                    <a href="modal-delete-charge" className="light-gray" onClick={handleDeleteModal}>Excluir cobrança</a>
+                </div>
+                {/* ADICIONAR BOTAO PARA CONFIRMAR EXCLUSÃO AQUI */}
                 <div className="flex-row mt-xl ml-xxl">
                     <button className="btn-white-client" onClick={handleCloseModal}>
                         Cancelar
@@ -199,6 +212,9 @@ function EditCharges() {
                     }
                 </div>
             </div>
+            {valueModalDeleteCharges &&
+                <DeleteDropdown />
+            }
         </form >
     );
 }

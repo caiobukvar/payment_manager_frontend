@@ -78,3 +78,8 @@ input {
 .gray {
     color: #4C4C4C;
 }
+
+.light-gray {
+    color: #868686;
+    text-decoration: underline;
+}

@@ -92,6 +92,18 @@
     cursor: pointer;
 }
 
+.btn-red-delete {
+    padding: 5px;
+    background-color: #FF576B;
+    font-weight: bold;
+}
+
+.btn-blue-delete {
+    padding: 5px;
+    background-color: #3A9FF1;
+    font-weight: bold;
+}
+
 .enabled {
     cursor: pointer;
 }
