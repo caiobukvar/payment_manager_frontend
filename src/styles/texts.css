@@ -23,6 +23,11 @@
     font-weight: bold;
 }
 
+.font-search {
+    font-size: 14px;
+    margin-left: 10px;
+}
+
 .font-md-bold {
     font-size: 16px;
     font-weight: 600;
