@@ -10,6 +10,10 @@
     padding: 0 30px;
 }
 
+.list-padding:last-child {
+    margin-bottom: 80px;
+}
+
 .flex-basis {
     flex: 0 0 250px;
 }
