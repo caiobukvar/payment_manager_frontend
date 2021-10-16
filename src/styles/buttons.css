@@ -93,15 +93,30 @@
 }
 
 .btn-red-delete {
-    padding: 5px;
+    all: unset;
+    padding: 4px;
     background-color: #FF576B;
     font-weight: bold;
+    font-size: 12px;
+    border-radius: 5px;
+    width: 40px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 8px;
 }
 
 .btn-blue-delete {
-    padding: 5px;
+    all: unset;
+    padding: 4px;
     background-color: #3A9FF1;
     font-weight: bold;
+    font-size: 12px;
+    border-radius: 5px;
+    width: 40px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
 }
 
 .enabled {

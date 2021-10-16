@@ -16,7 +16,7 @@ import DeleteDropdown from '../../components/DeleteDropdown';
 
 function EditCharges() {
     const { setValueModalEditCharges } = useContext(EditChargeModalContext);
-    const { setValueModalDeleteCharges } = useContext(DeleteChargeModalContext);
+    const { valueModalDeleteCharges, setValueModalDeleteCharges } = useContext(DeleteChargeModalContext);
     const { token } = useContext(AuthContext);
 
     const { clientArray } = useClientData();
@@ -188,7 +188,7 @@ function EditCharges() {
                 {/* ADICIONAR BOTAO PARA CONFIRMAR EXCLUSÃO AQUI */}
                 <div className="flex-row items-center mt-xl">
                     <img src={TrashIcon} alt="img-trash-icon" className="mr-sm" />
-                    <a href="modal-delete-charge" className="light-gray" onClick={handleDeleteModal}>Excluir cobrança</a>
+                    <a className="light-gray" onClick={handleDeleteModal}>Excluir cobrança</a>
                 </div>
                 {/* ADICIONAR BOTAO PARA CONFIRMAR EXCLUSÃO AQUI */}
                 <div className="flex-row mt-xl ml-xxl">
@@ -213,7 +213,10 @@ function EditCharges() {
                 </div>
             </div>
             {valueModalDeleteCharges &&
-                <DeleteDropdown />
+                <div className="dropdown-placement">
+                    <DeleteDropdown />
+                </div>
+
             }
         </form >
     );
