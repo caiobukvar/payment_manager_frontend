@@ -163,7 +163,7 @@ function ClientDetails({ setModalClientDetails, clientId }) {
               (
                 <div className="box-shadow-charges space-between flex-row mt-lg pad-lg" key={charge.id}>
                   <div className="flex-column space-evenly charge-card gray">
-                    <span><strong>#{charge.id}</strong> {charge.descricao}</span>
+                    <span className="overflow"><strong>#{charge.id}</strong> {charge.descricao}</span>
                     <span className="font-date">{new Date(charge.vencimento).toLocaleDateString('pt-br')}</span>
                   </div>
                   <div className="flex-column space-evenly charge-card gray text-right">

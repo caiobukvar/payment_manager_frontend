@@ -5,8 +5,6 @@ import EditChargeModalContext from '../../contexts/EditChargeModalContext';
 import ChargeContext from '../../contexts/ChargeContext';
 
 import ModalEditCharges from '../../components/ModalEditCharges';
-
-
 import SearchBar from '../../components/SearchBar';
 
 function ChargesTable() {
