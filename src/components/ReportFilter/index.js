@@ -34,7 +34,7 @@ function ReportFilter() {
     }
 
     return (
-        <div className="flex-row report-box screen-pos items-center">
+        <div className="flex-row report-box screen-pos">
             <div className="font-lg-bold mr-md">
                 <p className="pointer" onClick={handleModal}>{title}</p>
                 {modalOpen ?
@@ -50,7 +50,7 @@ function ReportFilter() {
                     </div>
                     : ''}
             </div>
-            <div >
+            <div className="flex-column content-center">
                 <img src={RectangleIcon} alt="seta" />
             </div>
             <div className="ml-md font-lg-bold content-center ">
