@@ -11,8 +11,9 @@ function ChargesTable() {
     const { chargesList } = useContext(ChargeContext);
     const { valueModalEditCharges, setValueModalEditCharges } = useContext(EditChargeModalContext);
 
-    function handleOpenEditCharge() {
+    function handleClick(charge) {
         setValueModalEditCharges(true);
+        localStorage.setItem('client-id-on-click', charge.id);
     }
 
     const dataFormatada =
@@ -35,7 +36,7 @@ function ChargesTable() {
                     <p className="flex-bar">Vencimento</p>
                 </div>
                 {chargesList.map((charge) => (
-                    <div className="flex-column list-padding white-bg" onClick={handleOpenEditCharge} key={charge.id}>
+                    <div className="flex-column list-padding white-bg" onClick={() => handleClick(charge)} key={charge.id}>
                         <div className="flex-row white-bg enabled">
                             <div className="flex-column content-center flex-bar" >
                                 <h3 className="font-md-custom gray">{`# ${charge.id}`}</h3>
@@ -65,7 +66,8 @@ function ChargesTable() {
                     </div>
                 ))}
             </div>
-            {valueModalEditCharges &&
+            {
+                valueModalEditCharges &&
                 <div className="modal">
                     <div className="modal-content">
                         <ModalEditCharges

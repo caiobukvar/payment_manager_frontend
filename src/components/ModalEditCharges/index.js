@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import EditChargeModalContext from '../../contexts/EditChargeModalContext';
@@ -15,6 +15,7 @@ import DeleteDropdown from '../../components/DeleteDropdown';
 
 
 function EditCharges() {
+    const [autocompleteData, setAutocompleteData] = useState();
     const { setValueModalEditCharges } = useContext(EditChargeModalContext);
     const { valueModalDeleteCharges, setValueModalDeleteCharges } = useContext(DeleteChargeModalContext);
     const { token } = useContext(AuthContext);
@@ -31,8 +32,32 @@ function EditCharges() {
         vencimento: ""
     });
 
-    // const clientDataFromStorage = localStorage.getItem('client-id-on-click');
-    // console.log({ clientDataFromStorage })
+    const chargeId = localStorage.getItem('client-id-on-click');
+    console.log(chargeId);
+
+    useEffect(() => {
+        try {
+            async function getClientData(chargeId) {
+                const response = await fetch(`https://paymentmanager-api.herokuapp.com/getCustomerBillings?id=${chargeId}`,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
+                const data = await response.json();
+                console.log("data", data)
+
+                if (response.ok) {
+                    setAutocompleteData(data);
+                }
+            }
+            getClientData(chargeId);
+        } catch (error) {
+
+        }
+    }, [chargeId])
 
     async function EditCharge(editData) {
         try {
