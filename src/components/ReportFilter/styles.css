@@ -1,0 +1,21 @@
+.report-box {
+    width: 30%;
+}
+
+.select-box {
+    all: unset;
+}
+
+.screen-pos {
+    position: absolute;
+    top: 10%;
+    left: 27%;
+}
+
+.selected-title {
+    color: #DA0175
+}
+
+.pointer {
+    cursor: pointer;
+}

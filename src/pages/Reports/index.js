@@ -9,6 +9,7 @@ import AddCharges from '../../components/AddCharges';
 
 import AuthContext from '../../contexts/AuthContext';
 import ChargeContext from '../../contexts/ChargeContext';
+import ReportFilter from '../../components/ReportFilter';
 
 function Charges() {
     const [isLoading, setIsLoading] = useState(true);
@@ -48,9 +49,13 @@ function Charges() {
             }
             {
                 !isLoading && (chargesList.length > 0 ?
-                    <ChargesTable
-                        chargesList={chargesList}
-                    />
+                    <div>
+                        <ReportFilter />
+                        <ChargesTable
+                            chargesList={chargesList}
+                        />
+                    </div>
+
                     :
                     <div className="mt-xxl">
                         <h2 className="position-left">{'//'} CRIAR COBRANÇA</h2>

@@ -64,3 +64,11 @@
 .border-right {
     border-right: 2px solid #DDDDDD;
 }
+
+.box-shadow-reports {
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0.1em 0.2em 1em rgb(0, 0, 0, 0.2);
+    text-align: left;
+    font-size: 16px;
+}
