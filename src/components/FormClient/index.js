@@ -3,15 +3,16 @@ import { useForm } from 'react-hook-form';
 import React, { useState, useContext } from 'react';
 
 import AuthContext from '../../contexts/AuthContext'
-import AddClientModalContext from '../../contexts/AddClientModalContext'
 import { toast } from 'react-toastify';
 import useClientData from '../../hooks/useClientData';
+import { useHistory } from 'react-router';
 
-function FormClient({ handleLoadClientCharges }) {
-    const [errorEmail, setErrorEmail] = useState('');
+function FormClient() {
     const { token } = useContext(AuthContext);
-    const { setValueModalAddClient } = useContext(AddClientModalContext);
+
     const { register, handleSubmit } = useForm();
+    const history = useHistory();
+    const [errorEmail, setErrorEmail] = useState('');
     const [novosDadosCliente, setNovosDadosCliente] = useState({
         nome: '',
         email: '',
@@ -48,7 +49,7 @@ function FormClient({ handleLoadClientCharges }) {
         if (response.ok) {
             toast.success("Cliente cadastrado com sucesso!");
             setClientArray([...clientArray, ...clientListResponse]);
-            setValueModalAddClient(false);
+            history.push('/clientes');
         }
         else {
             const err = true;
@@ -69,7 +70,7 @@ function FormClient({ handleLoadClientCharges }) {
     }
 
     function returnClient() {
-        setValueModalAddClient(false)
+        history.push('/clientes')
     }
 
     return (

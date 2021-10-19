@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useHistory } from "react-router";
 
 import "./styles.css";
 import ModalEditClientContext from "../../contexts/ModalEditClientContext";
@@ -12,8 +13,6 @@ import phoneIcon from '../../assets/phone.svg'
 import mailIcon from '../../assets/mail.svg'
 import useClientData from "../../hooks/useClientData";
 import ClientDetails from "../ClientDetails";
-import ReportFilter from "../ReportFilter";
-
 
 
 function ClientList({ handleLoadClientCharges, addVisible }) {
@@ -23,11 +22,12 @@ function ClientList({ handleLoadClientCharges, addVisible }) {
 
     const [modalClientDetails, setModalClientDetails] = useState(false);
     const [clientInformation, setClientInformation] = useState();
-
+    const history = useHistory();
     const { clientArray } = useClientData();
 
 
     function handleAddClient() {
+        history.push("/novo-cliente");
         setValueModalAddClient(true);
     }
 

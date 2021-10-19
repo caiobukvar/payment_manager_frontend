@@ -5,14 +5,15 @@ import './styles.css';
 import { CircularProgress } from '@mui/material';
 
 import ChargesTable from '../../components/ChargesTable';
-import AddCharges from '../../components/AddCharges';
 
 import AuthContext from '../../contexts/AuthContext';
 import ChargeContext from '../../contexts/ChargeContext';
+import { useHistory } from 'react-router';
 
 function Charges() {
     const [isLoading, setIsLoading] = useState(true);
     const { chargesList, setChargesList } = useContext(ChargeContext);
+    const history = useHistory();
 
     const { token } = useContext(AuthContext);
 
@@ -52,10 +53,7 @@ function Charges() {
                         chargesList={chargesList}
                     />
                     :
-                    <div className="mt-xxl">
-                        <h2 className="position-left">{'//'} CRIAR COBRANÇA</h2>
-                        <AddCharges />
-                    </div>
+                    history.push('/nova-cobranca')
                 )
             }
         </div>

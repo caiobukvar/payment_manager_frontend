@@ -3,23 +3,20 @@ import './styles.css'
 
 import { CircularProgress } from '@mui/material';
 
-import FormClient from '../../components/FormClient';
 import ClientList from '../../components/ClientList';
 
 
 import AuthContext from '../../contexts/AuthContext';
-import AddClientModalContext from '../../contexts/AddClientModalContext';
 
-import CloseIcon from '../../assets/close-icon.svg';
 import useClientData from '../../hooks/useClientData';
+import { useHistory } from 'react-router';
 
 
 function Client() {
-  const [clientCharges, setClientCharges] = useState();
+  const [setClientCharges] = useState();
   const { clientArray, isLoading } = useClientData();
-
+  const history = useHistory();
   const { token } = useContext(AuthContext);
-  const { valueModalAddClient, setValueModalAddClient } = useContext(AddClientModalContext);
 
 
   // Pegar info COBRANÇAS no CLIENTE
@@ -53,25 +50,8 @@ function Client() {
             handleLoadClientCharges={handleLoadClientCharges}
             addVisible={true}
           /> :
-          <div>
-            <h2 className="position-left">{'//'} ADICIONAR CLIENTE</h2>
-            <FormClient
-              handleLoadClientCharges={handleLoadClientCharges}
-            />
-          </div>
+          history.push("/novo-cliente")
         )
-      }
-      {valueModalAddClient &&
-        <div className="modal">
-          <div className="modal-content">
-            <FormClient handleLoadClientCharges={handleLoadClientCharges} />
-            <img src={CloseIcon}
-              alt="close-icon"
-              className="modal-close-icon"
-              onClick={() => { setValueModalAddClient(false) }}
-            />
-          </div>
-        </div>
       }
     </div>
   );

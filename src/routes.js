@@ -27,6 +27,8 @@ import DeleteChargeModalContext from './contexts/DeleteChargeModalContext';
 import SearchContext from './contexts/SearchContext';
 import ReportFilterContext from './contexts/ReportFilterContext';
 import SortingContext from './contexts/SortingContext';
+import AddClient from './pages/AddClient';
+import AddCharges from './pages/AddCharges';
 
 
 
@@ -111,12 +113,11 @@ function Routes() {
                                     >
                                       <Layout>
                                         <Route path="/" exact component={Main} />
-
+                                        <Route path="/novo-cliente" component={AddClient} />
+                                        <Route path="/nova-cobranca" component={AddCharges} />
                                         <Route path="/clientes" component={Client} />
-
-                                        <Route path="/relatorios" component={Reports} />
-
                                         <Route path="/cobrancas" component={Charges} />
+                                        <Route path="/relatorios" component={Reports} />
                                       </Layout>
                                     </ReportFilterContext.Provider>
                                   </SortingContext.Provider>
