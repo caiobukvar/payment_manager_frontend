@@ -26,6 +26,20 @@ function ChargesTable() {
         setChargeInfo(charge);
     }
 
+    const array = chargesList.filter((charges) => {
+        if (searchTerm === "") {
+            return charges
+        } else if (charges.nome.toLowerCase().includes(searchTerm.toLowerCase())) {
+            return charges.nome
+        } else if (String(charges.id).includes(searchTerm)) {
+            return charges.id
+        } else if (String(charges.cpf).includes(searchTerm)) {
+            return charges.cpf
+        } else if ((charges.email).includes(searchTerm)) {
+            return charges.email
+        }
+    });
+
     return (
         <div className="flex-column content-center mt-large">
             <div className="flex-column list-box">
@@ -38,19 +52,7 @@ function ChargesTable() {
                     <p className="flex-bar">Status</p>
                     <p className="flex-bar">Vencimento</p>
                 </div>
-                {chargesList.filter((charges) => {
-                    if (searchTerm === "") {
-                        return charges
-                    } else if (charges.nome.toLowerCase().includes(searchTerm.toLowerCase())) {
-                        return charges.nome
-                    } else if (String(charges.id).includes(searchTerm)) {
-                        return charges.id
-                    } else if (String(charges.cpf).includes(searchTerm)) {
-                        return charges.cpf
-                    } else if ((charges.email).includes(searchTerm)) {
-                        return charges.email
-                    }
-                }).map((charge) => (
+                {array.length > 0 ? array.map((charge) => (
                     <div className="flex-column list-padding white-bg" onClick={() => handleClick(charge)} key={charge.id}>
                         <div className="flex-row white-bg enabled">
                             <div className="flex-column content-center flex-bar" >
@@ -79,7 +81,14 @@ function ChargesTable() {
                             </div>
                         </div>
                     </div>
-                ))}
+                ))
+                    :
+                    <div className="flex-row content-center items-center flex-basis mt-md">
+                        <p className="font-lg">
+                            Nenhum resultado encontrado
+                        </p>
+                    </div>
+                }
             </div>
             {
                 valueModalEditCharges &&
