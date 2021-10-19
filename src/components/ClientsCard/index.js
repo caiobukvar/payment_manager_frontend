@@ -16,13 +16,13 @@ function ClientsCard({ userClientNumbers }) {
     function handleDefaulterClients() {
         history.push(`/relatorios/clientes?status=inadimplentes`);
         setTitle("CLIENTES");
-        setClientStatus("INADIMPLENTES")
+        setClientStatus("INADIMPLENTES");
     }
 
     function handleInDayClients() {
         history.push(`/relatorios/clientes?status=em-dia`);
         setTitle("CLIENTES");
-        setClientStatus("EM DIA")
+        setClientStatus("EM DIA");
     }
 
     return (

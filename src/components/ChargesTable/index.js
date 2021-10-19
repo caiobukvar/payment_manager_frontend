@@ -3,15 +3,20 @@ import './styles.css';
 
 import EditChargeModalContext from '../../contexts/EditChargeModalContext';
 import ChargeContext from '../../contexts/ChargeContext';
+import SearchContext from '../../contexts/SearchContext';
+import SortingContext from '../../contexts/SortingContext';
 
 import ModalEditCharges from '../../components/ModalEditCharges';
 import SearchBar from '../../components/SearchBar';
-import SearchContext from '../../contexts/SearchContext';
+
+// import { sortDataByName, sortData } from '../../functions/sortDataByName';
+
 
 function ChargesTable() {
     const [chargeInfo, setChargeInfo] = useState();
     const { searchTerm } = useContext(SearchContext);
     const { chargesList } = useContext(ChargeContext);
+    // const { sorting, setSorting } = useContext(SortingContext);
     const { valueModalEditCharges, setValueModalEditCharges } = useContext(EditChargeModalContext);
 
     const dataFormatada =
@@ -33,12 +38,17 @@ function ChargesTable() {
             return charges.nome
         } else if (String(charges.id).includes(searchTerm)) {
             return charges.id
-        } else if (String(charges.cpf).includes(searchTerm)) {
+        } else if (charges.cpf.includes(searchTerm)) {
             return charges.cpf
         } else if ((charges.email).includes(searchTerm)) {
             return charges.email
         }
     });
+
+    // array.sort(sortDataByName);
+    // if (sorting === 'desc') {
+    //     return array.reverse();
+    // }
 
     return (
         <div className="flex-column content-center mt-large">
@@ -52,6 +62,7 @@ function ChargesTable() {
                     <p className="flex-bar">Status</p>
                     <p className="flex-bar">Vencimento</p>
                 </div>
+
                 {array.length > 0 ? array.map((charge) => (
                     <div className="flex-column list-padding white-bg" onClick={() => handleClick(charge)} key={charge.id}>
                         <div className="flex-row white-bg enabled">
@@ -73,7 +84,7 @@ function ChargesTable() {
                                         `${charge.status}` === "pago" ? "green" :
                                             `${charge.status}` === "vencida" ? "red" : ''
                                 }>
-                                    <p>{(charge.status).toUpperCase()}</p>
+                                    <p>{charge.status.toUpperCase()}</p>
                                 </span>
                             </div>
                             <div className="flex-row items-center flex-bar" >

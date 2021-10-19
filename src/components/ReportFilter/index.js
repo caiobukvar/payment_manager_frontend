@@ -41,7 +41,7 @@ function ReportFilter() {
     function handleFilterStatusPago() {
         setSecondModalOpen(false);
         setTitle("COBRANÇAS");
-        setChargeStatus("PAGO");
+        setChargeStatus("PAGAS");
         history.push('/relatorios/cobrancas?status=pagas');
     }
     function handleFilterStatusVencida() {
@@ -56,6 +56,12 @@ function ReportFilter() {
         setTitle("CLIENTES");
         setClientStatus("EM DIA");
         history.push('/relatorios/clientes?status=em-dia')
+    }
+    function handleFilterStatusCobrancaEmDia() {
+        setSecondModalOpen(false);
+        setTitle("COBRANÇAS");
+        setChargeStatus("EM DIA");
+        history.push('/relatorios/cobrancas?status=em-dia')
     }
 
     function handleFilterStatusInadimplentes() {
@@ -91,7 +97,7 @@ function ReportFilter() {
                 {secondModalOpen && (title === "COBRANÇAS") &&
                     <div className="box-shadow-reports modal-shadow white-bg pad-sm text-center">
                         <p className={chargeStatus === "PENDENTES" ? `font-md-reports selected-title pointer` : `font-md-reports pointer`}
-                            onClick={handleFilterStatusEmDia}>
+                            onClick={handleFilterStatusCobrancaEmDia}>
                             Em Dia
                         </p>
                         <p className={chargeStatus === "VENCIDAS" ? `font-md-reports selected-title pointer` : `font-md-reports pointer`}

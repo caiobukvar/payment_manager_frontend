@@ -9,12 +9,17 @@ import ChargesTable from '../../components/ChargesTable';
 import AuthContext from '../../contexts/AuthContext';
 import ChargeContext from '../../contexts/ChargeContext';
 import ReportFilter from '../../components/ReportFilter';
+import ClientList from '../../components/ClientList';
+import useClientData from '../../hooks/useClientData';
 
 function Reports() {
     const [isLoading, setIsLoading] = useState(true);
     let location = useLocation();
     const [status, setStatus] = useState('');
+
     const { chargesList, setChargesList } = useContext(ChargeContext);
+    const { clientArray } = useClientData();
+
     const { token } = useContext(AuthContext);
 
     useEffect(() => {
@@ -49,12 +54,14 @@ function Reports() {
             }
             <ReportFilter />
 
-            {location === "/relatorios/cobrancas?status=previstas" &&
-                setStatus("previstas")
-            }
-
-            {
-                !isLoading && (chargesList.length > 0 ?
+            {!isLoading &&
+                location.pathname.includes('/clientes') ?
+                <div className="flex-column content-center mt-xxl" >
+                    <ClientList
+                        clientArray={clientArray}
+                    />
+                </div> :
+                (chargesList.length > 0 ?
                     <div>
                         <ChargesTable
                             chargesList={chargesList}
@@ -64,7 +71,6 @@ function Reports() {
                         <p>Não existem cobranças</p>
                     </div>
                 )
-
             }
         </div>
     )
