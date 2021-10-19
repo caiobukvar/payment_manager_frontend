@@ -12,10 +12,11 @@ import phoneIcon from '../../assets/phone.svg'
 import mailIcon from '../../assets/mail.svg'
 import useClientData from "../../hooks/useClientData";
 import ClientDetails from "../ClientDetails";
+import ReportFilter from "../ReportFilter";
 
 
 
-function ClientList({ handleLoadClientCharges }) {
+function ClientList({ handleLoadClientCharges, addVisible }) {
     const { setValueModalEditClient } = useContext(ModalEditClientContext);
     const { setValueModalAddClient } = useContext(AddClientModalContext);
     const { searchTerm } = useContext(SearchContext);
@@ -53,7 +54,9 @@ function ClientList({ handleLoadClientCharges }) {
         <>
             <div className="flex-column list-box">
                 <div className="flex-row">
-                    <button className="btn-white-large" onClick={handleAddClient}>Adicionar cliente</button>
+                    {addVisible &&
+                        <button className="btn-white-large" onClick={handleAddClient}>Adicionar cliente</button>
+                    }
                     <SearchBar />
                 </div>
                 <div className="flex-row border-grey white list-padding">

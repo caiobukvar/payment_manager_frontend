@@ -51,6 +51,7 @@ function Client() {
             setModalClientDetails
             userClientList={clientArray}
             handleLoadClientCharges={handleLoadClientCharges}
+            addVisible={true}
           /> :
           <div>
             <h2 className="position-left">{'//'} ADICIONAR CLIENTE</h2>

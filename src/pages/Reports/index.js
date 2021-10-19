@@ -52,17 +52,18 @@ function Reports() {
                     <CircularProgress color="secondary" />
                 </div>
             }
-            <ReportFilter />
-
             {!isLoading &&
                 location.pathname.includes('/clientes') ?
-                <div className="flex-column content-center mt-xxl" >
+                <div className="flex-column content-center mt-large">
+                    <ReportFilter />
                     <ClientList
                         clientArray={clientArray}
+                        addVisible={false}
                     />
                 </div> :
                 (chargesList.length > 0 ?
                     <div>
+                        <ReportFilter />
                         <ChargesTable
                             chargesList={chargesList}
                         />
