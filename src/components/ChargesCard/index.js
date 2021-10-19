@@ -6,7 +6,7 @@ import Money from '../../assets/money.svg';
 
 import ReportFilterContext from '../../contexts/ReportFilterContext';
 
-function ChargesCard() {
+function ChargesCard({ userChargeNumbers }) {
     const { title, setTitle } = useContext(ReportFilterContext);
     const { chargeStatus, setChargeStatus } = useContext(ReportFilterContext);
 
@@ -37,15 +37,15 @@ function ChargesCard() {
             <div className="flex-column card-content items-center content-center card-padding-lg">
                 <div className="border-blue flex-row space-between pad-md items-center full-width pointer" onClick={handlePredictedCharges}>
                     <p>Previstas</p>
-                    <p className="font-xxl">0</p>
+                    <p className="font-xxl">{userChargeNumbers.previstas}</p>
                 </div>
                 <div className="border-red flex-row space-between mt-md pad-md items-center full-width pointer" onClick={handleExpiredCharges}>
                     <p>Vencidas</p>
-                    <p className="font-xxl">0</p>
+                    <p className="font-xxl">{userChargeNumbers.vencidas}</p>
                 </div>
                 <div className="border-green flex-row space-between mt-lg pad-md items-center full-width pointer" onClick={handlePaidCharges}>
                     <p>Pagas</p>
-                    <p className="font-xxl">0</p>
+                    <p className="font-xxl">{userChargeNumbers.pagas}</p>
                 </div>
             </div>
         </div>

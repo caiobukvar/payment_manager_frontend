@@ -1,6 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import './styles.css';
+
 import ClientsCard from '../../components/ClientsCard';
 import ChargesCard from '../../components/ChargesCard';
 
@@ -9,11 +10,16 @@ import AuthContext from '../../contexts/AuthContext';
 
 function Main() {
   const { token } = useContext(AuthContext);
+  const [userClientNumbers, setUserClientNumbers] = useState();
+  const [userChargeNumbers, setUserChargeNumbers] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     try {
+      setIsLoading(true);
+
       async function loadUserNumbers() {
-        const response = await fetch('https://paymentmanager-api.herokuapp.com/getUserNumbers',
+        const response = await fetch('https://paymentmanager-api.herokuapp.com/getDataToHome',
           {
             method: 'GET',
             headers: {
@@ -24,21 +30,14 @@ function Main() {
 
         const userNumbers = await response.json();
 
-        // console.log(userNumbers);
-        // const userClientNumbers = userNumbers.clients;
-        // const userChargeNumbers = userNumbers.charges;
-
-        // userClientNumbers.emDia
-        // userClientNumbers.inadimplentes
-
+        console.log(userNumbers);
 
         if (response.ok) {
-          setChargesList(clientCharges);
-          setIsLoading(false);
-        } else {
-          setChargesList([]);
+          setUserClientNumbers(userNumbers.clients);
+          setUserChargeNumbers(userNumbers.billings);
           setIsLoading(false);
         }
+        setIsLoading(false);
       }
 
       loadUserNumbers();
@@ -49,8 +48,8 @@ function Main() {
 
   return (
     <div className="flex-row content-center full-height">
-      <ClientsCard />
-      <ChargesCard />
+      <ClientsCard userClientNumbers={userClientNumbers} />
+      <ChargesCard userChargeNumbers={userChargeNumbers} />
     </div>
   );
 }

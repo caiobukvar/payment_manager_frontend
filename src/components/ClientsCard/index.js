@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 import ReportFilterContext from '../../contexts/ReportFilterContext';
 
-function ClientsCard() {
+function ClientsCard({ userClientNumbers }) {
     const { title, setTitle } = useContext(ReportFilterContext);
     const { clientStatus, setClientStatus } = useContext(ReportFilterContext);
 
@@ -34,11 +34,11 @@ function ClientsCard() {
             <div className="flex-column card-content items-center content-center card-padding-lg">
                 <div className="border-green flex-row space-between pad-md items-center full-width pointer" onClick={handleInDayClients}>
                     <p>Em dia</p>
-                    <p className="font-xxl">0</p>
+                    <p className="font-xxl">{userClientNumbers.emDia}</p>
                 </div>
                 <div className="border-red flex-row space-between mt-md pad-md items-center full-width pointer" onClick={handleDefaulterClients}>
                     <p>Inadimplentes</p>
-                    <p className="font-xxl">0</p>
+                    <p className="font-xxl">{userClientNumbers.inadimplentes}</p>
                 </div>
             </div>
         </div>
