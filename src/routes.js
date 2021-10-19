@@ -26,6 +26,7 @@ import EditChargeModalContext from './contexts/EditChargeModalContext';
 import DeleteChargeModalContext from './contexts/DeleteChargeModalContext';
 import SearchContext from './contexts/SearchContext';
 import ReportFilterContext from './contexts/ReportFilterContext';
+import SortingContext from './contexts/SortingContext';
 
 
 
@@ -44,6 +45,7 @@ function Routes() {
   const [valueModalEditClient, setValueModalEditClient] = useState(false);
   const [valueModalEditCharges, setValueModalEditCharges] = useState(false);
   const [valueModalDeleteCharges, setValueModalDeleteCharges] = useState(false);
+  const [sorting, setSorting] = useState('asc');
   const [title, setTitle] = useState('');
   const [clientStatus, setClientStatus] = useState('');
   const [chargeStatus, setChargeStatus] = useState('');
@@ -101,19 +103,23 @@ function Routes() {
                                 <SearchContext.Provider
                                   value={{ searchTerm, setSearchTerm }}
                                 >
-                                  <ReportFilterContext.Provider
-                                    value={{ title, setTitle, clientStatus, setClientStatus, chargeStatus, setChargeStatus }}
+                                  <SortingContext.Provider
+                                    value={{ sorting, setSorting }}
                                   >
-                                    <Layout>
-                                      <Route path="/" exact component={Main} />
+                                    <ReportFilterContext.Provider
+                                      value={{ title, setTitle, clientStatus, setClientStatus, chargeStatus, setChargeStatus }}
+                                    >
+                                      <Layout>
+                                        <Route path="/" exact component={Main} />
 
-                                      <Route path="/clientes" component={Client} />
+                                        <Route path="/clientes" component={Client} />
 
-                                      <Route path="/relatorios" component={Reports} />
+                                        <Route path="/relatorios" component={Reports} />
 
-                                      <Route path="/cobrancas" component={Charges} />
-                                    </Layout>
-                                  </ReportFilterContext.Provider>
+                                        <Route path="/cobrancas" component={Charges} />
+                                      </Layout>
+                                    </ReportFilterContext.Provider>
+                                  </SortingContext.Provider>
                                 </SearchContext.Provider>
                               </EditChargeModalContext.Provider>
                             </ChargeContext.Provider>
