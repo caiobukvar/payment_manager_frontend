@@ -37,15 +37,15 @@ function ChargesCard({ userChargeNumbers }) {
             <div className="flex-column card-content items-center content-center card-padding-lg">
                 <div className="border-blue flex-row space-between pad-md items-center full-width pointer" onClick={handlePredictedCharges}>
                     <p>Previstas</p>
-                    <p className="font-xxl">{userChargeNumbers.previstas}</p>
+                    <p className="font-xxl">{userChargeNumbers.previstas || 0}</p>
                 </div>
                 <div className="border-red flex-row space-between mt-md pad-md items-center full-width pointer" onClick={handleExpiredCharges}>
                     <p>Vencidas</p>
-                    <p className="font-xxl">{userChargeNumbers.vencidas}</p>
+                    <p className="font-xxl">{userChargeNumbers.vencidas || 0}</p>
                 </div>
                 <div className="border-green flex-row space-between mt-lg pad-md items-center full-width pointer" onClick={handlePaidCharges}>
                     <p>Pagas</p>
-                    <p className="font-xxl">{userChargeNumbers.pagas}</p>
+                    <p className="font-xxl">{userChargeNumbers.pagas || 0}</p>
                 </div>
             </div>
         </div>

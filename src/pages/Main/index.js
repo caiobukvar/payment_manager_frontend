@@ -10,8 +10,8 @@ import AuthContext from '../../contexts/AuthContext';
 
 function Main() {
   const { token } = useContext(AuthContext);
-  const [userClientNumbers, setUserClientNumbers] = useState();
-  const [userChargeNumbers, setUserChargeNumbers] = useState();
+  const [userClientNumbers, setUserClientNumbers] = useState({});
+  const [userChargeNumbers, setUserChargeNumbers] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -30,8 +30,6 @@ function Main() {
 
         const userNumbers = await response.json();
 
-        console.log(userNumbers);
-
         if (response.ok) {
           setUserClientNumbers(userNumbers.clients);
           setUserChargeNumbers(userNumbers.billings);
@@ -48,8 +46,14 @@ function Main() {
 
   return (
     <div className="flex-row content-center full-height">
-      <ClientsCard userClientNumbers={userClientNumbers} />
-      <ChargesCard userChargeNumbers={userChargeNumbers} />
+      <ClientsCard
+        userClientNumbers={userClientNumbers}
+        setUserClientNumbers={setUserClientNumbers}
+      />
+      <ChargesCard
+        userChargeNumbers={userChargeNumbers}
+        setUserChargeNumbers={setUserChargeNumbers}
+      />
     </div>
   );
 }

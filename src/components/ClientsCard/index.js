@@ -34,11 +34,11 @@ function ClientsCard({ userClientNumbers }) {
             <div className="flex-column card-content items-center content-center card-padding-lg">
                 <div className="border-green flex-row space-between pad-md items-center full-width pointer" onClick={handleInDayClients}>
                     <p>Em dia</p>
-                    <p className="font-xxl">{userClientNumbers.emDia}</p>
+                    <p className="font-xxl">{userClientNumbers.emDia || 0}</p>
                 </div>
                 <div className="border-red flex-row space-between mt-md pad-md items-center full-width pointer" onClick={handleDefaulterClients}>
                     <p>Inadimplentes</p>
-                    <p className="font-xxl">{userClientNumbers.inadimplentes}</p>
+                    <p className="font-xxl">{userClientNumbers.inadimplentes || 0}</p>
                 </div>
             </div>
         </div>
