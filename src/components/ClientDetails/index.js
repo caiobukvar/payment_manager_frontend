@@ -32,6 +32,7 @@ function ClientDetails({ setModalClientDetails, clientId }) {
           });
 
         const data = await response.json();
+        console.log("DATA", data)
 
         if (!data) {
           return;
@@ -40,6 +41,7 @@ function ClientDetails({ setModalClientDetails, clientId }) {
         const {
           nome,
           email,
+          cpf,
           telefone,
           cep,
           bairro,
@@ -53,6 +55,7 @@ function ClientDetails({ setModalClientDetails, clientId }) {
         const clientDetails = {
           nome,
           email,
+          cpf,
           telefone,
           cep,
           bairro,
@@ -65,6 +68,10 @@ function ClientDetails({ setModalClientDetails, clientId }) {
         const billings = [];
 
         for (const billing of cobrancas) {
+          if (billing === null) {
+            setCustomerData('');
+          }
+
           billings.push({
             id: billing.id,
             descricao: billing.descricao,
@@ -73,8 +80,6 @@ function ClientDetails({ setModalClientDetails, clientId }) {
             status: billing.status
           });
         }
-
-        console.log("billings: ", billings);
 
         if (response.ok) {
           setCustomerData(billings);
@@ -110,17 +115,17 @@ function ClientDetails({ setModalClientDetails, clientId }) {
             />
             <div className="pad-side full-width mt-xl">
               <div className="pad-client-details">
-                <h2>{clientData.nome}</h2>
-                <p>CPF</p>
+                <h2>{clientData.nome || '-'}</h2>
+                <span>{clientData.cpf || '-'}</span>
               </div>
               <div className="flex-row border-right">
                 <div className="flex-row gap-sm half-width pad-client-details">
                   <img src={MailIcon} alt="email" />
-                  <span>{clientData.email}</span>
+                  <span>{clientData.email || '-'}</span>
                 </div>
                 <div className="flex-row gap-sm half-width pad-client-details">
                   <img src={PhoneIcon} alt="phone" />
-                  <span>{clientData.telefone}</span>
+                  <span>{clientData.telefone || '-'}</span>
                 </div>
               </div>
               <div className="border-right pad-vertical">

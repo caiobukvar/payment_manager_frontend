@@ -40,10 +40,8 @@ function ChargesTable() {
                 </div>
                 {chargesList.filter((charges) => {
                     if (searchTerm === "") {
-                        console.log(charges)
                         return charges
                     } else if (charges.nome.toLowerCase().includes(searchTerm.toLowerCase())) {
-                        console.log(charges.nome.toLowerCase());
                         return charges.nome
                     } else if (String(charges.id).includes(searchTerm)) {
                         return charges.id

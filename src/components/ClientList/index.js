@@ -1,8 +1,11 @@
 import React, { useContext, useState } from "react";
+
 import "./styles.css";
 import ModalEditClientContext from "../../contexts/ModalEditClientContext";
 import AddClientModalContext from "../../contexts/AddClientModalContext";
+import SearchContext from "../../contexts/SearchContext";
 
+import SearchBar from '../../components/SearchBar';
 
 import editIcon from '../../assets/edit.svg'
 import phoneIcon from '../../assets/phone.svg'
@@ -10,16 +13,18 @@ import mailIcon from '../../assets/mail.svg'
 import useClientData from "../../hooks/useClientData";
 import ClientDetails from "../ClientDetails";
 
-import SearchBar from '../../components/SearchBar';
 
 
 function ClientList({ handleLoadClientCharges }) {
     const { setValueModalEditClient } = useContext(ModalEditClientContext);
     const { setValueModalAddClient } = useContext(AddClientModalContext);
+    const { searchTerm } = useContext(SearchContext);
+
     const [modalClientDetails, setModalClientDetails] = useState(false);
+    const [clientInformation, setClientInformation] = useState();
+
     const { clientArray } = useClientData();
 
-    const [clientInformation, setClientInformation] = useState();
 
     function handleAddClient() {
         setValueModalAddClient(true);
@@ -32,6 +37,17 @@ function ClientList({ handleLoadClientCharges }) {
         setModalClientDetails(true);
     }
 
+    const array = clientArray.filter((clients) => {
+        if (searchTerm === "") {
+            return clients
+        } else if (clients.nome.toLowerCase().includes(searchTerm.toLowerCase())) {
+            return clients.nome
+        } else if (String(clients.cpf).includes(searchTerm)) {
+            return clients.cpf
+        } else if ((clients.email).includes(searchTerm)) {
+            return clients.email
+        }
+    });
 
     return (
         <>
@@ -40,14 +56,13 @@ function ClientList({ handleLoadClientCharges }) {
                     <button className="btn-white-large" onClick={handleAddClient}>Adicionar cliente</button>
                     <SearchBar />
                 </div>
-
                 <div className="flex-row border-grey white list-padding">
                     <p className="flex-basis">Cliente</p>
                     <p className="flex-basis">Cobranças Feitas</p>
                     <p className="flex-basis">Cobranças Recebidas</p>
                     <p className="flex-basis">Status</p>
                 </div>
-                {clientArray.map(client => (
+                {array.length > 0 ? array.map(client => (
                     <div className="flex-row list-padding white-bg mb-md" key={client.id} >
                         <div className="flex-column client-box content-center flex-basis enabled" onClick={() => handleClick(client)}>
                             <h3 className="font-md-bold">{client.nome}</h3>
@@ -76,7 +91,6 @@ function ClientList({ handleLoadClientCharges }) {
                                     INADIMPLENTE
                                 </p>)
                             }
-
                         </div>
                         <div className="flex-row items-center flex-basis" >
                             <img
@@ -87,7 +101,14 @@ function ClientList({ handleLoadClientCharges }) {
                             />
                         </div>
                     </div>
-                ))}
+                ))
+                    :
+                    <div className="flex-row content-center items-center flex-basis mt-md">
+                        <p className="font-lg">
+                            Nenhum resultado encontrado
+                        </p>
+                    </div>
+                }
             </div>
             {modalClientDetails &&
                 <ClientDetails
