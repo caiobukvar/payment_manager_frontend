@@ -3,9 +3,11 @@ import { toast } from "react-toastify";
 
 import DeleteChargeModalContext from '../../contexts/DeleteChargeModalContext';
 import AuthContext from '../../contexts/AuthContext';
+import EditChargeModalContext from '../../contexts/EditChargeModalContext';
 
 function DeleteDropdown({ id }) {
     const { setValueModalDeleteCharges } = useContext(DeleteChargeModalContext);
+    const { setValueModalEditCharges } = useContext(EditChargeModalContext);
     const { token } = useContext(AuthContext);
 
     async function DeleteCharge() {
@@ -23,8 +25,9 @@ function DeleteDropdown({ id }) {
         await response.json();
 
         if (response.ok) {
-            toast.success(`Cobrança ${chargeId} excluída!`)
+            toast.success(`Cobrança ${chargeId} excluída!`);
             setValueModalDeleteCharges(false);
+            setValueModalEditCharges(false);
         }
         setValueModalDeleteCharges(false);
     }
