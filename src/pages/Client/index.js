@@ -55,7 +55,9 @@ function Client() {
           /> :
           <div>
             <h2 className="position-left">{'//'} ADICIONAR CLIENTE</h2>
-            <FormClient handleLoadClientCharges={handleLoadClientCharges} />
+            <FormClient
+              handleLoadClientCharges={handleLoadClientCharges}
+            />
           </div>
         )
       }

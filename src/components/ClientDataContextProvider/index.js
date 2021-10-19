@@ -31,7 +31,7 @@ function ClientDataContextProvider({ children }) {
 
   return (
     <ClientDataContext.Provider
-      value={{ clientArray, isLoading, UserClientInfo }}
+      value={{ clientArray, isLoading, UserClientInfo, setClientArray }}
     >
       {children}
     </ClientDataContext.Provider>

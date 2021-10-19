@@ -5,13 +5,13 @@ import React, { useState, useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext'
 import AddClientModalContext from '../../contexts/AddClientModalContext'
 import { toast } from 'react-toastify';
+import useClientData from '../../hooks/useClientData';
 
 function FormClient({ handleLoadClientCharges }) {
     const [errorEmail, setErrorEmail] = useState('');
     const { token } = useContext(AuthContext);
     const { setValueModalAddClient } = useContext(AddClientModalContext);
     const { register, handleSubmit } = useForm();
-    const [details, setDetails] = useState('');
     const [novosDadosCliente, setNovosDadosCliente] = useState({
         nome: '',
         email: '',
@@ -24,6 +24,8 @@ function FormClient({ handleLoadClientCharges }) {
         cidade: '',
         referencia: ''
     });
+
+    const { clientArray, setClientArray } = useClientData();
 
 
     async function addClient(novosDadosCliente) {
@@ -42,10 +44,10 @@ function FormClient({ handleLoadClientCharges }) {
             });
 
         const clientListResponse = await response.json();
-        console.log(clientListResponse);
 
         if (response.ok) {
             toast.success("Cliente cadastrado com sucesso!");
+            setClientArray([...clientArray, ...clientListResponse]);
             setValueModalAddClient(false);
         }
         else {

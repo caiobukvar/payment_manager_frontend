@@ -71,11 +71,11 @@ function ClientList({ handleLoadClientCharges, addVisible }) {
                             <h3 className="font-md-bold">{client.nome}</h3>
                             <div className="flex-row items-center gap-xs">
                                 <img src={mailIcon} alt="mail-icon" />
-                                <p className="font-md font-regular">{client.email}</p>
+                                <p className="font-md font-regular">{client.email || "--"}</p>
                             </div>
                             <div className="flex-row items-center gap-xs">
                                 <img src={phoneIcon} alt="phone-icon" />
-                                <p className="font-md font-regular">{client.telefone}</p>
+                                <p className="font-md font-regular">{client.telefone || "--"}</p>
                             </div>
                         </div>
                         <div className="flex-row items-center flex-basis">
