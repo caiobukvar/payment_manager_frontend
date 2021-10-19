@@ -9,13 +9,13 @@ import ChargeContext from '../../contexts/ChargeContext';
 import useClientData from '../../hooks/useClientData';
 
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router';
 
 
 function AddCharges() {
-    const { setValueModalAddCharges } = useContext(AddChargeModalContext);
     const { chargesList, setChargesList } = useContext(ChargeContext);
     const { token } = useContext(AuthContext);
-
+    const history = useHistory();
     const { clientArray } = useClientData();
 
     const { register, handleSubmit } = useForm();
@@ -45,17 +45,16 @@ function AddCharges() {
             if (response.ok) {
                 toast.success("Cobrança cadastrada!");
                 setChargesList([...chargesList, ...result]);
-                setValueModalAddCharges(false);
+                history.push("/cobrancas")
             }
         } catch (error) {
-            console.log(error.message);
             toast.error(error.message);
         }
 
     };
 
     function handleReturn() {
-        setValueModalAddCharges(false);
+        history.push("/cobrancas")
     }
 
     return (

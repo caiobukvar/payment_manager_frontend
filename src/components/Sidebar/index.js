@@ -5,19 +5,19 @@ import House from '../../assets/house.svg';
 import Money from '../../assets/money.svg';
 import Clients from '../../assets/clients.svg';
 import { NavLink } from 'react-router-dom'
+import { useHistory } from 'react-router'
 import MenuContext from '../../contexts/MenuContext';
-import AddChargeModalContext from '../../contexts/AddChargeModalContext';
 
 function Sidebar() {
     const { setMenuOpen } = useContext(MenuContext);
-    const { setValueModalAddCharges } = useContext(AddChargeModalContext);
+    const history = useHistory();
 
     function handleCloseProfileDropdown() {
         setMenuOpen(false);
     }
 
     function handleCreateCharge() {
-        setValueModalAddCharges(true);
+        history.push("/nova-cobranca")
     }
 
     return (
