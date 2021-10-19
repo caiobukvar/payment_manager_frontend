@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react'
-
+import { useLocation } from 'react-router-dom';
 import './styles.css';
 
 import { CircularProgress } from '@mui/material';
 
 import ChargesTable from '../../components/ChargesTable';
-import AddCharges from '../../components/AddCharges';
 
 import AuthContext from '../../contexts/AuthContext';
 import ChargeContext from '../../contexts/ChargeContext';
 import ReportFilter from '../../components/ReportFilter';
 
-function Charges() {
+function Reports() {
     const [isLoading, setIsLoading] = useState(true);
+    let location = useLocation();
+    const [status, setStatus] = useState('');
     const { chargesList, setChargesList } = useContext(ChargeContext);
-
     const { token } = useContext(AuthContext);
 
     useEffect(() => {
@@ -47,24 +47,27 @@ function Charges() {
                     <CircularProgress color="secondary" />
                 </div>
             }
+            <ReportFilter />
+
+            {location === "/relatorios/cobrancas?status=previstas" &&
+                setStatus("previstas")
+            }
+
             {
                 !isLoading && (chargesList.length > 0 ?
                     <div>
-                        <ReportFilter />
                         <ChargesTable
                             chargesList={chargesList}
                         />
-                    </div>
-
-                    :
-                    <div className="mt-xxl">
-                        <h2 className="position-left">{'//'} CRIAR COBRANÇA</h2>
-                        <AddCharges />
+                    </div> :
+                    <div>
+                        <p>Não existem cobranças</p>
                     </div>
                 )
+
             }
         </div>
     )
 };
 
-export default Charges;
+export default Reports;

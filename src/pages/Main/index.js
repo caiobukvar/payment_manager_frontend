@@ -6,6 +6,8 @@ import ChargesCard from '../../components/ChargesCard';
 
 function Main() {
 
+  // fazer funcao para pegar dados de cobranças E clientes!
+
   return (
     <div className="flex-row content-center full-height">
       <ClientsCard />

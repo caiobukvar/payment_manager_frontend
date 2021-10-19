@@ -14,16 +14,7 @@ import TrashIcon from '../../assets/trash.svg';
 import DeleteDropdown from '../../components/DeleteDropdown';
 
 
-function EditCharges() {
-    const [autocompleteData, setAutocompleteData] = useState();
-    const { setValueModalEditCharges } = useContext(EditChargeModalContext);
-    const { valueModalDeleteCharges, setValueModalDeleteCharges } = useContext(DeleteChargeModalContext);
-    const { token } = useContext(AuthContext);
-
-    const { clientArray } = useClientData();
-
-    const { register, handleSubmit } = useForm();
-
+function EditCharges({ chargeInfo, setChargeInfo }) {
     const [editData, setEditData] = useState({
         cliente: "",
         descricao: "",
@@ -32,32 +23,21 @@ function EditCharges() {
         vencimento: ""
     });
 
-    const chargeId = localStorage.getItem('client-id-on-click');
-    console.log(chargeId);
+    const { register, handleSubmit } = useForm();
 
-    useEffect(() => {
-        try {
-            async function getClientData(chargeId) {
-                const response = await fetch(`https://paymentmanager-api.herokuapp.com/getCustomerBillings?id=${chargeId}`,
-                    {
-                        method: "GET",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${token}`
-                        }
-                    });
-                const data = await response.json();
-                console.log("data", data)
+    const { setValueModalEditCharges } = useContext(EditChargeModalContext);
+    const { valueModalDeleteCharges, setValueModalDeleteCharges } = useContext(DeleteChargeModalContext);
+    const { token } = useContext(AuthContext);
 
-                if (response.ok) {
-                    setAutocompleteData(data);
-                }
-            }
-            getClientData(chargeId);
-        } catch (error) {
+    const { clientArray } = useClientData();
+    const { id,
+        nome,
+        descricao,
+        valor,
+        vencimento,
+        status
+    } = chargeInfo;
 
-        }
-    }, [chargeId])
 
     async function EditCharge(editData) {
         try {
@@ -88,7 +68,7 @@ function EditCharges() {
         setValueModalEditCharges(false);
     }
     function handleDeleteModal() {
-        setValueModalDeleteCharges(true);
+        setValueModalDeleteCharges(!valueModalDeleteCharges);
     }
 
     return (
@@ -110,7 +90,7 @@ function EditCharges() {
                             })
                         }}
                     >
-                        <option value=""></option>
+                        <option defaultValue></option>
                         {clientArray.map((client) => (
                             <option
                                 value={client.id}
@@ -131,6 +111,7 @@ function EditCharges() {
                         id="description"
                         className="input-charges-large padY-sm mt-md"
                         {...register("descricao", { required: true })}
+                        value={descricao}
                         onChange={(e) => {
                             setEditData({
                                 ...editData,
@@ -155,7 +136,7 @@ function EditCharges() {
                             })
                         }}
                     >
-                        <option placeholder="" value="">Selecione um status...</option>
+                        <option>Selecione um status...</option>
                         <option
                             value="pago"
                             key="pago"
@@ -164,7 +145,7 @@ function EditCharges() {
                             pago
                         </option>
                         <option
-                            value="Pendente"
+                            value="pendente"
                             key="pendente"
                             placeholder="pendente"
                         >
@@ -181,12 +162,13 @@ function EditCharges() {
                             name="valor"
                             placeholder="Insira o valor"
                             id="valor"
+                            value={valor}
                             className="input-charges-line-small padY-sm mt-md"
                             {...register("valor", { required: true })}
                             onChange={(e) => {
                                 setEditData({
                                     ...editData,
-                                    valor: e.target.value
+                                    valor: (e.target.value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
                                 })
                             }}
                         />
@@ -210,12 +192,12 @@ function EditCharges() {
                         />
                     </div>
                 </div>
-                {/* ADICIONAR BOTAO PARA CONFIRMAR EXCLUSÃO AQUI */}
+
                 <div className="flex-row items-center mt-xl">
                     <img src={TrashIcon} alt="img-trash-icon" className="mr-sm" />
                     <a className="light-gray" onClick={handleDeleteModal}>Excluir cobrança</a>
                 </div>
-                {/* ADICIONAR BOTAO PARA CONFIRMAR EXCLUSÃO AQUI */}
+
                 <div className="flex-row mt-xl ml-xxl">
                     <button className="btn-white-client" onClick={handleCloseModal}>
                         Cancelar
@@ -239,7 +221,9 @@ function EditCharges() {
             </div>
             {valueModalDeleteCharges &&
                 <div className="dropdown-placement">
-                    <DeleteDropdown />
+                    <DeleteDropdown
+                        id={id}
+                    />
                 </div>
 
             }

@@ -131,7 +131,7 @@ function AddCharges() {
                             pago
                         </option>
                         <option
-                            value="Pendente"
+                            value="pendente"
                             key="pendente"
                             placeholder="pendente"
                         >

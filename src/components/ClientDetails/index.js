@@ -169,7 +169,7 @@ function ClientDetails({ setModalClientDetails, clientId }) {
                   <div className="flex-column space-evenly charge-card gray text-right">
                     <span><strong>{parseFloat(charge.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong></span>
                     <span className={
-                      (charge.status === "pago" ? "green" : charge.status === "Pendente" ? "blue" : charge.status === "Vencida" ? "red" : '')
+                      (charge.status === "pago" ? "green" : charge.status === "pendente" ? "blue" : charge.status === "vencida" ? "red" : '')
                     }>
                       <strong>
                         {charge.status.toUpperCase()}

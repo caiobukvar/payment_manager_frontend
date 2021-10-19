@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './styles.css';
 
 import EditChargeModalContext from '../../contexts/EditChargeModalContext';
@@ -6,15 +6,13 @@ import ChargeContext from '../../contexts/ChargeContext';
 
 import ModalEditCharges from '../../components/ModalEditCharges';
 import SearchBar from '../../components/SearchBar';
+import SearchContext from '../../contexts/SearchContext';
 
 function ChargesTable() {
+    const [chargeInfo, setChargeInfo] = useState();
+    const { searchTerm } = useContext(SearchContext);
     const { chargesList } = useContext(ChargeContext);
     const { valueModalEditCharges, setValueModalEditCharges } = useContext(EditChargeModalContext);
-
-    function handleClick(charge) {
-        setValueModalEditCharges(true);
-        localStorage.setItem('client-id-on-click', charge.id);
-    }
 
     const dataFormatada =
         (vencimento) => {
@@ -22,6 +20,11 @@ function ChargesTable() {
             data.setHours(data.getHours() + 3)
             return new Date(data).toLocaleDateString('pt-br')
         }
+
+    async function handleClick(charge) {
+        setValueModalEditCharges(true);
+        setChargeInfo(charge);
+    }
 
     return (
         <div className="flex-column content-center mt-large">
@@ -35,7 +38,21 @@ function ChargesTable() {
                     <p className="flex-bar">Status</p>
                     <p className="flex-bar">Vencimento</p>
                 </div>
-                {chargesList.map((charge) => (
+                {chargesList.filter((charges) => {
+                    if (searchTerm === "") {
+                        console.log(charges)
+                        return charges
+                    } else if (charges.nome.toLowerCase().includes(searchTerm.toLowerCase())) {
+                        console.log(charges.nome.toLowerCase());
+                        return charges.nome
+                    } else if (String(charges.id).includes(searchTerm)) {
+                        return charges.id
+                    } else if (String(charges.cpf).includes(searchTerm)) {
+                        return charges.cpf
+                    } else if ((charges.email).includes(searchTerm)) {
+                        return charges.email
+                    }
+                }).map((charge) => (
                     <div className="flex-column list-padding white-bg" onClick={() => handleClick(charge)} key={charge.id}>
                         <div className="flex-row white-bg enabled">
                             <div className="flex-column content-center flex-bar" >
@@ -71,7 +88,8 @@ function ChargesTable() {
                 <div className="modal">
                     <div className="modal-content">
                         <ModalEditCharges
-
+                            chargeInfo={chargeInfo}
+                            setChargeInfo={setChargeInfo}
                         />
                     </div>
                 </div>

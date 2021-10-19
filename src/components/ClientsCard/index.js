@@ -1,19 +1,28 @@
-import './styles.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import Clients from '../../assets/clients.svg'
+
+import './styles.css';
 
 import { useHistory } from 'react-router-dom';
 
+import ReportFilterContext from '../../contexts/ReportFilterContext';
+
 function ClientsCard() {
+    const { title, setTitle } = useContext(ReportFilterContext);
+    const { clientStatus, setClientStatus } = useContext(ReportFilterContext);
 
     const history = useHistory();
 
     function handleDefaulterClients() {
-        history.push(`/relatorios?status=inadimplentes`);
+        history.push(`/relatorios/clientes?status=inadimplentes`);
+        setTitle("CLIENTES");
+        setClientStatus("INADIMPLENTES")
     }
 
     function handleInDayClients() {
-        history.push(`/relatorios?status=em-dia`);
+        history.push(`/relatorios/clientes?status=em-dia`);
+        setTitle("CLIENTES");
+        setClientStatus("EM DIA")
     }
 
     return (
@@ -23,11 +32,11 @@ function ClientsCard() {
                 <p className="ml-sm">Clientes</p>
             </div>
             <div className="flex-column card-content items-center content-center card-padding-lg">
-                <div className="border-green flex-row space-between pad-md items-center full-width" onClick={handleInDayClients}>
+                <div className="border-green flex-row space-between pad-md items-center full-width pointer" onClick={handleInDayClients}>
                     <p>Em dia</p>
                     <p className="font-xxl">0</p>
                 </div>
-                <div className="border-red flex-row space-between mt-md pad-md items-center full-width" onClick={handleDefaulterClients}>
+                <div className="border-red flex-row space-between mt-md pad-md items-center full-width pointer" onClick={handleDefaulterClients}>
                     <p>Inadimplentes</p>
                     <p className="font-xxl">0</p>
                 </div>
