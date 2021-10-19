@@ -53,14 +53,21 @@ function Reports() {
                 </div>
             }
             {!isLoading &&
-                location.pathname.includes('/clientes') ?
-                <div className="flex-column content-center mt-large">
-                    <ReportFilter />
-                    <ClientList
-                        clientArray={clientArray}
-                        addVisible={false}
-                    />
-                </div> :
+                location.pathname.includes('/clientes')
+                ?
+                (clientArray.length > 0 ?
+                    <div className="flex-column content-center mt-large">
+                        <ReportFilter />
+                        <ClientList
+                            clientArray={clientArray}
+                            addVisible={false}
+                        />
+                    </div> :
+                    <div>
+                        <p>Não existem clientes cadastrados</p>
+                    </div>
+                )
+                :
                 (chargesList.length > 0 ?
                     <div>
                         <ReportFilter />
